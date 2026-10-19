@@ -24,8 +24,17 @@ class ReleaseTests(unittest.TestCase):
         files["manifest.json"] = (json.dumps(value) + "\n").encode()
         return files
 
+    def test_pointer_condition_is_observable_and_covers_references(self):
+        for name in release.NAMES:
+            pointer = self.files[f"skills/{name}/SKILL.md"].decode()
+            self.assertIn("`lyra --version`", pointer)
+            self.assertIn("below", pointer)
+            self.assertIn("`references/`", pointer)
+            body = pointer[4:].split("\n---\n", 1)[1]
+            self.assertTrue(all(len(line) <= 88 for line in body.splitlines()), name)
+
     def test_complete_release(self):
-        self.assertEqual(release.validate(self.files)["skillsVersion"], "0.1.12")
+        self.assertEqual(release.validate(self.files)["skillsVersion"], "0.1.13")
 
     def test_manifest_and_content_rejections(self):
         cases = [
@@ -52,7 +61,7 @@ class ReleaseTests(unittest.TestCase):
                 release.validate(files)
 
     def test_device_and_escaping_paths(self):
-        for name in ("/absolute", "../escape", "C:/drive", "a\\b", "CON.md", "a/LPT9.md", "a/COM0", "a/..", "a//b", "a/trailing.", "a/name:stream", "a\0b"):
+        for name in ("/absolute", "../escape", "C:/drive", "a\\b", "CON.md", "a/LPT9.md", "a/COM0", "a/..", "a//b", "a/trailing.", "a/name:stream", "references/server~1.md", "a\0b"):
             with self.subTest(name=name), self.assertRaises(ValueError):
                 release.safe_path(name)
 
@@ -78,6 +87,23 @@ class ReleaseTests(unittest.TestCase):
                         if mode == "expansion":
                             archive.writestr("large.md", b"x" * (release.LIMIT + 1))
                 with self.assertRaises(ValueError):
+                    release.zip_files(path)
+
+    def test_local_header_name_and_sizes_must_match_the_central_directory(self):
+        for field in ("name", "size"):
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as temp:
+                path = Path(temp) / "local.zip"
+                with zipfile.ZipFile(path, "w") as archive:
+                    archive.writestr("guide.md", b"text")
+                    archive.writestr("reference.md", b"reference")
+                self.assertEqual(len(release.zip_files(path)), 2)
+                data = bytearray(path.read_bytes())
+                if field == "name":
+                    data[30] = ord("G")
+                else:
+                    data[22:26] = (999).to_bytes(4, "little")
+                path.write_bytes(data)
+                with self.assertRaisesRegex(ValueError, "local header.*guide.md"):
                     release.zip_files(path)
 
     def test_tag_stops_before_git_on_failed_validation(self):

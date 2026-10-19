@@ -38,9 +38,11 @@ lyra skills update --repair-links --json
 both whole skill folders; give a skill name to select only that skill. It never
 downloads a release. Edited, extra and newer files stay protected. A failed
 publication retains and names its old, new and staged paths for inspection.
-`get` reads and verifies installed guide/reference files. Before whole files are
-installed, this delivery keeps its compiled guide as a fallback for absent or
-exact-known unedited short pointers; edited pointers refuse and name the file.
+`get` reads and verifies installed guide/reference files only when a whole-file
+installation record is present. Until seed migration ships, all other layouts
+use the compiled guide, including old or edited pointers and linked folders.
+If a recorded whole installation has missing or changed guide/reference files,
+`get` refuses and keeps the files.
 The minimum Lyra version is advisory: stderr and JSON name the found and needed
 versions, while an intact guide remains available. The shared folder is
 `~/.agents/skills/<name>`; agents reach it so:

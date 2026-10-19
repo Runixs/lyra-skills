@@ -2,6 +2,7 @@
 """Validate a whole release and build a reproducible, offline ZIP."""
 import argparse
 import hashlib
+import io
 import json
 from pathlib import Path
 import re
@@ -37,6 +38,7 @@ def safe_path(name):
         require(part not in ("", ".", "..") and not part.endswith((".", " ")), f"unsafe path: {name}")
         require(not any(ord(c) < 32 or c in '\\:<>\"|?*' for c in part), f"unsafe path: {name}")
         stem = part.split(".")[0].upper()
+        require(not re.fullmatch(r".+~[0-9]+", stem), f"Windows short-name alias path: {name}")
         require(stem not in {"CON", "PRN", "AUX", "NUL", "CLOCK$", "CONIN$", "CONOUT$"} and not re.fullmatch(r"(?:COM|LPT)[0-9]", stem), f"Windows device path: {name}")
     return name
 
@@ -124,10 +126,21 @@ def zip_files(path):
     require(path.stat().st_size <= LIMIT, "zip over 1 MiB")
     files = {}
     total = 0
-    with zipfile.ZipFile(path) as archive:
+    with path.open("rb") as stream:
+        zip_bytes = stream.read(LIMIT + 1)
+    require(len(zip_bytes) <= LIMIT, "zip over 1 MiB")
+    with zipfile.ZipFile(io.BytesIO(zip_bytes)) as archive:
         require(len(archive.infolist()) <= 64, "zip has more than 64 files")
         for info in archive.infolist():
             safe_path(info.filename)
+            header = zip_bytes[info.header_offset:info.header_offset + 30]
+            require(len(header) == 30 and header[:4] == b"PK\x03\x04", f"invalid local header: {info.filename}")
+            word = lambda at: int.from_bytes(header[at:at+2], "little")
+            dword = lambda at: int.from_bytes(header[at:at+4], "little")
+            raw_name = zip_bytes[info.header_offset+30:info.header_offset+30+word(26)]
+            require(raw_name == info.filename.encode("ascii"), f"local header name differs from central name: {info.filename}")
+            for field, found, needed in (("size", dword(22), info.file_size), ("compressed size", dword(18), info.compress_size), ("CRC32", dword(14), info.CRC), ("flags", word(6), info.flag_bits), ("compression", word(8), info.compress_type)):
+                require(found == needed, f"local header {field} for {info.filename} is {found}; central value {needed} is required")
             mode = info.external_attr >> 16
             require(not info.is_dir() and stat.S_IFMT(mode) in (0, stat.S_IFREG) and not (info.external_attr & 0x410), "link/reparse/directory entry")
             require(not info.flag_bits & 1, "encrypted entry")
