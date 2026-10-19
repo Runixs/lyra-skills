@@ -23,6 +23,7 @@ def require(ok, reason):
 def version(text, stable=False):
     match = SEMVER.fullmatch(text)
     require(match is not None, f"invalid SemVer: {text}")
+    require(all(int(match[i]) <= 2**64 - 1 for i in (1, 2, 3)), "SemVer component exceeds u64")
     if match[4]:
         require(not any(p.isdigit() and len(p) > 1 and p[0] == "0" for p in match[4].split(".")), "numeric prerelease has leading zero")
     require(not stable or (not match[4] and "+" not in text), "bundle version must be stable")
@@ -87,12 +88,14 @@ def validate(files):
         expected.update(paths)
         require(all(p in files for p in paths), "missing skill file")
         pointer = files[entry["pointer"]].decode()
-        require(pointer.startswith("---\n") and f"\nname: {entry['name']}\n" in pointer, "pointer front matter mismatch")
+        require(pointer.startswith("---\n") and "\n---\n" in pointer[4:], "pointer front matter is incomplete")
+        front = pointer[4:].split("\n---\n", 1)[0]
+        require([line for line in front.splitlines() if line.startswith("name:")] == [f"name: {entry['name']}"], "pointer name differs from manifest")
         require(len(files[entry["pointer"]]) <= 4096 and len(files[entry["guide"]]) <= 15 * 1024, "pointer/guide budget")
         require(all(p.endswith("/commands.md") or len(files[p]) <= 8 * 1024 for p in refs), "reference budget")
         require(all(not files[p].startswith(b"---") for p in [entry["guide"], *refs]), "only pointer has front matter")
         if release != "0.1.11":
-            require(f"skillsVersion: {release}\n" in pointer and f"minimumLyraVersion: {entry['minimumLyraVersion']}\n" in pointer, "pointer version metadata mismatch")
+            require([line for line in front.splitlines() if line.startswith("skillsVersion:")] == [f"skillsVersion: {release}"] and [line for line in front.splitlines() if line.startswith("minimumLyraVersion:")] == [f"minimumLyraVersion: {entry['minimumLyraVersion']}"] , "pointer version metadata mismatch")
     table = manifest["files"]
     paths = [e["path"] for e in table]
     require(paths == sorted(expected), "file table missing, extra, duplicated or unsorted")
@@ -159,7 +162,7 @@ def main():
             validate(zip_files(output))
             print(f"{output}: sha256={sha(output.read_bytes())}")
         print(f"validated {manifest['tag']}: {len(files)} files")
-    except (OSError, ValueError, KeyError, TypeError, UnicodeError, zipfile.BadZipFile, RuntimeError) as error:
+    except (OSError, ValueError, KeyError, TypeError, UnicodeError, zipfile.BadZipFile, RuntimeError, AttributeError, IndexError) as error:
         print(f"Could not {args.command} Lyra skills: {error}. Correct the named release files and run the command again.", file=sys.stderr)
         return 1
     return 0

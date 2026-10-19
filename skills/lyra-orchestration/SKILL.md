@@ -1,12 +1,13 @@
 ---
 name: lyra-orchestration
 description: 'Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results, or when Lyra typed a task ending in "[Lyra: when you finish, report ...]" or the line "You have N Lyra messages".'
+skillsVersion: 0.1.12
+minimumLyraVersion: 0.1.42
 ---
 
 # Lyra orchestration
 
-Find your role, then load only what it names. The `lyra` you run prints text
-that matches its own commands.
+Find your role, then load only what it names. The `lyra` you run reads the installed guide when present.
 
 - **Worker**: Lyra typed you a task that ends with a "[Lyra: when you finish,
   report ...]" footer. The footer is your contract: do the task, then run its
@@ -29,3 +30,6 @@ that matches its own commands.
 
 If `lyra` is missing or `skills get` fails, show the exact error to the person
 and stop. Unsure of a flag: add `--help` to that command; never guess one.
+
+This skill needs `lyra` 0.1.42 or later. If an older `lyra` returns its embedded
+guide, read `guide.md` beside this file.

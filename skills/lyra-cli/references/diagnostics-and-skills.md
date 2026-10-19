@@ -24,6 +24,8 @@ Run these only when the person asks; Lyra never installs skills by itself.
 
 ```text
 lyra skills list --installed --json
+lyra skills status --json
+lyra skills install --from <release.zip> --agent codex --json
 lyra skills get lyra-orchestration
 lyra skills install lyra-orchestration --agent claude --json
 lyra skills install lyra-cli --agent antigravity --json
@@ -31,11 +33,17 @@ lyra skills update --json
 lyra skills update --repair-links --json
 ```
 
-`skills list`, `get`, `install` and `update` work without `home`. `get` prints
-the core guide compiled into the running CLI. Each skill has one real copy: a
-short discovery `SKILL.md` with version marks, which tells the agent to run
-`skills get` and follow that guide, or report the exact error and stop. It
-lives in the shared folder `~/.agents/skills/<name>`; agents reach it so:
+`skills status` is the read-only alias of `skills list --installed`.
+`skills install --from <release.zip>` verifies a local release zip and installs
+both whole skill folders; give a skill name to select only that skill. It never
+downloads a release. Edited, extra and newer files stay protected. A failed
+publication retains and names its old, new and staged paths for inspection.
+`get` reads and verifies installed guide/reference files. Before whole files are
+installed, this delivery keeps its compiled guide as a fallback for absent or
+exact-known unedited short pointers; edited pointers refuse and name the file.
+The minimum Lyra version is advisory: stderr and JSON name the found and needed
+versions, while an intact guide remains available. The shared folder is
+`~/.agents/skills/<name>`; agents reach it so:
 
 | `--agent` | Reads the shared copy | `install` also makes |
 |---|---|---|

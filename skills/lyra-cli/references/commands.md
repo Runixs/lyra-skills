@@ -213,8 +213,9 @@ optional input; angle brackets are values to replace.
 **skills**
 
 - `lyra skills list [--installed] [--json]`: list bundled skills with one-line descriptions; no runtime required
+- `lyra skills status [--json]`: show local installed skills; alias of skills list --installed
 - `lyra skills get <name> [--references] [--reference <name>] [--full] [--json]`: print the matching core guide, list references, read one reference or print the full manual; no runtime required
-- `lyra skills install <name> [--agent <agent>] [--replace-old-copy] [--host-trash] [--json]`: install one shared skill and link the selected agent; --replace-old-copy trashes a marked agent copy first
+- `lyra skills install [<name>] [--agent <agent>] [--replace-old-copy] [--host-trash] [--from <zip>] [--json]`: install one shared skill or a verified local release zip; --replace-old-copy trashes a marked agent copy first
 - `lyra skills update [--agent <agent>] [--repair-links] [--host-trash] [--skill <name>] [--json]`: update the shared folder once; --repair-links installs missing skills and repairs detected agents' links
 
 **worker**
