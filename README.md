@@ -22,6 +22,11 @@ Python's standard library and never access the network. The manifest hashes
 VERSION and all skill files; it excludes itself and the enclosing zip. Checksums
 check integrity; this unsigned release trusts the publishing account.
 
+After validation and packaging, commit the source and run
+`python3 tools/release.py tag`. This command stops on validation, package or
+Git failure and never replaces an existing tag. Stop the publication sequence
+when any command fails; upload only a successfully checked tag and artifact.
+
 Never replace a used tag. Edit here, increment VERSION and pointer version marks,
 update the manifest, validate against the matching Lyra CLI, then cut a new tag.
 Publish its zip before updating the discovery manifest on main. Lyra's private

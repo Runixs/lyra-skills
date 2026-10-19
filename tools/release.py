@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 import stat
+import subprocess
 import sys
 import zipfile
 
@@ -142,12 +143,21 @@ def zip_files(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("validate", "package"))
+    parser.add_argument("command", choices=("validate", "package", "tag"))
     parser.add_argument("archive", nargs="?", type=Path)
     args = parser.parse_args()
     try:
         files = zip_files(args.archive) if args.archive else source_files()
         manifest = validate(files)
+        if args.command == "tag":
+            require(args.archive is None, "tag accepts source files only")
+            artifact = ROOT / "dist" / f"lyra-skills-{manifest['skillsVersion']}.zip"
+            packaged = zip_files(artifact)
+            validate(packaged)
+            require(packaged == files, "packaged bytes differ from source")
+            state = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, check=True, capture_output=True, text=True)
+            require(not state.stdout, "commit the validated source before tagging")
+            subprocess.run(["git", "tag", "--no-sign", manifest["tag"]], cwd=ROOT, check=True)
         if args.command == "package":
             require(args.archive is None, "package accepts source files only")
             output = ROOT / "dist" / f"lyra-skills-{manifest['skillsVersion']}.zip"
@@ -162,7 +172,7 @@ def main():
             validate(zip_files(output))
             print(f"{output}: sha256={sha(output.read_bytes())}")
         print(f"validated {manifest['tag']}: {len(files)} files")
-    except (OSError, ValueError, KeyError, TypeError, UnicodeError, zipfile.BadZipFile, RuntimeError, AttributeError, IndexError) as error:
+    except (OSError, ValueError, KeyError, TypeError, UnicodeError, zipfile.BadZipFile, RuntimeError, AttributeError, IndexError, subprocess.CalledProcessError) as error:
         print(f"Could not {args.command} Lyra skills: {error}. Correct the named release files and run the command again.", file=sys.stderr)
         return 1
     return 0

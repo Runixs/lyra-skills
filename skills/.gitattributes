@@ -1,4 +1,0 @@
-vendor/** text eol=lf
-bundled/** text eol=lf
-fixtures/*.zip binary
-lock.json text eol=lf

@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
+from contextlib import redirect_stderr
+import io
 import warnings
 import zipfile
 
@@ -76,6 +79,11 @@ class ReleaseTests(unittest.TestCase):
                             archive.writestr("large.md", b"x" * (release.LIMIT + 1))
                 with self.assertRaises(ValueError):
                     release.zip_files(path)
+
+    def test_tag_stops_before_git_on_failed_validation(self):
+        with patch("sys.argv", ["release.py", "tag"]), patch("release.source_files", return_value={}), patch("release.subprocess.run") as git, redirect_stderr(io.StringIO()):
+            self.assertEqual(release.main(), 1)
+            git.assert_not_called()
 
     def test_duplicate_json_fields(self):
         files = copy.deepcopy(self.files)
