@@ -26,7 +26,7 @@ agents, or when Lyra typed you a task with a report footer, use the
 - `--yes` only on the person's word: `project remove`, `workspace remove`,
   `workspace remove-branch`, `session close`, `session detach`, `terminal close`,
   `credential remove`, `server remove`, `process stop`, `update apply`,
-  `update rollback` and `update remote-reset` cannot be undone.
+  `update rollback` and `update recover` cannot be undone.
 - Text and secrets go through stdin or files, never arguments;
   `terminal send --text` is only for a short command without secrets. A path is
   spelled as its Host spells it (`/home/me/repo` on a remote Host).

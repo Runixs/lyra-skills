@@ -34,7 +34,7 @@ class ReleaseTests(unittest.TestCase):
             self.assertTrue(all(len(line) <= 88 for line in body.splitlines()), name)
 
     def test_complete_release(self):
-        self.assertEqual(release.validate(self.files)["skillsVersion"], "0.1.13")
+        self.assertEqual(release.validate(self.files)["skillsVersion"], "0.1.14")
 
     def test_manifest_and_content_rejections(self):
         cases = [
