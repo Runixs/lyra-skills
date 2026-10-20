@@ -14,9 +14,9 @@ lyra update check --json
 - `process list` shows processes Lyra started on this machine; `process stop`
   stops one after checking its OS identity.
 - `trace list` / `trace show` show recorded executions step by step.
-- `update apply`, `update rollback` and `update remote-reset` change the
-  installed version or stored rows; run them only on the person's decision. An
-  unknown result is not permission to run them again.
+- `update apply`, `update rollback` and `update recover` change a lyra-daemon's
+  installed version or its work data; run them only on the person's decision.
+  An unknown result is not permission to run them again.
 
 ## Install a Lyra skill for an agent
 

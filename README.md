@@ -6,7 +6,7 @@ from the Lyra application. Each immutable tag has a manifest and one release zip
 Supply a release zip locally (Lyra 0.1.42 or later):
 
 ```sh
-lyra skills install --from ./lyra-skills-0.1.13.zip --agent codex
+lyra skills install --from ./lyra-skills-0.1.14.zip --agent codex
 lyra skills status
 lyra skills get lyra-cli
 ```

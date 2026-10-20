@@ -6,7 +6,7 @@
     {
       "name": "lyra-cli",
       "description": "Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, or install a Lyra skill for an agent.",
-      "minimumLyraVersion": "0.1.42",
+      "minimumLyraVersion": "0.1.44",
       "pointer": "skills/lyra-cli/SKILL.md",
       "guide": "skills/lyra-cli/guide.md",
       "references": [
@@ -43,22 +43,22 @@
     {
       "path": "skills/lyra-cli/SKILL.md",
       "size": 1388,
-      "sha256": "f7eed9814cf9100fa74e99a26cc277d9e26acae1d5d4733df1417d3b2d46d3d2"
+      "sha256": "d255d86a4e0ac694e1b177dd5705a1d4460adc09c725fa6f5be19a342e9e3031"
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 6288,
-      "sha256": "85daff22e86f26d30781c096874476f39d6b558ad98c976de6c709f1435720ae"
+      "size": 6283,
+      "sha256": "53decccfce5a4b160266e52c0500f0b504f6ed813e7a9ac1e5b1714934133c13"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 33091,
-      "sha256": "49ecb94965cbcd2e8b6276151fe124be88c0bd28590ab5a7da2d8bcd81a3db3d"
+      "size": 33393,
+      "sha256": "e7926e183a25bc10b0f399a649459341d377105e801d8b8c2b69a24304c10966"
     },
     {
       "path": "skills/lyra-cli/references/diagnostics-and-skills.md",
-      "size": 6029,
-      "sha256": "3d6836ed2dc30f2e11ead7f61b69a67664b22ec6fbc526feece50a178fa8d2fa"
+      "size": 6038,
+      "sha256": "bb7e737e17bbb5e4d0a5e943a4bbb71e59020abac8060132ca7f926b3be975c1"
     },
     {
       "path": "skills/lyra-cli/references/files-and-terminals.md",

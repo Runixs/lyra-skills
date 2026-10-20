@@ -61,12 +61,12 @@ optional input; angle brackets are values to replace.
 
 **update**
 
-- `lyra update status [--json]`: show the current version, the previous one and the update state
-- `lyra update check [--json]`: ask the internal update source for a new version
-- `lyra update apply [--yes] [--json]`: install the checked new version
-- `lyra update rollback [--yes] [--json]`: switch back to the previous version
-- `lyra update remote-status [--server <id>] [--json]`: show each server's daemon version, the companion update outcome and other-version daemons
-- `lyra update remote-reset [--yes] [--json]`: remove corrupt companion update rows after a verified SQLite backup (never touches readable rows)
+- `lyra update status [--json]`: show localhost app and SSH engine status
+- `lyra update check [--json]`: explain that the Lyra app owns update checks and downloads
+- `lyra update apply [--yes] [--json]`: apply the selected engine's app-staged update now
+- `lyra update rollback [--server <id>] --engine <app|ssh> [--yes] [--json]`: restore the selected engine's recorded previous snapshot
+- `lyra update remote-status [--server <id>] [--json]`: show both engine roles on localhost and registered computers
+- `lyra update recover [--server <id>] --engine <app|ssh|resource> --transition <id> --resolution <finish|restore-recorded> [--yes] [--json]`: finish or restore the original interrupted engine transition
 
 **process**
 
@@ -107,7 +107,7 @@ optional input; angle brackets are values to replace.
 - `lyra workspace list <project-id> [--cursor <cursor>] [--limit <count>] [--json]`: list the workspaces of a project
 - `lyra workspace show <workspace-id> [--json]`: show one workspace with its kind, host, path and revision
 - `lyra workspace rename <workspace-id> <display-name> [--expected-revision <revision>] [--json]`: change only the display name; the id, path and branch stay
-- `lyra workspace remove <workspace-id> [--expected-revision <revision>] [--force] [--yes] [--json]`: remove or unregister a workspace; a dirty one is refused unless --force discards its uncommitted changes and new files; an unknown or in-use one is always refused
+- `lyra workspace remove <workspace-id> [--expected-revision <revision>] [--force] [--yes] [--json]`: remove or unregister a workspace; running sessions and terminals in the workspace are stopped first, and an unproven stop is refused and keeps the folder; a dirty one is refused before anything stops unless --force discards its uncommitted changes and new files (--force waives nothing else); a root or unknown one, or one a Lyra screen conversation uses, is always refused
 - `lyra workspace remove-branch <cleanup-ref> --expected-head <commit> [--yes] [--json]`: force-delete a created branch that was kept when its workspace was removed; unmerged commits may be lost; refused if the branch moved or is checked out
 
 **file**
