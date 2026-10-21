@@ -128,7 +128,7 @@ optional input; angle brackets are values to replace.
 - `lyra session models <workspace-id> [--agent <name>] [--json]`: read the actual model catalog with the saved native invocation
 - `lyra session defaults <harness-kind> [--json]`: read the separate home global model default
 - `lyra session set-default <harness-kind> [--model <model>] --expected-revision <revision> [--json]`: save or clear the separate home global model default using CAS
-- `lyra session open <workspace-id> [--agent <name>] [--model <model>] [--effort <level>] [--json]`: open a session with --agent (a canonical kind or Profile name); it reports opening, active, failed or unknown; an agent starts an Orchestrator tree under its role checks (Worker refused), while a person is unrestricted
+- `lyra session open <workspace-id> [--agent <name>] [--model <model>] [--effort <level>] [--title <title>] [--json]`: open a session with --agent (a canonical kind or Profile name); it reports opening, active, failed or unknown; --title sets the title you chose, which a later model summary does not overwrite; an agent starts an Orchestrator tree under its role checks (Worker refused), while a person is unrestricted
 - `lyra session list [--workspace <workspace-id>] [--cursor <cursor>] [--json]`: list sessions with host and state; a list that could not be read is a failure, never an empty list
 - `lyra session show <session-id> [--json]`: show one session with its host, state and title
 - `lyra session interrupt <session-id> [--json]`: stop the current conversation turn and keep its session open; idle is a no-op
