@@ -69,6 +69,8 @@ tell the person what you saw. Never cancel, retry or re-dispatch on silence.
 
 ### Stopping work
 
+Keep finished Workers open for reuse (`terminals`).
+
 `lyra task cancel <task-id> --yes --json` types one Ctrl-C into the Worker: a
 request, not a stop. The task reads `stopped` only when the Worker reports it
 (ask it by message to report `stopped`) or Lyra proves its process ended; keep

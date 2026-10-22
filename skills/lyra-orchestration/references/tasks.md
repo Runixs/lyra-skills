@@ -21,6 +21,7 @@ lyra task dispatch <task-id> --worker-session <owned-worker-session-id> --reques
   wide plan over a long chain. Dependencies stay inside your own plan.
 - `task list --ready` lists what can start now. A completed task starts
   nothing by itself: dispatch its dependents.
+- Keep finished Workers open for reuse (`terminals`).
 - A failed or stopped task blocks its dependents (`blockCauses`
   `predecessor-ended`) until you retry it; removing it blocks them for good.
 - `worker start --task` requires the task's current owner as its Lyra caller

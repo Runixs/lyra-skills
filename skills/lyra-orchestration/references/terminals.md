@@ -2,14 +2,23 @@
 
 A still-open Worker whose task has a result keeps its terminal, process and context. Reuse
 it for a follow-up on the same code (review fixes, the next step): it needs no
-new start and remembers what it did. Release it when nothing follows: releasing
-a Worker you started, once its result is recorded, is part of the job and needs
-no extra word from the person.
+new start and remembers what it did. Otherwise leave it open and reusable in
+the explorer, even when nothing follows. Never release a Worker on your own.
+Release only when the person asks, or when reuse is impossible and the person
+agrees after you explain why.
 
 ```text
 lyra terminal list --terminal-state reclaimable --json
 lyra task create --spec-file followup.md --json
 lyra terminal reuse --worker-session <worker-session-id> --task <new-task-id> --reuse-mode continue --request-id <new-request-id> --json
+```
+
+Tell the person how many finished Workers are kept in the filtered list's
+scope, including zero, and that `lyra terminal release` frees them when they
+want. If the list fails, report the count as unknown. Only after the person's
+request or agreement above:
+
+```text
 lyra terminal release --worker-session <worker-session-id> --request-id <new-request-id> --yes --json
 lyra terminal release --task <task-id> --request-id <new-request-id> --yes --json
 ```
@@ -17,8 +26,9 @@ lyra terminal release --task <task-id> --request-id <new-request-id> --yes --jso
 - The filtered list shows each settled attempt whose Worker terminal remains
   retained: `sessionId`, `taskId`, `attemptId`, `outcome`, `settledAt`,
   `ownerSessionId` and `next`. `next` is an exact release command only when you
-  own the task or its plan; otherwise it is `null`: message `ownerSessionId`,
-  who can release it. It includes older failed attempts after a retry; running
+  own the task or its plan; otherwise it is `null`: `ownerSessionId` names who
+  can release it. A returned command is not the person's permission to run it.
+  It includes older failed attempts after a retry; running
   and released terminals, and releases already `checking` or `closing`, are
   excluded. An agent sees its own tree; a person sees all. The list changes nothing. `--workspace` narrows it further.
   An older home refuses the new read operation as `bridge.unknown-operation`;

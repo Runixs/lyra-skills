@@ -57,8 +57,10 @@ lyra terminal detach <execution-terminal-id> --view-ref <view-ref> --json
   or `down`); it never starts a second copy of the agent.
 - `terminal detach` closes one attached view named by its view reference; the
   terminal keeps running.
-- A Worker's retained terminal is released or reused by its session ID with
-  the `lyra-orchestration` skill.
+- Keep a finished Worker's terminal open for reuse by its session ID with
+  the `lyra-orchestration` skill. Report how many are kept; `lyra terminal release`
+  frees them only on the person's request, or with their agreement when reuse
+  is impossible.
 
 ### Plain shells: start, type, read, stop
 
