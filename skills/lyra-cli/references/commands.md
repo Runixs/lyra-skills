@@ -236,3 +236,27 @@ tasks only. Handoff, session move, adoption and ordinary messages are distinct.
 ## Request receipts
 
 - `lyra request show <request-id> --operation <operation> [--session <session-id>] [--json]`: read a stored request receipt without retrying; a person may select --session, an agent reads its own scope
+
+**connection**
+
+Jira and GitHub requests are sent by the open Lyra app. Reads run on demand;
+there is no timed poll. Adding, checking and removing connections are person-only:
+ask the person to use Settings → Issue connections. Never retry a refused sign-in.
+The password or token is read at a hidden prompt or from stdin, never from argv.
+
+- `lyra connection list [--json]`: list connections and their account, app state and last read outcome, without tokens
+- `lyra connection add <name> --kind <kind> --url <base-url> --auth <auth> [--user <name-or-email>] [--token-stdin] [--json]`: person only; add a Jira or GitHub https connection; Jira Basic needs a user name or email
+- `lyra connection check <connection> [--json]`: person only; check the stored sign-in, including after the person corrects a refused credential
+- `lyra connection poll-now <connection> [--json]`: read this connection's open assigned issues once; respect any server-requested wait
+- `lyra connection remove <connection> [--yes] [--json]`: person only, with their consent; delete the connection and its stored password or token
+
+**issue**
+
+Use Jira keys such as ABC-123 or GitHub keys such as owner/repo#12. Name the
+connection when a kind has several. An unanswered sent comment is Unknown:
+inspect the issue's comments before deciding whether to post again; never replay it
+blindly. Use a file or stdin for a comment body.
+
+- `lyra issue list [--connection <name>] [--json]`: read open issues assigned to the connected account on one or every connection; keep all returned and cached rows, followed by each failed connection's reason; exit 1 only if no selected provider could be read, with the full result still in JSON
+- `lyra issue show <key> [--connection <connection>] [--json]`: read one issue, its status, assignee and URL
+- `lyra issue comment <key> [--body <text>] [--body-file <path|->] [--connection <connection>] [--json]`: post once with the connection's account; give exactly one body source, and use --body-file - for stdin
