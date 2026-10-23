@@ -144,29 +144,31 @@ they started; message other trees. People may open and prompt any session.
 
 ## Wait
 
-Keep one wait running. `--all` returns one message batch, held mail, overdue tasks, then Worker
-conditions in task-list order; a changed positive omitted-count notice follows held mail.
-It records only what it prints. Without `--all`, the first event wins. `checkpoint` means the
-timeout passed. Messages are capped at 50 and one guest line; `morePending` means wait again.
-Outgoing metadata is capped at 256, prioritizing held mail; a pruned message can reappear.
+Keep one wait running. `--all` returns one claimed message batch, held mail,
+overdue tasks, then Worker conditions in task-list order; a changed positive
+omitted count follows held mail. It records conditions without acking
+mail. Without `--all`, the first event wins. `checkpoint` means timeout.
+Mail is capped at 50 and one guest line. Ack before reading `morePending`.
+Outgoing metadata: 256 items, held first; pruned mail can reappear.
 
-- **Claude Code, when you are not a Lead:** start it as a background command
+- **Claude Code, unless a Lead:** run this in the background
   (`run_in_background: true`), then end your turn:
 
   ```text
   lyra task wait --all --timeout 15m --json
   ```
 
-  When Claude Code says it completed, read its output, act, and start the next
-  wait in the same message as your last action. Messages and Worker changes
-  end a wait at once, so the timeout only sets how often you look in: when you
-  supervise only Leads or hour-long tasks, up to `--timeout 45m` is fine.
-- **A Lead, or an agent without background commands:** run the same wait in
-  the foreground with your shell tool's time limit above it, and loop: for
-  example `--timeout 9m` with Claude Code's Bash timeout raised to 600000 ms
-  (its 2-minute default would cut the wait). A Lead never ends its turn while
-  its Workers run: to its parent that looks like a stopped Worker.
-- A wait also takes your messages; never run `message check` beside it.
+  On completion, read the output, act, ack its messages, then start the next
+  wait with your last action. Messages and Worker changes wake it at once;
+  for long tasks use `--timeout 45m`.
+- **A Lead, or an agent without background commands:** wait in the foreground
+  and loop; e.g. `--timeout 9m` with Bash timeout 600000 ms (its default is
+  2 minutes). A Lead never ends its turn while Workers run: its parent sees
+  a stopped Worker.
+- Never run `message check` beside a wait. After acting on
+  every message, run `lyra message ack <delivery-id>
+  --consumer-generation <consumer-generation> --json` from its event.
+  Until ack, it replays even after `/clear`.
 
 ## Act on each event
 
@@ -174,7 +176,7 @@ Outgoing metadata is capped at 256, prioritizing held mail; a pruned message can
 |---|---|
 | `all` | Act on each item in `result.events`, in order, using the rows below; `morePending` above 0 means messages remain for the next wait |
 | `observation-failed` | Act on the message item first; task/status observation, local record access or claimed-batch metadata validation failed. Inspect `operation`, `error` and `next`; for `message.check` and `task-wait-record`, `next` repeats the recovery in `error.next`. Repair it or tell the person, then re-arm the wait |
-| `message` | Act on each message once (by `id`). A report notice ("was reported") is the result: see below. A `kind: question` → answer once with its `nextStep` (`lyra message reply <question-id> <answer>`); a question in plain mail → `message send --to` its sender with `--file`, `--task` and `--attempt`. An answer to your question names its ID. A `lyra-supervisor` escalation → `recovery` |
+| `message` | Act on each message once (by `id`), then explicitly ack the event's delivery and consumer generation. For a handoff, accept by ack and verify ownership before executing. A report notice ("was reported") is the result: see below. A `kind: question` → answer once with its `nextStep` (`lyra message reply <question-id> <answer>`); a question in plain mail → `message send --to` its sender with `--file`, `--task` and `--attempt`. An answer to your question names its ID. A `lyra-supervisor` escalation → `recovery` |
 | `message-held` | Your mail cannot be delivered: an unrepairable refusal, unknown outcome, or an unread recipient that closed/failed. Retry-healed refusals and recipient-wait takeover raise no event. `message-recipient-closed` → hand the work to a live session; `message-delivery-unknown` → inspect before any resend and ask the person if still unsure; other reasons → inspect the message/session and follow `messages` for repair. Never invent a restore-delivery command |
 | `message-conditions-omitted` | The 256-item outgoing metadata cap omitted `omitted` of `total` items. Shown once while positive; only an observed zero re-arms it. Inspect `task list`, tell the person the counts, route known stranded work to live sessions and re-arm; pruned IDs may reappear |
 | `worker-stopped` | Its turn ended without a report. If it just asked you something, that question is the stop: answer it if you have not, and send nothing else. Otherwise send one message: report your result or name your blocker. A second stop → `recovery` |

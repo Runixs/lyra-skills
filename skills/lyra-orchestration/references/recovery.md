@@ -92,9 +92,8 @@ takes it out of the plan and blocks its dependents for good.
 When the daemon (it runs agent sessions) stops, every
 session it ran ends, yours too, and your commands fail with
 `caller-session-stale`. On the person's word, a new session takes over. A new
-session owns nothing yet, so its `task list` is empty until it adopts. Find
-the ended session in `lyra session list --json` (state `failed` or `closed`,
-the title the person knows), or ask the person for it:
+session's `task list` is empty until adoption. Find the ended session with
+`lyra session list --json` (`failed`/`closed`, by title), or ask the person:
 
 ```text
 lyra session show <ended-session-id> --json
@@ -102,10 +101,10 @@ lyra task adopt --from <ended-session-id> --yes --json
 lyra task list --json
 ```
 
-- The ended session must read `failed` or `closed`; `adopt-owner-open` means it
-  still runs.
-- You get its whole plan and own its tasks; Workers still alive report to you.
-  A task in `result.inFlight` is mid-handoff: adopt again once it settles.
+- Require `failed` or `closed`; `adopt-owner-open` means still running.
+- You get its plan, owned tasks and unread/claimed mail; later sends to its
+  address forward to you. Act on replayed mail, then `message ack` its batch.
+  Live Workers report to you; adopt `result.inFlight` after handoff.
 - A `running` task whose Worker died with the daemon: cancel it, retry it once
   it reads `stopped`, and run
   `worker start --task <task-id> --workspace <workspace-id>` with the

@@ -128,11 +128,10 @@ lyra task handoff <task-id> --worker-session <session-id> --request-id <new-requ
 lyra task show <task-id> --json
 ```
 
-- The task travels as a message, and ownership moves only when the receiver's
-  `message check` or `task wait` takes it within 60 seconds. Otherwise it ends
-  `not_delivered` and stays yours. A receiver idle at its prompt, or a fresh
-  agent once its prompt box reads ready, gets the "You have N Lyra messages"
-  line.
+- Ownership moves only on explicit `message ack` of the handoff batch after
+  `message check` or `task wait`. Accept by ack, then verify with `task show`
+  before executing. Never claimed at the 60-second deadline: `not_delivered`;
+  claimed without receipt: unknown, still yours. Idle recipients get the pointer.
 - `result.handoff.status`: `requested` or `delivering` (still yours),
   `delivered`, `not_delivered`, `rejected`. A ready task can go to any
   session, a running supervised task only to an existing one. Before sending and

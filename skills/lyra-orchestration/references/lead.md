@@ -58,11 +58,11 @@ summary, questions) and run your part like an Orchestrator (the guide). Also:
    Workers in your own Workspace (`--workspace current`), one writer per file set.
 2. **Wait in the foreground, always:** loop
    `lyra task wait --all --timeout 9m --json` with your shell tool's time limit above
-   it. Never end your turn while your Workers run: your parent would get
-   `worker-stopped`, then `worker-suspect`, and after an hour a stall
-   escalation that holds the tasks waiting on yours.
-   A long-running wait tool may raise `worker-wait-too-long` after its tool limit (60 minutes by
-   default). This only tells the parent; it never stops, retries or escalates the Lead.
+   it. Act on every message, then `message ack` its delivery/generation before
+   waiting again. Until ack, it replays. Never end your turn while Workers run:
+   your parent sees `worker-stopped`, then `worker-suspect`; after an hour a
+   stall escalation holds dependent tasks. `worker-wait-too-long` after the
+   tool limit (default 60 minutes) only tells the parent; it never acts.
 3. **Ask your parent** what your spec does not let you decide: `message send`
    to the `result.task.ownerSessionId` of your own task, with your
    footer's task and attempt IDs. Keep waiting on your Workers; the answer
