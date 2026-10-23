@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.17",
-  "tag": "v0.1.17",
+  "skillsVersion": "0.1.18",
+  "tag": "v0.1.18",
   "skills": [
     {
       "name": "lyra-cli",
@@ -38,12 +38,12 @@
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "bd270b0ddecef6c53cde260e7964048b1186147606e6643d2ccb8cf04e167bd1"
+      "sha256": "447836d46f39c5900faf74ad6a6554b8e1fafeca1f78de0416d5f05c6e09a080"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
       "size": 1387,
-      "sha256": "5bffa62dbe6f17690754e1bb919f814eb998ec4a46e110220d6916fcd5675ce0"
+      "sha256": "f1973ff26e0a2cb556213a3aebf7373af7d0ec7c3988fc0189f2f64addb11630"
     },
     {
       "path": "skills/lyra-cli/guide.md",
@@ -82,13 +82,13 @@
     },
     {
       "path": "skills/lyra-orchestration/SKILL.md",
-      "size": 2747,
-      "sha256": "da8927b8674f4290710429809f144b66a3e52dea4e0f2382aa65965ad370d288"
+      "size": 2760,
+      "sha256": "34a3126bc829eebf90f4fdad130efb27ad2c86e9a33a07f8ab284b50ed4ffc61"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15356,
-      "sha256": "a56edf0e4bbd7363ce78722c0058695375d3664a09cdd48e5926555506f3d438"
+      "size": 15354,
+      "sha256": "024a7a080ec0d505230e76f2e93cb5502bece5930a72b28c485e96f74124916a"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
@@ -117,8 +117,8 @@
     },
     {
       "path": "skills/lyra-orchestration/references/worker.md",
-      "size": 6540,
-      "sha256": "48519a8218a376a98ab464d4ccf0be8ee44a6da46d6d28fa4e91672b87e76ebb"
+      "size": 6537,
+      "sha256": "5acd66a948023b30e9b92a11d56cf273a2fe0e8294bdb2583fb5d1bb11648cd0"
     }
   ]
 }

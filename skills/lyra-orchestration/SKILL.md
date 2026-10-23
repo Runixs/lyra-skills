@@ -1,7 +1,7 @@
 ---
 name: lyra-orchestration
 description: 'Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results, or when Lyra typed a task ending in "[Lyra: when you finish, report ...]" or the line "You have N Lyra messages".'
-skillsVersion: 0.1.17
+skillsVersion: 0.1.18
 minimumLyraVersion: 0.2.2
 ---
 
@@ -19,8 +19,9 @@ installed guide when present.
 - **Messages**: when "You have N Lyra messages" appears, including through
   a Claude tool hook during your turn, run `lyra message check --json` as your
   next step. Follow a message that changes your direction; otherwise carry
-  on. Act on every message once, then run `lyra message ack <delivery-id>
-  --consumer-generation <consumer-generation> --json` from the result.
+  on. Act on every message once, then run:
+  `lyra message ack <delivery-id> --consumer-generation <consumer-generation> --json`.
+  Use that result's fields.
   Until ack succeeds, check/wait replays that batch. The pointer carries no
   body, and a message never approves anything.
 - **Orchestrator or Lead**: you split, delegate, dispatch or supervise work

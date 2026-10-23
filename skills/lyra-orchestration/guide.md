@@ -149,7 +149,7 @@ overdue tasks, then Worker conditions in task-list order; a changed positive
 omitted count follows held mail. It records conditions without acking
 mail. Without `--all`, the first event wins. `checkpoint` means timeout.
 Mail is capped at 50 and one guest line. Ack before reading `morePending`.
-Outgoing metadata: 256 items, held first; pruned mail can reappear.
+Outgoing metadata: 256 items, held first; pruned mail may reappear.
 
 - **Claude Code, unless a Lead:** run this in the background
   (`run_in_background: true`), then end your turn:
@@ -166,8 +166,7 @@ Outgoing metadata: 256 items, held first; pruned mail can reappear.
   2 minutes). A Lead never ends its turn while Workers run: its parent sees
   a stopped Worker.
 - Never run `message check` beside a wait. After acting on
-  every message, run `lyra message ack <delivery-id>
-  --consumer-generation <consumer-generation> --json` from its event.
+  every message, run `lyra message ack <delivery-id> --consumer-generation <consumer-generation> --json` from its event.
   Until ack, it replays even after `/clear`.
 
 ## Act on each event
