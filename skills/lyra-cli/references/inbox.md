@@ -1,7 +1,8 @@
 ## Inbox
 
-The Inbox holds approvals and questions from `Lyra` screen conversations for
-the person. A terminal agent's own permission prompt or question never reaches
+The Inbox holds approvals and questions from `Lyra` screen conversations, and
+workflow runs' approvals and decisions, for the person. A terminal agent's own
+permission prompt or question never reaches
 the Inbox: it shows only as that session's status, and the person answers it
 in that terminal.
 
@@ -11,7 +12,10 @@ lyra inbox list --state pending --json
 lyra inbox show <item-id> --json
 ```
 
-Answer only with the answer the person chose; Lyra does not check who answers.
+Answer only with the answer the person chose; for most items Lyra does not
+check who answers. A workflow run's approval or decision is answered only in
+the Lyra app's `Inbox`: `inbox answer` and `inbox modify` refuse it with
+`workflow.approval-app-only`.
 `inbox show` gives the item's kind, its choices and the `version` an answer must
 carry; a stale version leaves the item unchanged. A message or a prompt never
 counts as an approval.
