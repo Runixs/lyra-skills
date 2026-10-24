@@ -114,4 +114,5 @@ Load only the one your next step needs, with
 | Answer a pending approval or question in the Inbox | `inbox` |
 | Connect a remote server, SSH keys, credentials | `servers-and-credentials` |
 | Versions, processes, traces, updates, installing Lyra skills | `diagnostics-and-skills` |
+| Jira and GitHub connections, issues and their comments, workflows and runs | `connections-and-workflows` |
 | Every command in one list (for people; agents use `--help`) | `commands` |

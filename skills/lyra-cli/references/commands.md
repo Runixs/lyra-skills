@@ -237,20 +237,38 @@ loop and whole-branch depth checks run before the message and again at receipt;
 a failed receipt check returns the handoff. New receiving sessions take Ready
 tasks only. Handoff, session move, adoption and ordinary messages are distinct.
 
-## Request receipts
-
-- `lyra request show <request-id> --operation <operation> [--session <session-id>] [--json]`: read a stored request receipt without retrying; a person may select --session, an agent reads its own scope
-
 **connection**
 
 The open Lyra app sends Jira and GitHub requests. Adding, checking and removing
 connections are person-only; an agent asks the person to use Settings → Issue connections.
 
-- `lyra connection list [--json]`: list Jira and GitHub connections without tokens
-- `lyra connection add <name> --kind <kind> --url <base-url> --auth <auth> [--user <name-or-email>] [--token-stdin] [--json]`: person only; add a connection, reading its password or token at a hidden prompt or from stdin
-- `lyra connection check <connection> [--json]`: person only; check the stored sign-in
+- `lyra connection list [--json]`: list Jira and GitHub connections with the account, the last poll and the last error (no tokens)
+- `lyra connection add <name> --kind <kind> --url <base-url> --auth <auth> [--user <name-or-email>] [--poll-seconds <seconds>] [--token-stdin] [--json]`: person only; add a connection and check it; jira-basic needs --user; the password or token is typed at a hidden prompt, or read as one line from standard input with --token-stdin; polls every 60 seconds unless --poll-seconds (30 or more)
+- `lyra connection check <connection> [--json]`: person only; check a connection's address and sign-in now; exits 1 and prints the reason when it fails
+- `lyra connection poll-now <connection> [--json]`: poll a connection now and list the open issues assigned to its account; exits 1 and prints the reason when the poll fails
 - `lyra connection remove <connection> [--yes] [--json]`: person only, with their consent; delete the connection and its stored password or token
 
 **issue**
 
 - `lyra issue list [--connection <name>] [--json]`: list open issues assigned to the connected account on one or every connection
+- `lyra issue show <key> [--connection <connection>] [--json]`: show one issue by key (ABC-123 for Jira, owner/repo#12 for GitHub); --connection names the connection when the key alone is not enough
+- `lyra issue comment <key> [--body <text>] [--body-file <path|->] [--connection <connection>] [--json]`: post a plain-text comment with the connection's account; from a Lyra session the comment is recorded for that session; give exactly one of --body and --body-file (`-` reads standard input)
+
+**workflow**
+
+- `lyra workflow save --file <file> [--json]`: save a workflow file; a file whose name exists becomes that workflow's next version
+- `lyra workflow list [--json]`: list saved workflows with their trigger, on or off, and last run
+- `lyra workflow show <workflow> [--json]`: show a workflow and its current file, by id or name
+- `lyra workflow enable <workflow> [--json]`: turn a workflow's trigger on
+- `lyra workflow disable <workflow> [--json]`: turn a workflow's trigger off; a manual run still works
+- `lyra workflow remove <workflow> [--yes] [--json]`: delete a workflow, its versions and its runs; the workspaces runs made stay
+- `lyra workflow run <workflow> [--issue <key>] [--issue-file <file>] [--connection <name>] [--request-id <request-id>] [--json]`: start a run by hand, with an issue key or an issue as a JSON file
+- `lyra workflow runs [--workflow <workflow>] [--limit <n>] [--json]`: list recent runs, newest first
+- `lyra workflow run-show <run-id> [--json]`: show a run: each step's state, reason, workspace, session or terminal, outputs and links
+- `lyra workflow run-output <run-id> --step <step> --name <output> [--json]`: print one output a run's step kept, in full; it stays readable after the workspace is gone
+- `lyra workflow run-stop <run-id> [--json]`: stop a run: its running step's session or terminal is stopped and the run ends stopped
+- `lyra workflow run-clean <run-id> [--yes] [--json]`: delete the workspaces an ended run made, with their folders and branches; the run and its outputs stay
+
+## Request receipts
+
+- `lyra request show <request-id> --operation <operation> [--session <session-id>] [--json]`: read a stored request receipt without retrying; a person may select --session, an agent reads its own scope
