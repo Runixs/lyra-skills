@@ -114,7 +114,7 @@ Worker; they change the person's saved settings for every later session.
 | `turn` | Means | Do |
 |---|---|---|
 | `started` | The Worker took the task | Wait |
-| `not-started` | Typed, no turn seen yet (usual for opencode) | Wait; not a failure. If no news follows: `recovery` |
+| `not-started` | Typed, no turn seen yet (usual for OpenCode 1.x) | Wait; not a failure. If no news follows: `recovery` |
 | `awaiting-permission` | It waits for a person's approval in its terminal | Tell the person, then wait |
 
 **If it stops part-way,** never run `worker start` again for it: it creates new
@@ -183,7 +183,7 @@ Worker changes and urgent mail end a wait at once; other mail is batched
 | `worker-wait-too-long` | The approval wait (default 10 min) or tool run (default 60 min) crossed its saved limit. Tell the person what is waiting (`progress.waitingTooLong`); it authorizes no escalation, stop, retry or dispatch. Printed once per wait, also in `--all` |
 | `worker-suspect` | No progress for 10 minutes; a long build looks the same. Act only on proof → `recovery` |
 | `worker-closed` | Its session closed without a result → `recovery` |
-| `worker-unobservable` | Lyra cannot see its status (opencode, a lost link). Not a result: wait again |
+| `worker-unobservable` | Lyra cannot see its status (OpenCode 1.x, a lost link). Not a result: wait again |
 | `checkpoint` | For each task listed as ended, act on its notice, or read `task show --brief`. A `running` task with the same `state` and `progress` (or null) as at the last checkpoint has no news: read its `turn` with `lyra status show --session <worker-session-id> --json`. `ended` → as `worker-stopped`; `awaiting-human` → tell the person; anything else → wait again. No news again at the next checkpoint → `recovery` |
 | `idle` | Nothing runs and no message waits: settle and report |
 

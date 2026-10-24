@@ -87,8 +87,8 @@
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15326,
-      "sha256": "8bce5e11a3c5a6ffdd822dce86c9b5f0cf3a15da6a75f27892b11f31db07ae7f"
+      "size": 15334,
+      "sha256": "65ffcc39118ea615b236488aafe09b82e197038de0e41b531acf67bc5e14844a"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
@@ -102,8 +102,8 @@
     },
     {
       "path": "skills/lyra-orchestration/references/recovery.md",
-      "size": 8174,
-      "sha256": "10f68da74c625279ebb3ec779d12daa069a6070e9e6f65e1e496d92f6fbfd4e6"
+      "size": 8178,
+      "sha256": "a99fce023c70878f285a758b6b6357f9404415af5a7e8a0bfdd90a27b8b3c800"
     },
     {
       "path": "skills/lyra-orchestration/references/tasks.md",
