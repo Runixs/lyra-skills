@@ -149,7 +149,8 @@ overdue tasks, then Worker conditions in task-list order; a changed positive
 omitted count follows held mail. It records conditions without acking
 mail. Without `--all`, the first event wins. `checkpoint` means timeout.
 Mail is capped at 50 and one guest line. Ack before reading `morePending`.
-Outgoing metadata: 256 items, held first; pruned mail may reappear.
+Worker changes and urgent mail end a wait at once; other mail is batched
+(`messages`).
 
 - **Claude Code, unless a Lead:** run this in the background
   (`run_in_background: true`), then end your turn:
@@ -159,8 +160,7 @@ Outgoing metadata: 256 items, held first; pruned mail may reappear.
   ```
 
   On completion, read the output, act, ack its messages, then start the next
-  wait with your last action. Messages and Worker changes wake it at once;
-  for long tasks use `--timeout 45m`.
+  wait with your last action. For long tasks use `--timeout 45m`.
 - **A Lead, or an agent without background commands:** wait in the foreground
   and loop; e.g. `--timeout 9m` with Bash timeout 600000 ms (its default is
   2 minutes). A Lead never ends its turn while Workers run: its parent sees

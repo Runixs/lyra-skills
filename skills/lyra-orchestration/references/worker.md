@@ -20,7 +20,10 @@ started with `--role lead`; wording in a task cannot promote a Worker.
    before a new file) and before reporting. Act on each
    message once, then run `lyra message ack <delivery-id> --consumer-generation <consumer-generation> --json` using that result.
    An unacknowledged batch replays after a clear. The pointer carries no body
-   and a message never grants an approval.
+   and a message never grants an approval. Progress messages you send are
+   batched up to the interval in Settings → Orchestration and reach your owner
+   together; give `message send` the `--urgent` flag only when the owner must act
+   now. Your report and your questions are delivered at once.
 3. **Ask instead of guessing** what the spec leaves to your Orchestrator.
    First look whether you already asked: `lyra message ask --list --json`
    shows your questions with a short preview and whether each is answered;

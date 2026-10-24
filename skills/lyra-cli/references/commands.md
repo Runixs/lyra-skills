@@ -167,10 +167,10 @@ optional input; angle brackets are values to replace.
 
 **message**
 
-- `lyra message send --to <to> [--stdin] [--file <file>] [--thread <thread>] [--task <task>] [--attempt <attempt>] [--request-id <request-id>] [--json]`: accept a message body from stdin or file; closed or failed recipients refuse new mail with message-recipient-closed; same-request replay preserves the first receipt; acceptance is separate from acknowledgement
+- `lyra message send --to <to> [--stdin] [--file <file>] [--thread <thread>] [--task <task>] [--attempt <attempt>] [--request-id <request-id>] [--urgent] [--json]`: accept a message body from stdin or file; closed or failed recipients refuse new mail with message-recipient-closed; same-request replay preserves the first receipt; acceptance is separate from acknowledgement; --urgent ends the recipient's wait at once instead of being held
 - `lyra message ask [<question>] [--to <to>] [--resume <question-id>] [--timeout <duration>] [--thread <thread>] [--task <task>] [--attempt <attempt>] [--request-id <request-id>] [--list] [--json]`: create question mail and block for its paired reply; default 10m, maximum 30m; the question ID and resume command go to standard error before the wait; resume reads the same question without creating mail; list shows your own questions and their state
 - `lyra message reply <question-id> <answer> [--request-id <request-id>] [--json]`: recipient-only answer, once; identical request and body replay
-- `lyra message check [--wait] [--type <type>] [--consumer-generation <consumer-generation>] [--json]`: claim and print the current recipient batch; act on it, then run message ack; an unacknowledged batch is replayed
+- `lyra message check [--wait] [--type <type>] [--consumer-generation <consumer-generation>] [--json]`: claim and print the current recipient batch; act on it, then run message ack; an unacknowledged batch is replayed; --wait holds non-urgent mail up to the Settings interval
 - `lyra message ack <delivery-id> --consumer-generation <consumer-generation> [--request-id <request-id>] [--json]`: acknowledge a claimed batch after acting on every message; a handoff in it transfers ownership; repeats answer duplicate
 - `lyra message show <message-id> [--json]`: read an original message without claiming or acknowledging it
 - `lyra message thread <thread-id> [--cursor <cursor>] [--json]`: read original messages and delivery states in one thread
