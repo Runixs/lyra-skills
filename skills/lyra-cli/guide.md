@@ -10,9 +10,12 @@ agents, or when Lyra typed you a task with a report footer, use the
 ## Rules for every command
 
 - `home` (Lyra's core without a window) answers every command except `home`,
-  `skills` and `version`. `home.not-running`: tell the person, and start it
-  with `lyra home start --json` only on their word. `lyra home stop --json` is
-  refused while work runs; `--force` is the person's decision.
+  `daemon`, `update`, `skills` and `version`. `home.not-running`: tell the
+  person, and start it with `lyra daemon start --json` only on their word.
+  Stopping is the person's decision: `lyra daemon stop --json` stops this
+  computer's idle lyra-daemon and its keeper, with no force; on an engine
+  install `lyra home stop --json` refuses with `app.unit-unavailable`. Both
+  refuse an agent that Lyra started (`home.guest-not-allowed`).
 - Use `--json`: success is `{"ok": true, "result": ...}`; a failure carries
   `error.class`, `error.code`, `error.message`, `error.next` and
   `error.detail`. Exit 0 success, 1 refused, 2 usage, 3 unknown.

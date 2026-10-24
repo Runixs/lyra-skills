@@ -5,7 +5,6 @@ lyra doctor --json
 lyra version --json
 lyra process list --json
 lyra trace list --json
-lyra update status --json
 lyra update check --json
 ```
 
@@ -14,16 +13,19 @@ lyra update check --json
 - `process list` shows processes Lyra started on this machine; `process stop`
   stops one after checking its OS identity.
 - `trace list` / `trace show` show recorded executions step by step.
-- `update apply`, `update rollback` and `update recover` change a lyra-daemon's
-  installed version or its work data; run them only on the person's decision.
-  An unknown result is not permission to run them again.
-- Before another Lyra version is installed on this computer, the person stops
-  its idle lyra-daemon engine and keeper with `lyra daemon stop --json`;
-  `lyra daemon start --json` starts it again. Both are a person's commands:
-  an agent that Lyra started is refused (`home.guest-not-allowed`).
-  `daemon-stop-busy` means work still runs: finish it and stop again; there
-  is no force. An unknown result (exit 3) is not a stop: inspect both
-  processes before installing.
+- `update rollback` and `update recover` with `--engine app` change this
+  computer's lyra-daemon version or its work data; run them only on the
+  person's decision. An unknown result is not permission to run them again.
+  This build refuses them for other engines and servers, and refuses
+  `update apply`, `update status` and `update remote-status`: a person applies
+  an update with Update now in the Lyra app.
+- Before another Lyra version is installed by hand on this computer, the
+  person stops its idle lyra-daemon engine and keeper with
+  `lyra daemon stop --json`; `lyra daemon start --json` starts it again.
+  Both are a person's commands: an agent that Lyra started is refused
+  (`home.guest-not-allowed`). `daemon-stop-busy` means work still runs:
+  finish it and stop again; there is no force. An unknown result (exit 3) is
+  not a stop: inspect both processes before installing.
 
 ## Install a Lyra skill for an agent
 

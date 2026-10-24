@@ -61,12 +61,12 @@ optional input; angle brackets are values to replace.
 
 **update**
 
-- `lyra update status [--json]`: show localhost app and SSH engine status
+- `lyra update status [--json]`: refused by this build; it shows no engine status
 - `lyra update check [--json]`: explain that the Lyra app owns update checks and downloads
-- `lyra update apply [--yes] [--json]`: apply the selected engine's app-staged update now
-- `lyra update rollback [--server <id>] --engine <app|ssh> [--yes] [--json]`: restore the selected engine's recorded previous snapshot
+- `lyra update apply [--yes] [--json]`: refused by this build; a person applies an update with Update now in the Lyra app
+- `lyra update rollback [--server <id>] --engine <app|ssh> [--yes] [--json]`: restore the selected engine's recorded previous snapshot; this build runs it only with --engine app on localhost and refuses other engines and servers
 - `lyra update remote-status [--server <id>] [--json]`: refused by this build; no command here lists engine roles or a transition ID
-- `lyra update recover [--server <id>] --engine <app|ssh|resource> --transition <id> --resolution <finish|restore-recorded> [--yes] [--json]`: finish or restore the original interrupted engine transition
+- `lyra update recover [--server <id>] --engine <app|ssh|resource> --transition <id> --resolution <finish|restore-recorded> [--yes] [--json]`: finish or restore the original interrupted engine transition; this build runs it only with --engine app on localhost and refuses other engines and servers
 
 **process**
 
@@ -81,7 +81,7 @@ optional input; angle brackets are values to replace.
 **home**
 
 - `lyra home start [--json]`: start the home runtime if it is not running and wait until it answers
-- `lyra home stop [--force] [--json]`: stop the home runtime; refused while work runs unless --force
+- `lyra home stop [--force] [--json]`: stop the home runtime; refused while work runs unless --force; on an engine install it refuses with app.unit-unavailable: use `daemon stop`
 - `lyra home status [--json]`: show whether the home runtime runs, without starting it
 
 **daemon**
