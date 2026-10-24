@@ -162,7 +162,6 @@ optional input; angle brackets are values to replace.
 
 **status**
 
-- `lyra status configure [--enabled <true|false>] [--json]`: read or change the app-wide Agent status switch for new sessions
 - `lyra status show [--session <session-id>] [--json]`: show the five status axes, observation times and aggregates from home
 - `lyra status wait --session <session-id> --for <condition> [--wait] [--json]`: check a status condition, or wait with --wait; Ctrl-C cancels reception only
 

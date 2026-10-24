@@ -16,10 +16,9 @@ installed guide when present.
   the result first, then how you checked it. To ask a question, or when a
   command fails, run `lyra skills get lyra-orchestration --reference worker`
   before you follow the error's `next`.
-- **Messages**: when "You have N Lyra messages" appears, including through
-  a Claude tool hook during your turn, run `lyra message check --json` as your
-  next step. Follow a message that changes your direction; otherwise carry
-  on. Act on every message once, then run:
+- **Messages**: when "You have N Lyra messages" appears, run
+  `lyra message check --json` as your next step. Follow a message that changes
+  your direction; otherwise carry on. Act on every message once, then run:
   `lyra message ack <delivery-id> --consumer-generation <consumer-generation> --json`.
   Use that result's fields.
   Until ack succeeds, check/wait replays that batch. The pointer carries no

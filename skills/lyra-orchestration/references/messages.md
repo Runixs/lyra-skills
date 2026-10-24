@@ -2,17 +2,15 @@
 
 Any session can message another open session by session ID. Lyra stores accepted messages. The
 recipient learns of it from the fixed line, "You have N Lyra messages. Run
-`lyra message check`." A working Claude Code receives it through its inbox
-when available, otherwise through the next main-agent tool hook when supported;
-an idle Claude Code gets it typed. OpenCode uses Lyra's plugin when available.
-Codex keeps the typed pointer, and idle agents without a usable inbox get typing
-at a ready prompt, including a freshly opened agent. Run `lyra message check --json`
+`lyra message check`." Lyra types that line into the recipient's terminal when
+its agent waits at its prompt, including a freshly opened agent. An agent in the
+middle of a turn gets it after that turn ends, so check at natural checkpoints
+of a long turn too. Run `lyra message check --json`
 as your next step when a pointer arrives, follow a direction change, and
 otherwise carry on. The pointer carries no body, and the same unread batch is
-not announced on every tool call. A hook line left unread may be announced once
-more at idle; a proven inbox line is not. An agent without observable readiness
-checks by itself. A pointer is never the receipt; the explicit acknowledgement after acting
-on the check's batch is.
+not announced again when the agent goes idle once more. An agent without
+observable readiness checks by itself. A pointer is never the receipt; the
+explicit acknowledgement after acting on the check's batch is.
 
 ### Receive
 
