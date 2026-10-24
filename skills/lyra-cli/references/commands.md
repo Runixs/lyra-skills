@@ -65,7 +65,7 @@ optional input; angle brackets are values to replace.
 - `lyra update check [--json]`: explain that the Lyra app owns update checks and downloads
 - `lyra update apply [--yes] [--json]`: apply the selected engine's app-staged update now
 - `lyra update rollback [--server <id>] --engine <app|ssh> [--yes] [--json]`: restore the selected engine's recorded previous snapshot
-- `lyra update remote-status [--server <id>] [--json]`: show both engine roles on localhost and registered computers
+- `lyra update remote-status [--server <id>] [--json]`: refused by this build; no command here lists engine roles or a transition ID
 - `lyra update recover [--server <id>] --engine <app|ssh|resource> --transition <id> --resolution <finish|restore-recorded> [--yes] [--json]`: finish or restore the original interrupted engine transition
 
 **process**
@@ -83,6 +83,11 @@ optional input; angle brackets are values to replace.
 - `lyra home start [--json]`: start the home runtime if it is not running and wait until it answers
 - `lyra home stop [--force] [--json]`: stop the home runtime; refused while work runs unless --force
 - `lyra home status [--json]`: show whether the home runtime runs, without starting it
+
+**daemon**
+
+- `lyra daemon start [--json]`: start this computer's lyra-daemon and wait until it answers
+- `lyra daemon stop [--json]`: stop this computer's idle lyra-daemon engine and keeper
 
 **project**
 

@@ -74,8 +74,8 @@ what is done, next step, reset request ID), then run
 `lyra session reset <your-session-id> --resume-file <note-file> --request-id <request-id> --yes --json`.
 Only reset yourself. This supports Claude Code only: Codex, OpenCode or a daemon without clear support returns
 `session-reset-clear-unsupported` and does nothing. Do not retry; keep working in the same session and tell
-the person if it cannot go on. If the daemon does not serve clear, tell the person to update Lyra on that host
-(`lyra update remote-status --json`). A pending handoff or unsettled dispatch refuses it too.
+the person if it cannot go on. If the daemon does not serve clear, tell the person to update Lyra on that host.
+A pending handoff or unsettled dispatch refuses it too.
 When it answers `pending`, end your turn. At your next rest (turn ended, no dialog open, no person typing),
 Lyra types `/clear`, waits for the new active conversation, then gives the note as its first input; its arrival
 means the reset is done. Your session ID, place in the tree, owned tasks, running attempt and message address

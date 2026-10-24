@@ -17,6 +17,13 @@ lyra update check --json
 - `update apply`, `update rollback` and `update recover` change a lyra-daemon's
   installed version or its work data; run them only on the person's decision.
   An unknown result is not permission to run them again.
+- Before another Lyra version is installed on this computer, the person stops
+  its idle lyra-daemon engine and keeper with `lyra daemon stop --json`;
+  `lyra daemon start --json` starts it again. Both are a person's commands:
+  an agent that Lyra started is refused (`home.guest-not-allowed`).
+  `daemon-stop-busy` means work still runs: finish it and stop again; there
+  is no force. An unknown result (exit 3) is not a stop: inspect both
+  processes before installing.
 
 ## Install a Lyra skill for an agent
 
