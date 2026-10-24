@@ -63,16 +63,30 @@ lyra workflow run-show <run-id> --json
 lyra workflow run-output <run-id> --step fix --name notes --json
 ```
 
-- `workflow save` takes the whole file; a name that exists becomes that
-  workflow's next version. A refused file names each problem and its place.
+- `workflow save` takes the whole file. A new workflow is saved off; a name
+  that exists becomes that workflow's next version and keeps its on or off. A
+  refused file names each problem and its place.
 - `workflow list` shows each trigger as on or off. `workflow enable` and
   `workflow disable` turn it on and off, and are the person's decision; a
   `workflow run` started by hand works either way.
 - `workflow run-show` gives each step's state, reason, workspace, session or
   terminal, outputs and links. `workflow run-output` prints one kept output in
   full, also after its workspace is gone.
-- `workflow run-stop` stops a run. `workflow run-clean` deletes the
-  workspaces an ended run made, and `workflow remove` deletes a workflow with
-  its versions and runs; pass `--yes` to either only on the person's word.
+- `workflow run-stop` asks to stop a run, then waits up to 90 seconds until
+  the Workflow engine confirms that its running step's session or terminal
+  ended: exit 0 with `result.stopConfirmed` true. A run that ended another way
+  first says "ended <state>, not stopped"; a `warning:` line names a task whose
+  cancellation was not recorded. `workflow-stop-unconfirmed` (no confirmation
+  in time, or the look failed) or `interrupted` (exit 1) means the stop was
+  requested and is not confirmed: look again with the command in
+  `error.detail.check`. `--no-wait` answers once the stop is requested, with
+  `result.stopConfirmed` false while the run has not ended.
+- `workflow run-clean` deletes the workspaces an ended run made, with their
+  folders and uncommitted files; a branch with commits is kept. Without `--yes`
+  it lists them and asks first. `workflow remove` deletes a workflow with its
+  versions and runs. Pass `--yes` to either only on the person's word.
 - A step working for an issue comments with `issue comment`. When its file
   asks for a comment, the step does not pass without one.
+- When its workflow asks for choice records, a step keeps them with
+  `workflow record`, as its task shows; `workflow records <run-id>` lists a
+  run's records, each evidence marked observed, kept or stated.

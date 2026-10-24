@@ -256,7 +256,7 @@ connections are person-only; an agent asks the person to use Settings → Issue 
 
 **workflow**
 
-- `lyra workflow save --file <file> [--json]`: save a workflow file; a file whose name exists becomes that workflow's next version
+- `lyra workflow save --file <file> [--json]`: save a workflow file; a new workflow is saved off, and a file whose name exists becomes that workflow's next version and keeps its on or off
 - `lyra workflow list [--json]`: list saved workflows with their trigger, on or off, and last run
 - `lyra workflow show <workflow> [--json]`: show a workflow and its current file, by id or name
 - `lyra workflow enable <workflow> [--json]`: turn a workflow's trigger on
@@ -266,8 +266,10 @@ connections are person-only; an agent asks the person to use Settings → Issue 
 - `lyra workflow runs [--workflow <workflow>] [--limit <n>] [--json]`: list recent runs, newest first
 - `lyra workflow run-show <run-id> [--json]`: show a run: each step's state, reason, workspace, session or terminal, outputs and links
 - `lyra workflow run-output <run-id> --step <step> --name <output> [--json]`: print one output a run's step kept, in full; it stays readable after the workspace is gone
-- `lyra workflow run-stop <run-id> [--json]`: stop a run: its running step's session or terminal is stopped and the run ends stopped
-- `lyra workflow run-clean <run-id> [--yes] [--json]`: delete the workspaces an ended run made, with their folders and branches; the run and its outputs stay
+- `lyra workflow run-stop <run-id> [--no-wait] [--json]`: stop a run: its running step's session or terminal is stopped and the run ends stopped; waits until the end is confirmed, or with --no-wait answers once the stop is requested
+- `lyra workflow run-clean <run-id> [--yes] [--json]`: delete the workspaces an ended run made, with their folders and the files left uncommitted in them; without --yes it lists them and asks first, and deletes nothing if they changed since; --yes deletes without showing a list first; a branch with commits is kept, and the run and its outputs stay
+- `lyra workflow record [--kind <kind>] [--about <question>] [--option <option>]... [--chose <choice>] --why <reason> [--evidence <kind>:<value>]... [--skip <item>] [--request-id <request-id>] [--json]`: from a running workflow step: keep a choice record (what you chose, why, on what evidence: file:, output:, check:, command:, link:, quote:), or skip a requested item (records, output:<name>) with its reason
+- `lyra workflow records <run-id> [--step <step>] [--writer <writer>] [--json]`: list a run's choice records in order, each evidence marked observed, kept or stated
 
 ## Request receipts
 
