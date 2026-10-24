@@ -15,7 +15,7 @@ printed; it comes before `error.next`.
 | `task-agent-dialog-<name>` or `task-agent-not-ready` | The Worker's agent shows a dialog (update, trust, directory, model, hooks, prompt) or never became ready; nothing was typed. Ask the person to answer it in that terminal, then run `next` with a new `--request-id` |
 | `task-input-held-by-human` | The person typed into that Worker's view. Ask them to close the view, then run `next` with a new `--request-id` |
 | `task-execution-refused` or another dispatch refusal | Nothing started and the task is still ready. Run `next` once with a new `--request-id`; the same code again → stop and report it. A spec over 16 KiB is refused this way: shorten it and point to files |
-| `worker-depth-limit` | This Worker cannot start deeper Workers. Ask the task owner with `lyra message send --to <owner-session-id> --task <task-id> --file <file>` |
+| `worker-depth-limit` | This Worker cannot start deeper Workers. Split the work with a Workflow, or ask the task owner with `lyra message send --to <owner-session-id> --task <task-id> --file <file>` |
 | `task-not-startable` | Its dependencies have not completed; run `next` when they have |
 | `session-not-active` | The session did not become active in 60 seconds; `next` is the `session show` to read it |
 | `session-effort-unsupported`, `session-model-not-in-catalog`, `agent-selection-refused` | Nothing was created. Pick from `error.detail.allowed` or `candidates`, or ask |
