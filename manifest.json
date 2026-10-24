@@ -1,16 +1,17 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.16",
-  "tag": "v0.1.16",
+  "skillsVersion": "0.1.19",
+  "tag": "v0.1.19",
   "skills": [
     {
       "name": "lyra-cli",
-      "description": "Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, or install a Lyra skill for an agent.",
+      "description": "Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles, Jira and GitHub connections and issues, and workflows - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, add or poll a Jira or GitHub connection, show or comment on an issue, save, run or inspect a workflow, or install a Lyra skill for an agent.",
       "minimumLyraVersion": "0.1.44",
       "pointer": "skills/lyra-cli/SKILL.md",
       "guide": "skills/lyra-cli/guide.md",
       "references": [
         "skills/lyra-cli/references/commands.md",
+        "skills/lyra-cli/references/connections-and-workflows.md",
         "skills/lyra-cli/references/diagnostics-and-skills.md",
         "skills/lyra-cli/references/files-and-terminals.md",
         "skills/lyra-cli/references/inbox.md",
@@ -38,22 +39,27 @@
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "7470694a0b5af87394b523c1a640e2ad099efbe0e6d9e6d2f7a70703e4d04457"
+      "sha256": "b6961620d618f9cb3418be09f15e730af410a3e0a3e1d3a649c8892bfa7317d4"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
-      "size": 1388,
-      "sha256": "7de3bd4cf7cac8688d68cd1535a2d267a69777d613dfe1fd120511b513c8b2be"
+      "size": 1546,
+      "sha256": "f2bd4ce6fc8a31f174001cf4f110d3bf175f646f2d199a726d556c64917dbf18"
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 6283,
-      "sha256": "53decccfce5a4b160266e52c0500f0b504f6ed813e7a9ac1e5b1714934133c13"
+      "size": 6392,
+      "sha256": "74af201cb8ee00ef33d4bf67aca926b924b5877006ea083151073917090ddad2"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 34503,
-      "sha256": "1075a3152d6b0f9b1e014ebeb28da993ba77ccf9bd8380b7d3f5b2970e39fb66"
+      "size": 36997,
+      "sha256": "4219689a36d1b3eee3a8d9ce5c9a1753956c0f04d335b851e4ff02d5bce0435a"
+    },
+    {
+      "path": "skills/lyra-cli/references/connections-and-workflows.md",
+      "size": 4039,
+      "sha256": "510521d413db2ee55ee3bbe99bf41559c8546f8f00abde02fbb44e15f9c5a6b2"
     },
     {
       "path": "skills/lyra-cli/references/diagnostics-and-skills.md",
@@ -83,7 +89,7 @@
     {
       "path": "skills/lyra-orchestration/SKILL.md",
       "size": 2582,
-      "sha256": "a165b5ae34b00fd4057f8110f6ce0655771abffdaeb9159c6931b70dfbc15b38"
+      "sha256": "be48ef7c5b73907d6244aa9153e9bcda573932b3e0c5ff7ef11e38c586f50552"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
