@@ -117,8 +117,8 @@ the tree, owned tasks, running attempt and message address. Nothing moves.
 
 Only Claude Code sessions support this: Codex, OpenCode and a daemon that does not serve clear are refused with
 `session-reset-clear-unsupported`; nothing was done. Do not retry; keep working in the same session and tell
-the person if it cannot go on. If the daemon does not serve clear, tell the person to update Lyra on that host
-(`lyra update remote-status --json`). From the clear until the note arrives, Lyra message
+the person if it cannot go on. If the daemon does not serve clear, tell the person to update Lyra on that host.
+From the clear until the note arrives, Lyra message
 pointers wait; tasks, handoffs, reuse and prompts are refused with `session-resetting`. A person can still type
 in the session's tab. If the clear is unconfirmed (`session-reset-clear-unconfirmed`), it is not typed again:
 do not reset again. Read the session with `lyra session read <session-id> --source terminal` or ask the person
