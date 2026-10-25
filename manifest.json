@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.22",
-  "tag": "v0.1.22",
+  "skillsVersion": "0.1.23",
+  "tag": "v0.1.23",
   "skills": [
     {
       "name": "lyra-cli",
@@ -33,23 +33,38 @@
         "skills/lyra-orchestration/references/terminals.md",
         "skills/lyra-orchestration/references/worker.md"
       ]
+    },
+    {
+      "name": "lyra-workflow",
+      "description": "Works inside Lyra workflows - as one step of a workflow run, as a helper who watches a run for the person, or as the author of a workflow - moving on recorded evidence instead of questions. Use when a task Lyra typed says \"This task is one step of a Lyra workflow run\" or starts with \"[Lyra workflow:\", when asked to watch or explain a workflow run, or when asked to make, change, explain or draw a Lyra workflow from a description of the work or from the history of a finished project.",
+      "minimumLyraVersion": "0.2.2",
+      "pointer": "skills/lyra-workflow/SKILL.md",
+      "guide": "skills/lyra-workflow/guide.md",
+      "references": [
+        "skills/lyra-workflow/references/authoring.md",
+        "skills/lyra-workflow/references/definition.md",
+        "skills/lyra-workflow/references/example-issue-fix.md",
+        "skills/lyra-workflow/references/example-stages.md",
+        "skills/lyra-workflow/references/orchestrator.md",
+        "skills/lyra-workflow/references/step.md"
+      ]
     }
   ],
   "files": [
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "b0569383609842116bc78ee560cb5a7aee44bdbe59d85efc7b7316cb72389862"
+      "sha256": "76f75753f47c5f9a402427e4ee481b463e5a164edabccbfeab33964eea31913e"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
-      "size": 1545,
-      "sha256": "c7f09e18d06548e9438ef699f26897ac7e8a9d10e82de9fe7a190a750633a932"
+      "size": 1661,
+      "sha256": "31bf5e9a951fcabe5956a1732a6c255014c12968428418908399daa32ee5e259"
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 6612,
-      "sha256": "2769385496d2f255481365bbf5f1ea6f8e6729c8736279ac83c4a10c5847c59b"
+      "size": 6838,
+      "sha256": "d09c412b730e5315b1c44f22fe93e19612a280368a4b0d50c3bff27b38099698"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
@@ -58,8 +73,8 @@
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
-      "size": 5052,
-      "sha256": "2e1bb03d66b6d222ab65fa85182f8c4fc1e95d5207eafeb25c1857da8f3e1179"
+      "size": 6049,
+      "sha256": "ca97e152462c38d2ea39a2c4328ca63167816ee29a341326b1cfc3c69b0d3f04"
     },
     {
       "path": "skills/lyra-cli/references/diagnostics-and-skills.md",
@@ -88,8 +103,8 @@
     },
     {
       "path": "skills/lyra-orchestration/SKILL.md",
-      "size": 2703,
-      "sha256": "9c4f214c197925626c27d82e3badb1af52f29390e7bc685a139dfe31b440a3c0"
+      "size": 2899,
+      "sha256": "c84783429e14f3784f483de8c33e2c95122eb24cc29034f7dbe53a88581a411d"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
@@ -123,8 +138,48 @@
     },
     {
       "path": "skills/lyra-orchestration/references/worker.md",
-      "size": 6757,
-      "sha256": "1e14d88d9b21a923f096120a4d48d680b4db03ebcedc5a2bc7fef4f68a70813f"
+      "size": 7269,
+      "sha256": "120814bd6a9724dd296b99ae3a77d006f29387485bdfda12691e779e8f150a8d"
+    },
+    {
+      "path": "skills/lyra-workflow/SKILL.md",
+      "size": 2023,
+      "sha256": "bdbf089a89ba6f4169be799a4b8a8283f6fd061cad157ae2e6d2a4bec469b0af"
+    },
+    {
+      "path": "skills/lyra-workflow/guide.md",
+      "size": 10489,
+      "sha256": "e923bede99b0ed205a1d6d563390163f841853202dbda7795cdaed5c33fe5efa"
+    },
+    {
+      "path": "skills/lyra-workflow/references/authoring.md",
+      "size": 6857,
+      "sha256": "1b675f6e24109166c371ecff9e85437a310197859ae172f66d8e19884034fbb1"
+    },
+    {
+      "path": "skills/lyra-workflow/references/definition.md",
+      "size": 7759,
+      "sha256": "15ddf1b22a63a0ebe720f1135dc0ae1c453901c926a5642bc486c4d602d68a95"
+    },
+    {
+      "path": "skills/lyra-workflow/references/example-issue-fix.md",
+      "size": 5467,
+      "sha256": "030f52eae7b69e51993d2523a95df2dce9f359f7aecce4b0b55c47eeae09bed1"
+    },
+    {
+      "path": "skills/lyra-workflow/references/example-stages.md",
+      "size": 5610,
+      "sha256": "51eeb19000603041a7208ce872bf0ead51346a51ac780820983ca3d2819a2a00"
+    },
+    {
+      "path": "skills/lyra-workflow/references/orchestrator.md",
+      "size": 3164,
+      "sha256": "6f7e5a41eb32e41553f852220d0608d56eb4a90116bc64ba89f1942130abd234"
+    },
+    {
+      "path": "skills/lyra-workflow/references/step.md",
+      "size": 8181,
+      "sha256": "39089377538acdc51e1ec03b1403fce23c3f003c741009857ada86a37fa8b683"
     }
   ]
 }

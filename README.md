@@ -3,10 +3,12 @@
 English guides for Lyra commands and agent orchestration, released independently
 from the Lyra application. Each immutable tag has a manifest and one release zip.
 
-Supply a release zip locally (Lyra 0.1.42 or later):
+Supply a release zip locally (Lyra 0.2.2 or later; an older Lyra refuses a
+release with three skills and cannot read one a newer Lyra installed, so use
+0.1.22 or earlier there):
 
 ```sh
-lyra skills install --from ./lyra-skills-0.1.15.zip --agent codex
+lyra skills install --from ./lyra-skills-0.1.23.zip --agent codex
 lyra skills status
 lyra skills get lyra-cli
 ```
