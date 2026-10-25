@@ -100,3 +100,14 @@ exact error and gives your summary, so a person can act on it.
 
 **If your recorded role is Lead** (your parent started you with `--role lead`), run `lyra skills get lyra-orchestration`, then
 `lyra skills get lyra-orchestration --reference lead`.
+
+## A task from a workflow run
+
+Its closing lines say "This task is one step of a Lyra workflow run", or
+it starts "[Lyra workflow:". Before you start, run
+`lyra skills get lyra-workflow --reference step` and follow it; it replaces
+duty 3 here. The run owns your task and nobody answers a question:
+`message ask` to your task's owner (yourself) is refused
+(`message-self-send-refused`), and messaging another session instead is
+wrong. Where you would ask, record an assumption and go on, as that
+reference says.

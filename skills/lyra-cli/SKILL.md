@@ -14,7 +14,8 @@ it. When it names a reference for your next step, load only that one with
 
 A task Lyra typed into your terminal with a report footer, a "You have N Lyra
 messages" line, or several agent sessions to coordinate belong to the
-`lyra-orchestration` skill.
+`lyra-orchestration` skill. A step of a workflow run, watching a run, and
+writing or drawing a workflow file belong to the `lyra-workflow` skill.
 
 If `lyra` is missing or `skills get` fails, show the exact error to the person
 and stop. Unsure of a flag: add `--help` to that command; never guess one.

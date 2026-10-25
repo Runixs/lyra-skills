@@ -29,6 +29,8 @@ lyra issue comment ABC-123 --body-file notes.md --json
 - `issue comment` posts plain text with the connection's account. Give
   exactly one of `--body` and `--body-file` (a dash reads standard input).
   From a Lyra session the comment is recorded for that session.
+- A comment cannot be taken back. Comment only when your task or the person
+  asks, and write it to a file: `--body` shows in the process list.
 
 ### When a connection refuses
 
@@ -61,6 +63,7 @@ lyra workflow run triage --issue ABC-123 --json
 lyra workflow runs --workflow triage --json
 lyra workflow run-show <run-id> --json
 lyra workflow run-output <run-id> --step fix --name notes --json
+lyra workflow records <run-id> --step fix --json
 ```
 
 - `workflow save` takes the whole file. A new workflow is saved off; a name
@@ -69,6 +72,11 @@ lyra workflow run-output <run-id> --step fix --name notes --json
 - `workflow list` shows each trigger as on or off. `workflow enable` and
   `workflow disable` turn it on and off, and are the person's decision; a
   `workflow run` started by hand works either way.
+- `workflow save`, `workflow run` and `workflow run-stop` act for the person:
+  run them only on their word. A run makes workspaces, starts agents and may
+  comment on the issue. Give `workflow run` a `--request-id` you choose
+  (`run-abc-123-1`): when the answer is lost, the same command with the same
+  ID returns that run instead of starting another.
 - `workflow run-show` gives each step's state, reason, workspace, session or
   terminal, outputs and links. `workflow run-output` prints one kept output in
   full, also after its workspace is gone.
@@ -90,3 +98,13 @@ lyra workflow run-output <run-id> --step fix --name notes --json
 - When its workflow asks for choice records, a step keeps them with
   `workflow record`, as its task shows; `workflow records <run-id>` lists a
   run's records, each evidence marked observed, kept or stated.
+- To write, change or draw a workflow file with the person, use the
+  `lyra-workflow` skill.
+
+### In a workflow step
+
+You are one step of a run when your task says "This task is one step of a
+Lyra workflow run" or starts "[Lyra workflow:", or when the command you run
+is a terminal step's (Lyra set `LYRA_WORKFLOW_ATTEMPT`). Run
+`lyra skills get lyra-workflow --reference step` and follow it: it says how
+to comment, record your choices and report.

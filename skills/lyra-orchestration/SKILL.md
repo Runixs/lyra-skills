@@ -15,7 +15,10 @@ installed guide when present.
   `task report` command once, with a one-line `--summary` in every outcome:
   the result first, then how you checked it. To ask a question, or when a
   command fails, run `lyra skills get lyra-orchestration --reference worker`
-  before you follow the error's `next`.
+  before you follow the error's `next`. A task that says "This task is
+  one step of a Lyra workflow run" or starts "[Lyra workflow:" is a step
+  of a workflow run: run
+  `lyra skills get lyra-workflow --reference step` before you start.
 - **Messages**: when "You have N Lyra messages" appears, run
   `lyra message check --json` as your next step. Follow a message that changes
   your direction; otherwise carry on. Act on every message once, then run:
