@@ -13,7 +13,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 1024 * 1024
-NAMES = {"lyra-cli", "lyra-orchestration"}
+NAMES = {"lyra-cli", "lyra-orchestration", "lyra-workflow"}
 SEMVER = re.compile(r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?\Z")
 
 
@@ -73,7 +73,7 @@ def validate(files):
     version(release, stable=True)
     require(files["VERSION"] == (release + "\n").encode() and manifest["tag"] == "v" + release, "VERSION/tag mismatch")
     entries = manifest["skills"]
-    require(len(entries) == 2 and {e["name"] for e in entries} == NAMES, "unknown/duplicate/missing skill")
+    require(len(entries) == len(NAMES) and {e["name"] for e in entries} == NAMES, "unknown/duplicate/missing skill")
     expected = {"VERSION"}
     for entry in entries:
         require(set(entry) == {"name", "description", "minimumLyraVersion", "pointer", "guide", "references"}, "unknown/missing skill field")

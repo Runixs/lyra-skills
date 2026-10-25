@@ -60,6 +60,16 @@ class ReleaseTests(unittest.TestCase):
             with self.subTest(case=index), self.assertRaises((ValueError, UnicodeError)):
                 release.validate(files)
 
+    def test_a_release_without_lyra_workflow_is_refused(self):
+        workflow = "skills/lyra-workflow/"
+        files = {name: data for name, data in self.files.items() if not name.startswith(workflow)}
+        value = json.loads(files["manifest.json"])
+        value["skills"] = [entry for entry in value["skills"] if entry["name"] != "lyra-workflow"]
+        value["files"] = [entry for entry in value["files"] if not entry["path"].startswith(workflow)]
+        files["manifest.json"] = (json.dumps(value) + "\n").encode()
+        with self.assertRaisesRegex(ValueError, "unknown/duplicate/missing skill"):
+            release.validate(files)
+
     def test_device_and_escaping_paths(self):
         for name in ("/absolute", "../escape", "C:/drive", "a\\b", "CON.md", "a/LPT9.md", "a/COM0", "a/..", "a//b", "a/trailing.", "a/name:stream", "references/server~1.md", "a\0b"):
             with self.subTest(name=name), self.assertRaises(ValueError):
