@@ -39,9 +39,6 @@ nodes:                           # the steps, the trigger first
     pass:
       checks: [ { run: [cargo, test, --workspace], timeout: 10m } ]
       onFail: { retry: 2 }
-layout:                          # optional: the Lyra app's drawing only
-  direction: LR
-  nodes: { assigned: { x: 0, y: 0 }, fix: { x: 280, y: 0 } }
 ```
 
 - **`id`**: a letter, then letters, digits, `-` or `_`; unique in the file.
@@ -82,8 +79,9 @@ layout:                          # optional: the Lyra app's drawing only
 `policy: { outputs, records, checks }` at the top and on a step, `level` on
 one output or one check, each `required`, `requested` (the default) or
 `off`; the most specific wins. `floor: { outputs, records, checks }` at the
-top is the lowest any of them may set: save refuses a lower one with its
-path. An output a later step binds, and the comment of
+top is the lowest level anything runs at: save refuses a step's `policy` or
+a `level` below it, with its path, and raises the top `policy` to it. An
+output a later step binds, and the comment of
 `pass: { comment: true }`, are `required` by themselves; a lower `level` on
 a bound output is refused.
 
@@ -113,10 +111,17 @@ The Lyra app's workflow editor keeps how it drew the file in a top-level
 `layout`. Drawing only: the engine never reads it, arrows come from `after`,
 and the editor's end box is drawn by itself (the file has no end step).
 
+```text
+layout:
+  direction: LR
+  nodes: { assigned: { x: 0, y: 0 }, fix: { x: 280, y: 0 } }
+  edges: { "assigned->fix": { from: r2, to: l2 } }
+```
+
 - `direction` is `LR` or `TB`; `nodes.<step>: { x, y }` places a step's box,
   two numbers; `edges."<from>-><to>": { from, to }` names the connection
   point at each end of an arrow, a side `l`, `r`, `t` or `b` and a number
-  1 to 3 (`r2`). Every part is optional.
+  1 to 3. Every part is optional.
 - Save refuses a `layout` of the wrong shape, by its path
   (`layout.nodes.fix.y`). An entry naming a step or an arrow the file does
   not have is only one of the save answer's `warnings`; the file saves.

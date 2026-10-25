@@ -107,8 +107,8 @@ nodes:
 ## Without a separate test step
 
 Test inside `fix` instead: its checks run in its own Workspace, and a retry
-hands the failure back to the same session. `comment` then follows `fix`
-and binds only `${fix.summary}`.
+hands the failure back in the same conversation. `comment` then follows
+`fix` and binds only `${fix.summary}`.
 
 ```yaml
   - id: fix

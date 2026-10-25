@@ -158,13 +158,13 @@
     },
     {
       "path": "skills/lyra-workflow/references/definition.md",
-      "size": 7759,
-      "sha256": "15ddf1b22a63a0ebe720f1135dc0ae1c453901c926a5642bc486c4d602d68a95"
+      "size": 7818,
+      "sha256": "20ef75e83f719c85fced7821b9927c3711206472b6933eee3cd500c23840b360"
     },
     {
       "path": "skills/lyra-workflow/references/example-issue-fix.md",
-      "size": 5467,
-      "sha256": "030f52eae7b69e51993d2523a95df2dce9f359f7aecce4b0b55c47eeae09bed1"
+      "size": 5472,
+      "sha256": "6fddac5c3a1231a934c27edacbda259f1063cabcfa17e292ed81cbbc1a293c4e"
     },
     {
       "path": "skills/lyra-workflow/references/example-stages.md",
