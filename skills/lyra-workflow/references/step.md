@@ -86,9 +86,10 @@ lyra workflow record --skip <item> --why <reason> --json
   make them or record the skips, then report as its footer says. It is not
   an attempt; do not change the work itself.
 - **Retry.** "[Lyra workflow: attempt k of n] The last attempt did not
-  pass: <why>." The new task comes into this conversation (in a new
-  session when the old task never reported). "This is the last attempt": no
-  retry is left. Fix that first. Report with the new footer's IDs only.
+  pass: <why>." It comes into this session while it is open, or a new one
+  (continuing this conversation if the old task never reported). "This is
+  the last attempt": no retry is left. Fix that first. Report with the new
+  footer's IDs only.
 - **Send-back.** "[Lyra workflow: attempt k] The work came back from step
   `<step>`: <why>." A later step failed, or the person denied its
   approval or this step's own (`<why>` is then their note: their request),
@@ -132,5 +133,5 @@ variable), and posts a required comment before the command ends.
 | `workflow.record-invalid` | A field, an evidence or a skip is wrong; `error.detail.problems` names each | Fix those and record again |
 | `workflow.record-skip-required` | The item is `Must produce`, or a check | Make it, or report `failed` with the reason |
 | `workflow.evidence-unreadable` | The cited file is missing, outside this Workspace, not text, or over 1 MB | Cite a shorter text file, such as a log tail, or a `quote:` |
-| `workflow.record-limit` | This attempt has 50 records, the most it keeps; a `finding` is refused too | Record no more: name what is left in your summary. Combine records before 50 |
+| `workflow.record-limit` | This attempt has 50 records, the most it keeps; a `finding` is refused too | Record no more: name what is left in your summary |
 | A `connection` or `issue` code | Your comment was refused | `lyra skills get lyra-cli --reference connections-and-workflows`; after `connection.auth-refused` never retry: report `failed` with its message |

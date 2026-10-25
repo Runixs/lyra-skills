@@ -102,9 +102,10 @@ advisory: its failure is kept as a warning and the step goes on.
 ## Attempts, retries and send-backs
 
 - **`retry: n`** gives up to n more attempts (1 to 4), counted again after
-  each send-back into the step. The next task comes into the same
-  conversation: into the step's session while it is open, or, when the old
-  task never reported, into a new session that continues that conversation.
+  each send-back into the step. The next task comes into the step's session
+  while it is open; when the old task never reported, into a new session
+  that continues that conversation; otherwise into a new session in the
+  step's Workspace.
 - **`goto: { node, max }`** sends the work back to an earlier agent step this
   one waits for. That step starts its next attempt in its own Workspace,
   with a new session; the steps after it that had started run again once it
