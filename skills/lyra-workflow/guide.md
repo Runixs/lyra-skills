@@ -111,7 +111,7 @@ advisory: its failure is kept as a warning and the step goes on.
   with a new session; the steps after it that had started run again once it
   passes, and their open `Inbox` items are withdrawn. `max` (1 to 10) counts
   every send-back into that step in the run, from any step, a denial's
-  included.
+  included; only a `goto` stops at it, never a denial.
 - **The hand-over** is the first line of the new attempt's task: "[Lyra
   workflow: attempt k of n] The last attempt did not pass: ..." for a
   retry, "[Lyra workflow: attempt k] The work came back from step `X`: ..."

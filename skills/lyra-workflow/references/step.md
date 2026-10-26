@@ -91,10 +91,10 @@ lyra workflow record --skip <item> --why <reason> --json
   the last attempt": no retry is left. Fix that first. Report with the new
   footer's IDs only.
 - **Send-back.** "[Lyra workflow: attempt k] The work came back from step
-  `<step>`: <why>." A later step failed, or the person denied its
-  approval or this step's own (`<why>` is then their note: their request),
-  and the work came back here, into this Workspace, with a new session and
-  the send-backs left. The failed attempt's records follow.
+  `<step>`: <why>." It is back in this Workspace, with a new session: a
+  later step failed (the send-backs left and its records follow), or the
+  person denied its approval or this step's own (`<why>` is their note:
+  their request).
 - **New session.** "[Lyra workflow: new session]": your step's session ended
   before it finished and Lyra started this one, once, in the same attempt.
   Check what the Workspace holds, then do the task.
@@ -120,10 +120,11 @@ lyra workflow record --skip <item> --why <reason> --json
 ## A terminal step
 
 A step with `launch: terminal` runs one command in a shell in its Workspace,
-with `LYRA_WORKFLOW_ATTEMPT` set. It gets no closing lines and no footer:
-its exit code decides, 0 passes, and its records are `off`. An agent that
-this command starts comments the same way (Lyra finds the step from that
-variable), and posts a required comment before the command ends.
+with `LYRA_WORKFLOW_ATTEMPT` set. It gets no closing lines or footer, and
+its records are `off`. Any exit but 0 fails the attempt; after 0, it passes
+only if its required comment, blocking checks and required file outputs
+hold. An agent it starts comments the same way (Lyra finds the step from
+that variable), before the command ends.
 
 ## When a command fails
 

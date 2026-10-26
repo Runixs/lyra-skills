@@ -24,7 +24,8 @@ Nothing is saved, turned on or run until the person says so.
      that changes something for good, such as a comment), and where a
      denial sends the work back;
    - where a failure goes back (a fix after a failed test), and how often:
-     the cap counts every send-back into that step, denials included;
+     the cap counts every send-back into that step, denials included, but
+     never stops a denial;
    - for outputs, choice records and checks, what is a must (`required`),
      what is only asked for (`requested`, the default) and what is not
      wanted (`off`), and whether a `floor` keeps every step at `required`

@@ -4,7 +4,8 @@ An issue assigned to the person starts the run. `fix` changes the code.
 `test` works in `fix`'s Workspace: it adds a test for the issue, Lyra runs
 the checks, and a failure goes back to `fix`. Before `comment` answers on
 the issue, the person approves in `Inbox`; a denial with a note goes back
-to `fix` too. At most three send-backs reach `fix` in all.
+to `fix` too. A failure goes back by itself until three send-backs, denials
+counted, have reached `fix`; a denial always goes back.
 
 ```text
  issue assigned ──▶ fix ──▶ test ──╪──▶ comment
@@ -73,18 +74,20 @@ nodes:
     pass: { comment: true }
 ```
 
-- **The send-back.** `test` passes when its checks exit 0. On a failure, its
+- **The send-back.** A failed check fails `test`. On a failure, its
   `onFail` sends the work back to `fix`: `fix` starts its next attempt in
   the same Workspace with a new session, whose first line says "The work
   came back from step `test`", with the end of the check's own output, the
   send-backs left and `test`'s records; then `test` runs again.
 - **The approval.** `comment` asks the person before it starts, showing its
   task and what `fix` and `test` left. Approving starts it. Denying needs a
-  note; the note goes to `fix` the same way, and `comment` asks again once
-  `test` passes again.
+  note; the note goes to `fix` as the reason on its next attempt's first
+  line, and `comment` asks again once `test` passes again.
 - **The cap.** `max: 3` counts every send-back into `fix`, from `test` or
-  from the denial. After the third, a failure waits for the person in
-  `Inbox`, where one more attempt is one more send-back to `fix`, counted.
+  from the denial. After the third, a failure of `test` no longer goes back
+  by itself: it waits for the person in `Inbox`, where one more attempt is
+  one more send-back to `fix`, counted. A denial still goes back to `fix`
+  after the third, and counts too.
 - **One Workspace.** `test` and `comment` work in `fix`'s Workspace, so
   `test` tests the fix, and every attempt of each step works there too.
 - **Levels.** Records are `requested`, the default. Checks are `required`,

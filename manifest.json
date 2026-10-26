@@ -148,23 +148,23 @@
     },
     {
       "path": "skills/lyra-workflow/guide.md",
-      "size": 10513,
-      "sha256": "9830f59a45dee8c800b5cac5f9173eb7da1718d4a56759e88c326a14340cf8b8"
+      "size": 10556,
+      "sha256": "bf71ee912135c4a0ec9f120a194a6e4211693d291c8ab2f0cbe401dd96ccb118"
     },
     {
       "path": "skills/lyra-workflow/references/authoring.md",
-      "size": 6857,
-      "sha256": "1b675f6e24109166c371ecff9e85437a310197859ae172f66d8e19884034fbb1"
+      "size": 6888,
+      "sha256": "97e9b1fa0a45464c6eea4ce8b8b054eb6c16c593c0eb738b6d52171b37954a9c"
     },
     {
       "path": "skills/lyra-workflow/references/definition.md",
-      "size": 7818,
-      "sha256": "20ef75e83f719c85fced7821b9927c3711206472b6933eee3cd500c23840b360"
+      "size": 7857,
+      "sha256": "9b8361d0e0858495a46a1b017b63742569a49cb72f0374ea9eed4ba2410bd5a0"
     },
     {
       "path": "skills/lyra-workflow/references/example-issue-fix.md",
-      "size": 5483,
-      "sha256": "ffb9b91ab4d4356067b75851201999563e6666e84d039dc61b9a9954922c6376"
+      "size": 5696,
+      "sha256": "65dd67e3d7a1b8343fa00259beb74be361540058ff6aa9ea15f2723efd842639"
     },
     {
       "path": "skills/lyra-workflow/references/example-stages.md",
@@ -178,8 +178,8 @@
     },
     {
       "path": "skills/lyra-workflow/references/step.md",
-      "size": 8182,
-      "sha256": "ad3400490de4951e908299954628a16ba8d74eda1997ecbd872378c77c2ef2de"
+      "size": 8191,
+      "sha256": "bd6735c871a787171f638008a6b80b25400f62378c35b9e2b3c9b2ec0067bc9e"
     }
   ]
 }
