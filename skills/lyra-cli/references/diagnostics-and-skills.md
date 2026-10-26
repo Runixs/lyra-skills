@@ -37,7 +37,6 @@ lyra skills status --json
 lyra skills install --from <release.zip> --agent codex --json
 lyra skills get lyra-orchestration
 lyra skills install lyra-orchestration --agent claude --json
-lyra skills install lyra-cli --agent antigravity --json
 lyra skills update --json
 lyra skills update --repair-links --json
 ```
@@ -60,15 +59,17 @@ versions, while an intact guide remains available. The shared folder is
 |---|---|---|
 | `codex`, `opencode` | Directly | Nothing |
 | `claude` | Through a link | The folder link `~/.claude/skills/<name>`, or under `CLAUDE_CONFIG_DIR` when set |
-| `antigravity` | Through a link | The folder link `~/.gemini/config/skills/<name>` |
+
+Lyra does not install or link skills for Antigravity; anything under
+`~/.gemini` is left as it is.
 
 On Windows, `~` is `%USERPROFILE%` and the links are junctions. Lyra writes
 nowhere else (not `CODEX_HOME` or OpenCode's own folders). The same file
 already there is success (`result.installed: false`); the result names the
 agent's `path` and the `realPath` behind its link. Without `--agent`, install
 picks the one agent whose configuration folder exists (`~/.claude` or
-`CLAUDE_CONFIG_DIR`, `~/.codex` or `CODEX_HOME`, OpenCode's configuration
-folders, `~/.gemini/config` or `~/.gemini/antigravity-cli`); none or several →
+`CLAUDE_CONFIG_DIR`, `~/.codex` or `CODEX_HOME`, or OpenCode's configuration
+folders); none or several →
 `skill-agent-required`, with what it found in `error.detail.detected`.
 
 `skills list --installed` changes nothing. Its `shared` row is `current` (a
@@ -83,8 +84,8 @@ and `repairable` count the rows.
 `skills update` rewrites an `outdated` shared copy once for every agent;
 `--skill <name>` limits it to one skill. `edited` or `unknown` copies stay as
 they are and are listed in `result.skipped`; missing copies are not installed.
-`--repair-links` also installs a missing shared copy and, for each Claude Code
-or Antigravity found here, makes a missing link or turns an `old-copy` into a
+`--repair-links` also installs a missing shared copy and, when Claude Code is
+found here, makes a missing link or turns an `old-copy` into a
 link, moving that folder to the OS trash first (the person can restore it);
 it stops with `skill-install-conflict` on an `edited` or `unknown` shared copy.
 `skills install --replace-old-copy` does the same for one agent's `old-copy`.
