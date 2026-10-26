@@ -22,7 +22,7 @@
     {
       "name": "lyra-orchestration",
       "description": "Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results, or when Lyra typed a task ending in \"[Lyra: when you finish, report ...]\" or the line \"You have N Lyra messages\".",
-      "minimumLyraVersion": "0.2.2",
+      "minimumLyraVersion": "0.2.4",
       "pointer": "skills/lyra-orchestration/SKILL.md",
       "guide": "skills/lyra-orchestration/guide.md",
       "references": [
@@ -89,17 +89,17 @@
     {
       "path": "skills/lyra-orchestration/SKILL.md",
       "size": 2703,
-      "sha256": "9c4f214c197925626c27d82e3badb1af52f29390e7bc685a139dfe31b440a3c0"
+      "sha256": "cf6a1e8a3212d9955079902739d8099a97e1876bba959b5aaf26614185607bac"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15334,
-      "sha256": "65ffcc39118ea615b236488aafe09b82e197038de0e41b531acf67bc5e14844a"
+      "size": 15354,
+      "sha256": "3467037db0ff94250774ff109655bb955d8fb61902b6515121ca8976ab565fe2"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
-      "size": 8153,
-      "sha256": "2e7dfb01a88a6212b898545cfb4dd41e04e362223b8633056781d6c9c0cd9beb"
+      "size": 8167,
+      "sha256": "0580ea52372499df0119f3f8fbaface19273bac26fc8bd6a291ec0473c1bd155"
     },
     {
       "path": "skills/lyra-orchestration/references/messages.md",
