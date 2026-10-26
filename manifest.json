@@ -78,8 +78,8 @@
     },
     {
       "path": "skills/lyra-cli/references/diagnostics-and-skills.md",
-      "size": 6691,
-      "sha256": "5a60d4962e0ed2d2b4751225c148e24c7d338ba4442ff76788fc2966c32b8c25"
+      "size": 6585,
+      "sha256": "612c715fb6cc3138d54a1465601bd2b02e50fc5e534ba4c7fc7eb52a80ca007b"
     },
     {
       "path": "skills/lyra-cli/references/files-and-terminals.md",
