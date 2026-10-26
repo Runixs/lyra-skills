@@ -271,6 +271,10 @@ connections are person-only; an agent asks the person to use Settings → Issue 
 - `lyra workflow record [--kind <kind>] [--about <question>] [--option <option>]... [--chose <choice>] --why <reason> [--evidence <kind>:<value>]... [--skip <item>] [--request-id <request-id>] [--json]`: from a running workflow step: keep a choice record (what you chose, why, on what evidence: file:, output:, check:, command:, link:, quote:), or skip a requested item (records, output:<name>) with its reason
 - `lyra workflow records <run-id> [--step <step>] [--writer <writer>] [--json]`: list a run's choice records in order, each evidence marked observed, kept or stated
 
+**search**
+
+- `lyra search <query> [--json]`: find workspaces, conversation sessions, profiles and projects whose name contains the text (put several words in quotes); no match is said plainly, and a source that could not be read is named, never counted as zero
+
 ## Request receipts
 
 - `lyra request show <request-id> --operation <operation> [--session <session-id>] [--json]`: read a stored request receipt without retrying; a person may select --session, an agent reads its own scope
