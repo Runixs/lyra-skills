@@ -31,14 +31,14 @@ Peers: <other Leads' session IDs and what to agree with them>, or "ask me"
 ```
 
 Anything the parts share (an interface, a schema) goes on the base branch
-before the Leads start, as a task of yours, so every Lead's Workspace has it;
+before the Leads start, as a task of yours, so every Lead's Workspace has it
+(on another host, once pushed and fetched there: the guide's Start Workers);
 changes to it go through you. Start every Lead before you wait, then send each
 one its peers' session IDs if they must agree on something. When the Leads
 have reported, you (or one integration Worker) merge their branches and run the
 acceptance across the parts. Wait and act as for any Worker: a Lead waiting on
-its Workers sits in a running tool, so it reads as waiting, not stopped. Its
-questions and its report reach you like any Worker's, and a `worker-stopped`
-from a Lead means its turn really ended.
+its Workers sits in a running tool, so it reads as waiting, not stopped. A
+`worker-stopped` from a Lead means its turn really ended.
 
 If a Lead's session ends, its Workers keep running in its plan. On the person's
 word a live session (yours, or a new Lead) takes them over, then decides each

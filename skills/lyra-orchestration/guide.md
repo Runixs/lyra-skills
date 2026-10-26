@@ -17,8 +17,8 @@ children, so it stands at depth at most limit minus one.
 
 ## Re-link a session
 
-Agents stay in their tree and never re-link themselves. Detach, move and
-set-role, and who may: `lead`.
+Agents stay in their tree and never re-link themselves. Detach, move,
+set-role and who may: `lead`.
 
 ## Choose the shape
 
@@ -65,8 +65,8 @@ a review, give it to a Worker on a different agent than the builder.
 
 ## Start Workers
 
-Write one spec file per Worker. The Worker sees only this text and the footer
-Lyra appends with its task and attempt IDs, so write no report command:
+Write one spec file per Worker. It sees only this text and the footer Lyra
+appends with its task and attempt IDs, so write no report command:
 
 ```text
 Goal: <one result, in one sentence>
@@ -85,14 +85,20 @@ lyra worker start --project <project-id> --name <workspace-name> --spec-file tas
 lyra worker start --task <ready-task-id> --workspace current --agent claude --json
 ```
 
-- `--workspace current` adds the Worker to your Workspace (a terminal each).
-  `--project` with `--name` makes a new Workspace (a Git worktree) for a Lead
-  or for Workers that must not share one. `--title` names its session in the
-  person's list.
+- `--workspace current` adds the Worker to your Workspace (a terminal each),
+  `--workspace <workspace-id>` to that one on any host. `--project` with
+  `--name` always makes a new Workspace (a Git worktree).
+- A new Workspace starts from `--base`, else (Lyra 0.2.4+) on another host
+  from your Git branch, else from the target root's HEAD (`baseRef` in the
+  result). Another host sees only commits pushed and fetched there; a branch
+  it lacks is refused. Sessions on one branch share one Workspace: reuse one
+  from `lyra workspace list <project-id> --json` or give the rest the first
+  start's `workspaceId`; never make several at once. `--reuse-branch` with
+  `--base` uses that local branch itself.
 - `--task` starts an existing ready task with its stored spec; retry failed or
-  stopped tasks first. Other states, other owners' tasks and task-content flags
+  stopped tasks first. Other states, others' tasks and task-content flags
   are refused before anything is made (`tasks`).
-- `--kind "<kind> · <work>"`, for example `"build · login form"`, places the
+- `--kind "<kind> · <work>"`, e.g. `"build · login form"`, places the
   task on the person's status board: the same `<work>` for every step of one
   piece, one short `<kind>` word per kind of step.
 - Start every independent Worker before you wait. Start a later stage when the
@@ -102,11 +108,11 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
 **Who runs it.** `--agent claude`, `codex`, `opencode`, or a Profile name the
 person gave; with none named, your own kind. Pass `--model` only when the
 person asked for a model or a kind of model (cheapest, strongest): pick it from
-`lyra session models <workspace-id> --agent <name> --json`. Pass `--effort`
-only with `--model`, and only a level in that model's `modelEfforts` list
-(opencode takes none). A refusal lists `error.detail.allowed` or `candidates`:
-pick one or ask. Never run `profile add` or `session configure` to start a
-Worker; they change the person's saved settings for every later session.
+`lyra session models <workspace-id> --agent <name> --json`; `--effort` only
+with it, at a level in its `modelEfforts` (opencode takes none). A refusal
+lists `error.detail.allowed` or `candidates`: pick one or ask. Never run
+`profile add` or `session configure` to start a Worker; they change the
+person's saved settings.
 
 **Read the result**: `taskId`, `attemptId`, `sessionId`, `workspaceId`, the
 `model` and `effort` that applied, and `turn`:
@@ -118,9 +124,8 @@ Worker; they change the person's saved settings for every later session.
 | `awaiting-permission` | It waits for a person's approval in its terminal | Tell the person, then wait |
 
 **If it stops part-way,** never run `worker start` again for it: it creates new
-things every time and undoes nothing. `error.detail` names `failedStep`,
-`created` (kept) and `next`, the exact command for this start (it comes
-before `error.next`); then read `recovery`.
+things every time and undoes nothing. `error.detail.next` is the exact command
+for this start (before `error.next`); then read `recovery`.
 
 ## Start a new Orchestrator
 
@@ -174,11 +179,11 @@ Worker changes and urgent mail end a wait at once; other mail is batched
 | `result.event` | Do |
 |---|---|
 | `all` | Act on each item in `result.events`, in order, using the rows below; `morePending` above 0 means messages remain for the next wait |
-| `observation-failed` | Act on the message item first; task/status observation, local record access or claimed-batch metadata validation failed. Inspect `operation`, `error` and `next`; for `message.check` and `task-wait-record`, `next` repeats the recovery in `error.next`. Repair it or tell the person, then re-arm the wait |
-| `message` | Act on each message once (by `id`), then explicitly ack the event's delivery and consumer generation. For a handoff, accept by ack and verify ownership before executing. A report notice ("was reported") is the result: see below. A `kind: question` → answer once with its `nextStep` (`lyra message reply <question-id> <answer>`); a question in plain mail → `message send --to` its sender with `--file`, `--task` and `--attempt`. An answer to your question names its ID. A `lyra-supervisor` escalation → `recovery` |
-| `message-held` | Your mail cannot be delivered: an unrepairable refusal, unknown outcome, or an unread recipient that closed/failed. Retry-healed refusals and recipient-wait takeover raise no event. `message-recipient-closed` → hand the work to a live session; `message-delivery-unknown` → inspect before any resend and ask the person if still unsure; other reasons → inspect the message/session and follow `messages` for repair. Never invent a restore-delivery command |
-| `message-conditions-omitted` | The 256-item outgoing metadata cap omitted `omitted` of `total` items. Shown once while positive; only an observed zero re-arms it. Inspect `task list`, tell the person the counts, route known stranded work to live sessions and re-arm; pruned IDs may reappear |
-| `worker-stopped` | Its turn ended without a report. If it just asked you something, that question is the stop: answer it if you have not, and send nothing else. Otherwise send one message: report your result or name your blocker. A second stop → `recovery` |
+| `observation-failed` | Act on the message item first; observing tasks or status, reading local records or validating claimed-batch metadata failed. Inspect `operation`, `error` and `next` (for `message.check` and `task-wait-record`, it repeats `error.next`). Repair it or tell the person, then re-arm the wait |
+| `message` | Act on each message once (by `id`), then explicitly ack the event's delivery and consumer generation. For a handoff, accept by ack and verify ownership before executing. A report notice ("was reported") is the result: see below. A `kind: question` → answer once with its `nextStep` (`lyra message reply <question-id> <answer>`); a question in plain mail → `message send --to` its sender with `--file`, `--task` and `--attempt`. A `lyra-supervisor` escalation → `recovery` |
+| `message-held` | Your mail cannot be delivered: an unrepairable refusal, unknown outcome, or an unread recipient that closed/failed. `message-recipient-closed` → hand the work to a live session; `message-delivery-unknown` → inspect before any resend and ask the person if still unsure; other reasons → inspect the message/session and follow `messages` for repair. Never invent a restore-delivery command |
+| `message-conditions-omitted` | The 256-item outgoing metadata cap omitted `omitted` of `total` items. Inspect `task list`, tell the person the counts, route known stranded work to live sessions and re-arm |
+| `worker-stopped` | Its turn ended without a report. Right after its question: answer it if you have not, and send nothing else. Otherwise send one message: report your result or name your blocker. A second stop → `recovery` |
 | `task-overdue` | Read `task show`; decide with the person. No automatic action. Deadline/cap rights: `tasks` |
 | `worker-wait-too-long` | The approval wait (default 10 min) or tool run (default 60 min) crossed its saved limit. Tell the person what is waiting (`progress.waitingTooLong`); it authorizes no escalation, stop, retry or dispatch. Printed once per wait, also in `--all` |
 | `worker-suspect` | No progress for 10 minutes; a long build looks the same. Act only on proof → `recovery` |
@@ -212,15 +217,13 @@ is new. It sends nothing; you read only your own tree, a Worker none.
 
 ## Settle and report
 
-- Keep every finished Worker open for reuse in the explorer (`terminals`).
-  Release only on the person's request, or with their agreement when reuse
-  is impossible.
+- Keep every finished Worker open for reuse in the explorer. Release only on
+  the person's request, or with their agreement when reuse is impossible.
 - Before your final report, `task wait` answers `idle` and each task in scope
   is `completed`, `failed` or `stopped` in `lyra task list --json`.
 - Report per task: its result, the evidence from its summary, what is left,
-  and the agent, model and effort that ran it.
-- Report the kept Worker count (`terminals`) and `lyra terminal release` for
-  when the person asks to free them.
+  and the agent, model and effort that ran it; then the kept Worker count and
+  `lyra terminal release` for when the person asks to free them (`terminals`).
 
 ## References
 
@@ -230,7 +233,7 @@ Load only the one your next step needs, with
 | When | `<name>` |
 |---|---|
 | Lyra assigned you a task: you are a Worker | `worker` |
-| Give a part of the job to a Lead, or you were started with --role lead; sessions that work as peers; re-linking; resetting a long session | `lead` |
+| Give a part to a Lead, or you were started with --role lead; peers; re-linking; resetting a long session | `lead` |
 | A start, a wait, a Worker or a command went wrong, went quiet or is unknown | `recovery` |
 | A Task DAG by hand, decision gates, handoff, several tasks for one session | `tasks` |
 | Message details: receipts, duplicates, doorbells, threads | `messages` |
@@ -240,6 +243,6 @@ Projects, Workspaces, Sessions and plain terminals are in the `lyra-cli` skill.
 
 ### Continuing a session (V-333)
 
-An agent's `lyra session continue <id>` is a start: a `Worker` is refused, and a `Lead` or `Orchestrator` must
-pass the predecessor-role start check. The target must be in its tree or directly started by it. The revived
-session retains its original role and place. A person can continue any session.
+An agent's `lyra session continue <id>` is a start: a `Worker` is refused; a `Lead` or `Orchestrator` must
+pass the predecessor-role start check, and the target must be in its tree or directly started by it. The revived
+session keeps its role and place. A person can continue any session.
