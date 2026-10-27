@@ -64,13 +64,13 @@
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 6921,
-      "sha256": "6f436d903757d22e9f70e95e6a95c6e7b7cb554b53b288628e6433e85c0d036a"
+      "size": 7055,
+      "sha256": "9c3655153c8c8f77368962e390b9fdb563df421756af8fd4a7f4657eae9eb30b"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 40397,
-      "sha256": "ede59f0511e847995661e0456a1bbb5baad560b9e64f3f620234344c31318850"
+      "size": 40161,
+      "sha256": "b06481671e3be872960c9772413ae6cf7ea098c1c558af1e66c70b671eae5f7e"
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
@@ -79,8 +79,8 @@
     },
     {
       "path": "skills/lyra-cli/references/diagnostics-and-skills.md",
-      "size": 6585,
-      "sha256": "612c715fb6cc3138d54a1465601bd2b02e50fc5e534ba4c7fc7eb52a80ca007b"
+      "size": 6822,
+      "sha256": "f92944db9dd805f8708a1965de3f098a233f703241a5171714f0234c5d86e105"
     },
     {
       "path": "skills/lyra-cli/references/files-and-terminals.md",
@@ -114,8 +114,8 @@
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15359,
-      "sha256": "2679d8d970ef4cb19869c4ebff9bcd038f41fcf5af1dff1f8e57cbdb4a01b2d1"
+      "size": 15351,
+      "sha256": "d09900ef99c0140443d777cc5f94138bf253ffb158a6b63094eae49c53436731"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
@@ -124,13 +124,13 @@
     },
     {
       "path": "skills/lyra-orchestration/references/messages.md",
-      "size": 8146,
-      "sha256": "bbd2bc28da37bbcfafd7c24e7413cc0e6cd387409749142e56d2b490b8bb7925"
+      "size": 8155,
+      "sha256": "0414a39b50998f92fb28de27c7f51e13e3e1b9ff53967a40f982d47717263821"
     },
     {
       "path": "skills/lyra-orchestration/references/recovery.md",
-      "size": 8178,
-      "sha256": "a99fce023c70878f285a758b6b6357f9404415af5a7e8a0bfdd90a27b8b3c800"
+      "size": 8180,
+      "sha256": "564a7689c4608c873891f24be1b072bb88fa8871f3e7c2ae8a8c60022a3abf2f"
     },
     {
       "path": "skills/lyra-orchestration/references/tasks.md",

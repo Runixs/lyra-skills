@@ -78,16 +78,11 @@ optional input; angle brackets are values to replace.
 - `lyra trace list [--project <project>] [--cursor <cursor>] [--limit <count>] [--json]`: list executions, newest first, with where they stopped and on which hosts
 - `lyra trace show <subject> --kind <kind> [--project <project>] [--cursor <cursor>] [--limit <count>] [--json]`: show every recorded step of one execution with its host
 
-**home**
-
-- `lyra home start [--json]`: start the home runtime if it is not running and wait until it answers
-- `lyra home stop [--force] [--json]`: stop the home runtime; refused while work runs unless --force; on an engine install it refuses with app.unit-unavailable: use `daemon stop`
-- `lyra home status [--json]`: show whether the home runtime runs, without starting it
-
 **daemon**
 
 - `lyra daemon start [--json]`: start this computer's lyra-daemon and wait until it answers
-- `lyra daemon stop [--json]`: stop this computer's idle lyra-daemon engine and keeper
+- `lyra daemon stop [--json]`: stop this computer's idle lyra-daemon engine and keeper; only on a computer without the Lyra app
+- `lyra daemon status [--json]`: show whether this computer's lyra-daemon runs, without starting it
 
 **project**
 

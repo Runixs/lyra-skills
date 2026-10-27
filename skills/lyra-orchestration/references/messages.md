@@ -72,7 +72,8 @@ lyra message thread <thread-id> --json
   For unsupported delivery or a version mismatch, update Lyra on the recipient's
   host or use a compatible live session. For an unverified terminal/fence, inspect
   `session show` and `terminal show`; tell the person what needs repair. For a
-  store refusal, inspect `home status` and ask the person to repair storage.
+  store refusal, inspect `lyra daemon status` and ask the person to repair
+  storage.
 - The outgoing observation is capped at 256 items: held mail first, then other
   mail, each group in acceptance order. `message-conditions-omitted` shows
   `total`, `omitted` and `cap` once while the omitted count stays positive, re-armed

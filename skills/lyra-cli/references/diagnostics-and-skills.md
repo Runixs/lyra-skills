@@ -19,13 +19,16 @@ lyra update check --json
   This build refuses them for other engines and servers, and refuses
   `update apply`, `update status` and `update remote-status`: a person applies
   an update with Update now in the Lyra app.
-- Before another Lyra version is installed by hand on this computer, the
-  person stops its idle lyra-daemon engine and keeper with
-  `lyra daemon stop --json`; `lyra daemon start --json` starts it again.
-  Both are a person's commands: an agent that Lyra started is refused
+- Before another Lyra version is installed by hand on a computer without the
+  Lyra app (a server or WSL), the person stops its idle lyra-daemon engine and
+  keeper with `lyra daemon stop --json`; `lyra daemon start --json` starts it
+  again. Both are a person's commands: an agent that Lyra started is refused
   (`home.guest-not-allowed`). `daemon-stop-busy` means work still runs:
   finish it and stop again; there is no force. An unknown result (exit 3) is
-  not a stop: inspect both processes before installing.
+  not a stop: inspect both processes before installing. With the Lyra app
+  installed the stop refuses (`daemon-stop-app-installed`) and the app updates
+  lyra-daemon; `daemon-stop-app-unverified` means the app check could not
+  finish: run the stop again.
 
 ## Install a Lyra skill for an agent
 

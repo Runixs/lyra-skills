@@ -43,7 +43,7 @@ printed; it comes before `error.next`.
 5. `bridge.unknown-operation`: home is older; ask the person to update it.
 6. `task wait` or `message check` exit 3 (`home.connection-lost`,
    `message-claim-unconfirmed`) loses nothing: run it again. A tool timeout is
-   unknown too: read `lyra home status --json`, then step 1.
+   unknown too: read `lyra daemon status --json`, then step 1.
 
 ### Worker conditions
 
