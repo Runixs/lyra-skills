@@ -157,7 +157,7 @@ Mail is capped at 50 and one guest line. Ack before reading `morePending`.
 Worker changes and urgent mail end a wait at once; other mail is batched
 (`messages`).
 
-- **Claude Code, unless a Lead:** run this in the background
+- **Claude Code, Orchestrator or Lead:** run this in the background
   (`run_in_background: true`), then end your turn:
 
   ```text
@@ -166,10 +166,9 @@ Worker changes and urgent mail end a wait at once; other mail is batched
 
   On completion, read the output, act, ack its messages, then start the next
   wait with your last action. For long tasks use `--timeout 45m`.
-- **A Lead, or an agent without background commands:** wait in the foreground
+- **An agent without background commands:** wait in the foreground
   and loop; e.g. `--timeout 9m` with Bash timeout 600000 ms (its default is
-  2 minutes). A Lead never ends its turn while Workers run: its parent sees
-  a stopped Worker.
+  2 minutes).
 - Never run `message check` beside a wait. After acting on
   every message, run `lyra message ack <delivery-id> --consumer-generation <consumer-generation> --json` from its event.
   Until ack, it replays even after `/clear`.
@@ -189,7 +188,7 @@ Worker changes and urgent mail end a wait at once; other mail is batched
 | `worker-suspect` | No progress for 10 minutes; a long build looks the same. Act only on proof → `recovery` |
 | `worker-closed` | Its session closed without a result → `recovery` |
 | `worker-unobservable` | Lyra cannot see its status (OpenCode 1.x, a lost link). Not a result: wait again |
-| `checkpoint` | For each task listed as ended, act on its notice, or read `task show --brief`. A `running` task with the same `state` and `progress` (or null) as at the last checkpoint has no news: read its `turn` with `lyra status show --session <worker-session-id> --json`. `ended` → as `worker-stopped`; `awaiting-human` → tell the person; anything else → wait again. No news again at the next checkpoint → `recovery` |
+| `checkpoint` | For each task listed as ended, act on its notice, or read `task show --brief`. A `running` task other than a Lead whose `progress.verdict` is `waiting` (it waits for its Workers) has no news when its `state` and `progress` (or null) are as at the last checkpoint: read its `turn` with `lyra status show --session <worker-session-id> --json`. `ended` → as `worker-stopped`; `awaiting-human` → tell the person; anything else → wait again. No news again at the next checkpoint → `recovery` |
 | `idle` | Nothing runs and no message waits: settle and report |
 
 ## Read results

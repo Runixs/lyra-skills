@@ -36,9 +36,9 @@ before the Leads start, as a task of yours, so every Lead's Workspace has it
 changes to it go through you. Start every Lead before you wait, then send each
 one its peers' session IDs if they must agree on something. When the Leads
 have reported, you (or one integration Worker) merge their branches and run the
-acceptance across the parts. Wait and act as for any Worker: a Lead waiting on
-its Workers sits in a running tool, so it reads as waiting, not stopped. A
-`worker-stopped` from a Lead means its turn really ended.
+acceptance across the parts. Wait and act as for any Worker: a Lead whose
+Workers run reads as waiting, also after its turn ends. A `worker-stopped`
+from a Lead means its turn ended with none of its Workers running.
 
 If a Lead's session ends, its Workers keep running in its plan. On the person's
 word a live session (yours, or a new Lead) takes them over, then decides each
@@ -56,13 +56,14 @@ summary, questions) and run your part like an Orchestrator (the guide). Also:
 
 1. **Plan, then start.** Read your own task with `lyra task show <task-id> --json`; child tasks inherit no deadline. Explicitly keep each child deadline no later than yours, and respect its failed-attempt cap (`tasks`). Split your part by the guide's rule and start its
    Workers in your own Workspace (`--workspace current`), one writer per file set.
-2. **Wait in the foreground, always:** loop
-   `lyra task wait --all --timeout 9m --json` with your shell tool's time limit above
-   it. Act on every message, then `message ack` its delivery/generation before
-   waiting again. Until ack, it replays. Never end your turn while Workers run:
-   your parent sees `worker-stopped`, then `worker-suspect`; after an hour a
-   stall escalation holds dependent tasks. `worker-wait-too-long` after the
-   tool limit (default 60 minutes) only tells the parent; it never acts.
+2. **Wait as the guide says.** Claude Code: run
+   `lyra task wait --all --timeout 15m --json` with `run_in_background: true`,
+   end your turn; on completion read, act, ack, re-arm. Without background
+   commands, loop it in the foreground with `--timeout 9m`. Until ack, a
+   message replays. While your Workers run, your parent reads your ended turn
+   as `waiting`; ended with none running and no report, it sees
+   `worker-stopped`, then `worker-suspect`, and after an hour a stall
+   escalation holds dependent tasks.
 3. **Ask your parent** what your spec does not let you decide: `message send`
    to the `result.task.ownerSessionId` of your own task, with your
    footer's task and attempt IDs. Keep waiting on your Workers; the answer

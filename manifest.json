@@ -108,13 +108,13 @@
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15354,
-      "sha256": "3467037db0ff94250774ff109655bb955d8fb61902b6515121ca8976ab565fe2"
+      "size": 15350,
+      "sha256": "39d9f6fc77323f505a11b7608367b12916c069018ca160a8e39b748285b79b3d"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
-      "size": 8167,
-      "sha256": "0580ea52372499df0119f3f8fbaface19273bac26fc8bd6a291ec0473c1bd155"
+      "size": 8180,
+      "sha256": "371328f34746e847d1fea376c325ed8ee7f355fe19ae7a14bf958ae52fb59f92"
     },
     {
       "path": "skills/lyra-orchestration/references/messages.md",
