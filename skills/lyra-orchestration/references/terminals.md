@@ -97,3 +97,16 @@ There is no fallback to cooperative cancel or ordinary close.
 A force-stopped Lead's children keep running and their tasks keep that Lead's
 recorded ownership. Explicitly adopt its plan and tasks using recovery.md, "Your own session ended";
 force-stop does not cascade, move children or invent a new owner.
+
+## Checkouts on another host
+
+A Workspace (Git worktree) is made from a checkout on the same host. If the
+project has none there, use its remote URL without asking the person:
+`lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`.
+For an existing checkout, use `lyra project location add <project-id> <native-path>
+--host <host> --expected-revision <revision>` (get the revision from
+`lyra project show <project-id> --json`). Then run `lyra worker start … --host <host>`.
+
+In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before passing a POSIX path for a
+remote host, for example `export MSYS_NO_PATHCONV=1`. Otherwise Git Bash rewrites
+`/home/...` to `C:/Program Files/Git/home/...`.

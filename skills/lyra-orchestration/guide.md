@@ -65,8 +65,7 @@ a review, give it to a Worker on a different agent than the builder.
 
 ## Start Workers
 
-Write one spec file per Worker. It sees only this text and the footer Lyra
-appends with its task and attempt IDs, so write no report command:
+Workers see their spec and Lyra's task/attempt footer; omit report commands:
 
 ```text
 Goal: <one result, in one sentence>
@@ -76,8 +75,7 @@ Acceptance: <commands whose output proves it done>
 Ask first: <decisions it must not take alone>
 ```
 
-Lyra types the spec into the Worker's terminal and refuses one over 16 KiB
-with its footer (`task-execution-refused`).
+Lyra types the spec; over 16 KiB including the footer is refused (`task-execution-refused`).
 
 ```text
 lyra worker start --workspace current --spec-file task-a.md --agent claude --title <title> --kind <kind> --json
@@ -86,36 +84,40 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
 ```
 
 - `--workspace current` adds the Worker to your Workspace (a terminal each),
-  `--workspace <workspace-id>` to that one on any host. `--project` with
-  `--name` always makes a new Workspace (a Git worktree).
+  `--workspace <workspace-id>` to one on any host. `--project --name`
+  makes a new Workspace (Git worktree).
+- A Workspace needs a checkout on the same host. If absent, first run
+  `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`
+  (or `lyra project location add` for an existing checkout), then
+  `lyra worker start … --host <host>`. With a remote URL, do not ask the person.
+  In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before remote POSIX
+  paths; see `terminals`.
 - A new Workspace starts from `--base`, else (Lyra 0.2.4+) on another host
   from your Git branch, else from the target root's HEAD (`baseRef` in the
-  result). Another host sees only commits pushed and fetched there; a branch
-  it lacks is refused. Sessions on one branch share one Workspace: reuse one
-  from `lyra workspace list <project-id> --json` or give the rest the first
-  start's `workspaceId`; never make several at once. `--reuse-branch` with
-  `--base` uses that local branch itself.
+  result). Push and fetch commits there first; missing branches are refused.
+  One branch shares one Workspace: use `lyra workspace list <project-id> --json`
+  or the first start's `workspaceId`, never create several at once.
+  `--reuse-branch --base` uses that local branch itself.
 - `--task` starts an existing ready task with its stored spec; retry failed or
-  stopped tasks first. Other states, others' tasks and task-content flags
-  are refused before anything is made (`tasks`).
+  stopped tasks first. Other states, owners and task-content flags are
+  refused before creation (`tasks`).
 - `--kind "<kind> · <work>"`, e.g. `"build · login form"`, places the
-  task on the person's status board: the same `<work>` for every step of one
-  piece, one short `<kind>` word per kind of step.
-- Start every independent Worker before you wait. Start a later stage when the
-  stage before it completes, or create its tasks now and dispatch each one
-  when Lyra lists it ready (`tasks`); nothing starts by itself.
+  task on the status board: keep `<work>` across its steps; one short `<kind>`.
+- Start independent Workers before waiting. Later stages start after their
+  predecessors; or create tasks now and dispatch when ready (`tasks`).
+  Nothing starts by itself.
 
-**Who runs it.** `--agent claude`, `codex`, `opencode`, or a Profile name the
-person gave; with none named, your own kind. Pass `--model` only when the
-person asked for a model or a kind of model (cheapest, strongest): pick it from
+**Who runs it.** `--agent claude`, `codex`, `opencode`, or a person-given Profile;
+omission inherits your kind. Only pass `--model` when asked for a model or
+kind (cheapest, strongest), chosen from
 `lyra session models <workspace-id> --agent <name> --json`; `--effort` only
 with it, at a level in its `modelEfforts` (opencode takes none). A refusal
 lists `error.detail.allowed` or `candidates`: pick one or ask. Never run
 `profile add` or `session configure` to start a Worker; they change the
 person's saved settings.
 
-**Read the result**: `taskId`, `attemptId`, `sessionId`, `workspaceId`, the
-`model` and `effort` that applied, and `turn`:
+**Read** `taskId`, `attemptId`, `sessionId`, `workspaceId`, applied `model`/`effort`,
+and `turn`:
 
 | `turn` | Means | Do |
 |---|---|---|
@@ -123,9 +125,9 @@ person's saved settings.
 | `not-started` | Typed, no turn seen yet (usual for OpenCode 1.x) | Wait; not a failure. If no news follows: `recovery` |
 | `awaiting-permission` | It waits for a person's approval in its terminal | Tell the person, then wait |
 
-**If it stops part-way,** never run `worker start` again for it: it creates new
-things every time and undoes nothing. `error.detail.next` is the exact command
-for this start (before `error.next`); then read `recovery`.
+**If it stops part-way,** do not repeat `worker start`: it creates new things
+and undoes nothing. Follow `error.detail.next` before `error.next`, then read
+`recovery`.
 
 ## Start a new Orchestrator
 

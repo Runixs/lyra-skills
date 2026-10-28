@@ -105,6 +105,14 @@ optional input; angle brackets are values to replace.
 - `lyra project branches <project-id> [--host <host>] [--location <execution-location>] [--root <source-root>] [--json]`: list the local and remote branches of one project checkout, read on its host now
 - `lyra project scan --host <host> [--path <native-dir>] [--limit <count>] [--json]`: list the folders under a directory on a host and whether each is a Git repository
 
+A Workspace (Git worktree) needs a checkout on the same host. If the project
+has none there, first run `lyra project clone <remote-url> <parent-path> --host <host>
+--project <project-id>`; for an existing checkout use `lyra project location add`
+above. Then run `lyra worker start … --host <host>`. With a remote URL, do not ask
+the person. In Windows Git Bash, set `MSYS_NO_PATHCONV=1` (for example
+`export MSYS_NO_PATHCONV=1`) before passing remote POSIX paths: otherwise
+`/home/...` becomes `C:/Program Files/Git/home/...`.
+
 **workspace**
 
 - `lyra workspace create <project-id> <name> [--agent <name>] [--host <host>] [--location <execution-location>] [--root <source-root>] [--base <branch>] [--branch <new-branch>] [--reuse-branch] [--setup <run|skip>] [--trust] [--json]`: create and prepare a workspace, then open its first session (the two results are reported separately); --base starts from a branch, --branch names the new branch, --reuse-branch checks out the existing local --base branch; prepare commands come from the project folder's .lyra/config.yaml (or the commands typed when it was added) and run only with your consent: --trust approves exactly the commands read now, --setup skip runs none
