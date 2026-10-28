@@ -107,9 +107,15 @@ optional input; angle brackets are values to replace.
 
 A Workspace (Git worktree) needs a checkout on the same host. If the project
 has none there, first run `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`; for an existing checkout use `location add` above. Then run `lyra worker start --project <project-id> --name <workspace-name> --spec-file <spec-file> --host <host> --agent <name>`. With a remote URL, do not ask
-the person. In Windows Git Bash, set `MSYS_NO_PATHCONV=1` (for example
-`export MSYS_NO_PATHCONV=1`) before passing remote POSIX paths: otherwise
-`/home/...` becomes `C:/Program Files/Git/home/...`.
+the person. In Windows Git Bash, apply `MSYS_NO_PATHCONV=1` to just the
+command that passes remote POSIX paths:
+
+```sh
+MSYS_NO_PATHCONV=1 \
+lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>
+```
+
+Otherwise `/home/...` becomes `C:/Program Files/Git/home/...`.
 
 **workspace**
 

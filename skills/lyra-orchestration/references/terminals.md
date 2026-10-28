@@ -107,5 +107,12 @@ For an existing checkout, use `lyra project location add <project-id> <native-pa
 `lyra project show <project-id> --json`). Then run `lyra worker start --project <project-id> --name <workspace-name> --spec-file <spec-file> --host <host> --agent <name>`.
 
 In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before passing a POSIX path for a
-remote host, for example `export MSYS_NO_PATHCONV=1`. Otherwise Git Bash rewrites
+remote host. Apply it to that command only:
+
+```sh
+MSYS_NO_PATHCONV=1 \
+lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>
+```
+
+Otherwise Git Bash rewrites
 `/home/...` to `C:/Program Files/Git/home/...`.

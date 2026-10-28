@@ -88,10 +88,9 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   makes a new Workspace (Git worktree).
 - A Workspace needs a checkout on its host; if absent, run
   `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`
-  (or register an existing checkout: `terminals`), then `worker start`
-  with `--host <host>`. With a remote URL, do not ask.
-  In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before remote POSIX
-  paths (`terminals`).
+  Or register an existing checkout (`terminals`), then `worker start`
+  with `--host <host>`. Use the remote URL without asking.
+  Windows Git Bash: `MSYS_NO_PATHCONV=1` for remote POSIX paths (`terminals`).
 - A new Workspace starts from `--base`, else (Lyra 0.2.4+) on another host
   from your Git branch, else from the target root's HEAD (`baseRef` in the
   result). Another host sees only commits pushed and fetched there; a branch
@@ -104,12 +103,12 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   refused before creation (`tasks`).
 - `--kind "<kind> · <work>"`, e.g. `"build · login form"`, places the
   task on the status board: keep `<work>` across its steps; one short `<kind>`.
-- Start independent Workers before waiting. Later stages start after their
+- Start independent Workers before waiting. Start later stages after their
   predecessors; or create tasks now and dispatch when ready (`tasks`).
   Nothing starts by itself.
 
 **Who runs it.** `--agent claude`, `codex`, `opencode`, or a person-given Profile;
-omission inherits your kind. Only pass `--model` when asked for a model or
+omission inherits your kind. Only pass `--model` when the person asks for a model or
 kind (cheapest, strongest), chosen from
 `lyra session models <workspace-id> --agent <name> --json`; `--effort` only
 with it, at a level in its `modelEfforts` (opencode takes none). A refusal
