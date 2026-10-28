@@ -86,10 +86,10 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
 - `--workspace current` adds the Worker to your Workspace (a terminal each),
   `--workspace <workspace-id>` to one on any host. `--project --name`
   makes a new Workspace (Git worktree).
-- A Workspace needs a checkout on the same host. If absent, first run
+- A Workspace needs a checkout on its host. If absent, run
   `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`
-  (or `lyra project location add` for an existing checkout), then
-  `lyra worker start … --host <host>`. With a remote URL, do not ask the person.
+  (or register an existing checkout; see `terminals`), then use
+  `worker start` with `--host <host>`. With a remote URL, do not ask the person.
   In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before remote POSIX
   paths; see `terminals`.
 - A new Workspace starts from `--base`, else (Lyra 0.2.4+) on another host
@@ -99,7 +99,7 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   or the first start's `workspaceId`, never create several at once.
   `--reuse-branch --base` uses that local branch itself.
 - `--task` starts an existing ready task with its stored spec; retry failed or
-  stopped tasks first. Other states, owners and task-content flags are
+  stopped tasks first. Other states, others' tasks and task-content flags are
   refused before creation (`tasks`).
 - `--kind "<kind> · <work>"`, e.g. `"build · login form"`, places the
   task on the status board: keep `<work>` across its steps; one short `<kind>`.
