@@ -68,8 +68,8 @@
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 39441,
-      "sha256": "dc6ed7a7b915f2055b1224ae3776a1a1d62a852da0b544607dd937fe0d56e306"
+      "size": 39442,
+      "sha256": "57fbea9a132f6a619caa4c7635843d8ad89f696a33acc0b2eebf8579544038c5"
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
@@ -108,8 +108,8 @@
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15349,
-      "sha256": "e5ae7612fc473fc058d04ef44759be02ed6180065e603aeb5044eaaa69a967bb"
+      "size": 15358,
+      "sha256": "efc5b8fd131cc5af74090f82e241af109e08f5d0315fc81ecb7a5f6806d214fa"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
@@ -133,8 +133,8 @@
     },
     {
       "path": "skills/lyra-orchestration/references/terminals.md",
-      "size": 7002,
-      "sha256": "393695fbdb7ac1410d2907b52d596df8d9d650fdaa1bd57aff6821e045dafc75"
+      "size": 7003,
+      "sha256": "d6881cd57d8036fcd571a06f1b0f4e644cdd35129a6e7da80e70b4e4a6c430ec"
     },
     {
       "path": "skills/lyra-orchestration/references/worker.md",

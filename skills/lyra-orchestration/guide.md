@@ -65,7 +65,7 @@ a review, give it to a Worker on a different agent than the builder.
 
 ## Start Workers
 
-Workers see their spec and Lyra's task/attempt footer; omit report commands:
+One spec file per Worker; it sees only that and Lyra's footer. Omit report commands:
 
 ```text
 Goal: <one result, in one sentence>
@@ -86,15 +86,16 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
 - `--workspace current` adds the Worker to your Workspace (a terminal each),
   `--workspace <workspace-id>` to one on any host. `--project --name`
   makes a new Workspace (Git worktree).
-- A Workspace needs a checkout on its host. If absent, run
+- A Workspace needs a checkout on its host; if absent, run
   `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`
-  (or register an existing checkout; see `terminals`), then use
-  `worker start` with `--host <host>`. With a remote URL, do not ask the person.
+  (or register an existing checkout: `terminals`), then `worker start`
+  with `--host <host>`. With a remote URL, do not ask.
   In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before remote POSIX
-  paths; see `terminals`.
+  paths (`terminals`).
 - A new Workspace starts from `--base`, else (Lyra 0.2.4+) on another host
   from your Git branch, else from the target root's HEAD (`baseRef` in the
-  result). Push and fetch commits there first; missing branches are refused.
+  result). Another host sees only commits pushed and fetched there; a branch
+  it lacks is refused.
   One branch shares one Workspace: use `lyra workspace list <project-id> --json`
   or the first start's `workspaceId`, never create several at once.
   `--reuse-branch --base` uses that local branch itself.
