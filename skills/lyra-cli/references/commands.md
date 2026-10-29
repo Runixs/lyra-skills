@@ -287,6 +287,15 @@ connections are person-only; an agent asks the person to use Settings → Issue 
 
 - `lyra search <query> [--json]`: find workspaces, conversation sessions, profiles and projects whose name contains the text (put several words in quotes); no match is said plainly, and a source that could not be read is named, never counted as zero
 
+**serial**
+
+- `lyra serial list [--json]`: list serial ports on this command's execution host
+- `lyra serial open <port> --baud <n> [--data-bits <n>] [--parity <none|odd|even>] [--stop-bits <n>] [--flow-control <none|xon-xoff|rts-cts>] [--json]`: open a serial endpoint with explicit baud and optional line settings
+- `lyra serial read <port> [--lines <n>] [--offset <n>] [--max-bytes <n>] [--json]`: read at most 64 KiB by offset or trailing lines; report expired byte ranges
+- `lyra serial expect <port> <text> --timeout <seconds> [--offset <n>] [--json]`: wait for new text for up to 60 seconds; --offset includes retained history
+- `lyra serial write <port> <text> [--json]`: write text to the board and record the caller; other writers remain allowed
+- `lyra serial close <port> [--json]`: stop the original serial endpoint and retain its bounded byte log
+
 ## Request receipts
 
 - `lyra request show <request-id> --operation <operation> [--session <session-id>] [--json]`: read a stored request receipt without retrying; a person may select --session, an agent reads its own scope
