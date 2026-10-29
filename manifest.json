@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.26",
-  "tag": "v0.1.26",
+  "skillsVersion": "0.1.27",
+  "tag": "v0.1.27",
   "skills": [
     {
       "name": "lyra-cli",
@@ -55,12 +55,12 @@
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "2f9d5846cd782c38fbe467cf86ec1401dd1b648c42ea4376b1e82c7fb62f4edf"
+      "sha256": "246a6387221ae9ed8e7b362df6959a816c0a2a1e8f98481beec0cecfe3976486"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
       "size": 1727,
-      "sha256": "d5f2e52f83b29fd8ec1f687d450d40aeb4b5b9a4470e517bf6878acaab0902fa"
+      "sha256": "1c9e9d0a3012fd2e9e26900668d8ce1c8c7e54c75a643edd977b3cd6110aa845"
     },
     {
       "path": "skills/lyra-cli/guide.md",
@@ -110,7 +110,7 @@
     {
       "path": "skills/lyra-orchestration/SKILL.md",
       "size": 2899,
-      "sha256": "d4b24286fec575b2dd95021a6724be3cf0d46a7f9200a07f55b4801b514c4b6c"
+      "sha256": "936a0571ee215b6dd4c98e7ea720cfb5ded7fe80129c643acd5240ae413ba7be"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
@@ -150,7 +150,7 @@
     {
       "path": "skills/lyra-workflow/SKILL.md",
       "size": 2023,
-      "sha256": "ffbc88e422cacff11c37ce706076fafe580b456c2259c53550b9e1cc96c0aac9"
+      "sha256": "af5c326868a3719218fb2b379cde8a9a81f3573db4f0a5f7d1ce5cf33fbe21c0"
     },
     {
       "path": "skills/lyra-workflow/guide.md",

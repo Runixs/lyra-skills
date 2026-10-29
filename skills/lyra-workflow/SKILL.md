@@ -1,7 +1,7 @@
 ---
 name: lyra-workflow
 description: 'Works inside Lyra workflows - as one step of a workflow run, as a helper who watches a run for the person, or as the author of a workflow - moving on recorded evidence instead of questions. Use when a task Lyra typed says "This task is one step of a Lyra workflow run" or starts with "[Lyra workflow:", when asked to watch or explain a workflow run, or when asked to make, change, explain or draw a Lyra workflow from a description of the work or from the history of a finished project.'
-skillsVersion: 0.1.26
+skillsVersion: 0.1.27
 minimumLyraVersion: 0.2.2
 ---
 
