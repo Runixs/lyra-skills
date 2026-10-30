@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.27",
-  "tag": "v0.1.27",
+  "skillsVersion": "0.1.28",
+  "tag": "v0.1.28",
   "skills": [
     {
       "name": "lyra-cli",
@@ -23,7 +23,7 @@
     {
       "name": "lyra-orchestration",
       "description": "Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results, or when Lyra typed a task ending in \"[Lyra: when you finish, report ...]\" or the line \"You have N Lyra messages\".",
-      "minimumLyraVersion": "0.2.4",
+      "minimumLyraVersion": "0.2.8",
       "pointer": "skills/lyra-orchestration/SKILL.md",
       "guide": "skills/lyra-orchestration/guide.md",
       "references": [
@@ -55,12 +55,12 @@
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "246a6387221ae9ed8e7b362df6959a816c0a2a1e8f98481beec0cecfe3976486"
+      "sha256": "5f30f682ec06500cbc89e949d22b27383646e8e7004b8714841c793a41ce8aec"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
       "size": 1727,
-      "sha256": "1c9e9d0a3012fd2e9e26900668d8ce1c8c7e54c75a643edd977b3cd6110aa845"
+      "sha256": "4195b696fbfdb9a243bf552297a8dbe006884247d6ee3afacb0e6395b06d45cb"
     },
     {
       "path": "skills/lyra-cli/guide.md",
@@ -110,7 +110,7 @@
     {
       "path": "skills/lyra-orchestration/SKILL.md",
       "size": 2899,
-      "sha256": "936a0571ee215b6dd4c98e7ea720cfb5ded7fe80129c643acd5240ae413ba7be"
+      "sha256": "059e13ea165beae7f320cc8113f8cdab38043435eea0001fe5145abf4aac4417"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
@@ -150,7 +150,7 @@
     {
       "path": "skills/lyra-workflow/SKILL.md",
       "size": 2023,
-      "sha256": "af5c326868a3719218fb2b379cde8a9a81f3573db4f0a5f7d1ce5cf33fbe21c0"
+      "sha256": "841d0b29fed339210e640e526f19bcb57c91cf3d8910f34d7dfd07e8c7d8060b"
     },
     {
       "path": "skills/lyra-workflow/guide.md",
