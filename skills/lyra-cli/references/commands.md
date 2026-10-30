@@ -290,6 +290,8 @@ connections are person-only; an agent asks the person to use Settings → Issue 
 - `lyra serial expect <port> <text> --timeout <seconds> [--offset <n>] [--json]`: wait for new text for up to 60 seconds; --offset includes retained history
 - `lyra serial write <port> <text> [--json]`: write text to the board and record the caller; other writers remain allowed
 - `lyra serial close <port> [--json]`: stop the original serial endpoint and retain its bounded byte log
+- `lyra serial break <port> [--duration-ms <n>] [--json]`: send a BREAK (50..5000 ms, default 250); it counts as a write
+- `lyra serial status [<port>] [--json]`: show open ports: line settings, capture, who wrote and how long ago, views
 
 ## Request receipts
 

@@ -121,5 +121,5 @@ Load only the one your next step needs, with
 | Connect a remote server, SSH keys, credentials | `servers-and-credentials` |
 | Versions, processes, traces, updates, installing Lyra skills | `diagnostics-and-skills` |
 | Jira and GitHub connections, issues and their comments, workflows and runs | `connections-and-workflows` |
-| A board's serial port: open, write and wait for output, read, close | `serial` |
+| A board's serial port: open, check who writes, write or send a BREAK and wait for output, read, close | `serial` |
 | Every command in one list (for people; agents use `--help`) | `commands` |

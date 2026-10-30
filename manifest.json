@@ -6,7 +6,7 @@
     {
       "name": "lyra-cli",
       "description": "Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles, Jira and GitHub connections and issues, workflows, and serial ports - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, add or poll a Jira or GitHub connection, show or comment on an issue, save, run or inspect a workflow, open, read, write or wait on a board's serial port, or install a Lyra skill for an agent.",
-      "minimumLyraVersion": "0.2.8",
+      "minimumLyraVersion": "0.2.9",
       "pointer": "skills/lyra-cli/SKILL.md",
       "guide": "skills/lyra-cli/guide.md",
       "references": [
@@ -60,17 +60,17 @@
     {
       "path": "skills/lyra-cli/SKILL.md",
       "size": 1727,
-      "sha256": "4195b696fbfdb9a243bf552297a8dbe006884247d6ee3afacb0e6395b06d45cb"
+      "sha256": "cb60967aae806b8f2c76b2199adf3b55191569146a4ae40fb57fa243afaa4802"
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 7055,
-      "sha256": "9c3655153c8c8f77368962e390b9fdb563df421756af8fd4a7f4657eae9eb30b"
+      "size": 7089,
+      "sha256": "da41d2f87f31e41f1589459289f18b61c18a8a62b63cab8249919a0fda4f6987"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 40161,
-      "sha256": "b06481671e3be872960c9772413ae6cf7ea098c1c558af1e66c70b671eae5f7e"
+      "size": 40399,
+      "sha256": "9c005f9dc1f9e6f0c87ad16a1b26f9172232b0cd13a2ff03f99b04dbf83ca817"
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
@@ -94,8 +94,8 @@
     },
     {
       "path": "skills/lyra-cli/references/serial.md",
-      "size": 6293,
-      "sha256": "b5d35a8a1574357e140db537185ce1f6e2cc00c7656f824efb666b69a7af1a4e"
+      "size": 8116,
+      "sha256": "7ee993c9a47a3d37633ef63e798d528bc3e5c34cd6906cb84d95da559e8bc062"
     },
     {
       "path": "skills/lyra-cli/references/servers-and-credentials.md",
