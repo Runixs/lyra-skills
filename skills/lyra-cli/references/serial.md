@@ -1,8 +1,8 @@
 ## Serial ports
 
 The `serial` commands use the serial ports of the Host your Session runs on,
-such as a board's USB-serial adapter plugged into that machine. A board plugged
-into another computer cannot be reached from your Session.
+such as a board's USB-serial adapter. A board plugged into another computer
+cannot be reached from your Session.
 
 ```text
 lyra serial list --json
@@ -42,8 +42,7 @@ lyra serial close <port> --json
    `error.detail` has their `gaps` and `missing`, as a match's `result` does,
    and the `nextOffset` it reached; the text may have been in the lost bytes,
    so never conclude the board did not send it. A timeout with no lost bytes
-   has no `error.detail`. Plain output prints the missing range and a line
-   for each gap before the match or the error.
+   has no `error.detail`.
 3. **BREAK.** Some boards stop in a monitor or debugger on a BREAK: send one
    only when your task, the person or the board's documentation calls for
    it, such as a Linux console's magic SysRq or a boot ROM waiting for one.
@@ -58,12 +57,10 @@ lyra serial close <port> --json
    `result.offset` lies in the text or at its edge, `offset` minus
    `result.offset` bytes into the raw `result.bytes`, and the output on its
    two sides is not continuous, even where the text runs on (step 5). Plain
-   output prints any capture failure and missing range first, then the text,
-   with a line "Serial port <port>: ... lost at log offset <n> (...)" where
-   each such gap falls. `--json` also has `result.nextOffset`,
-   `result.endOffset`, `result.missing`, `result.failure` and
-   `result.lastWriter`; the raw `bytes` come as numbers, several times the
-   size of the text: keep `--max-bytes` small. Continue from
+   output puts a line "... lost at log offset <n> (...)" where each gap falls.
+   `--json` also has `result.nextOffset`, `result.endOffset`, `result.missing`,
+   `result.failure` and `result.lastWriter`; the raw `bytes` come as numbers,
+   several times the size of the text: keep `--max-bytes` small. Continue from
    `result.nextOffset` until it equals `result.endOffset`.
 5. **Missing bytes.** Lyra keeps the newest 256 MiB of a port's output. A read
    or expect from an older offset first reports "bytes missing from X to Y"
@@ -115,9 +112,13 @@ lyra serial close <port> --json
   stopped capture, an adapter without BREAK support, or a BREAK to an
   endpoint an older lyra-daemon started (close and reopen it, as in step 6).
 - `serial.disabled`: a person turned serial off in the Lyra app, and only a
-  person turns it on: `open`, `write` and `break` are refused; the other
-  `serial` commands still work. Do not retry: quote the message to the
-  person and wait.
+  person turns it on. `serial.locked`: this version of Lyra keeps serial off,
+  and no setting changes that. Both refuse `open`, `write` and `break`; the
+  other `serial` commands still work. Do not retry: quote the message to the
+  person.
+- `serial.endpoint-path-too-long` from `open`: this account's app data path is
+  too long for the port's connection file, so no port opens from it. Do not
+  retry: quote the message to the person.
 - `link-operation-absent` from `break` or `status`: the lyra-daemon on the
   computer the message names is older than the Lyra app and lacks that
   command. The other `serial` commands still work, and `result.lastWriter`

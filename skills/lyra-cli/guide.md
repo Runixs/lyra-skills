@@ -118,7 +118,7 @@ Load only the one your next step needs, with
 | Read a Workspace's files or Git state, show a file in Projects, plain shell terminals, attach or split | `files-and-terminals` |
 | Sessions in depth: rename, resume, models and saved launch settings | `sessions-and-models` |
 | Answer a pending approval or question in the Inbox | `inbox` |
-| Connect a remote server, SSH keys, credentials | `servers-and-credentials` |
+| Connect a remote server, a company gateway's one-time code, SSH keys, credentials | `servers-and-credentials` |
 | Versions, processes, traces, updates, installing Lyra skills | `diagnostics-and-skills` |
 | Jira and GitHub connections, issues and their comments, workflows and runs | `connections-and-workflows` |
 | A board's serial port: open, check who writes, write or send a BREAK and wait for output, read, close | `serial` |

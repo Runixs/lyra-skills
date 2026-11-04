@@ -42,9 +42,9 @@ optional input; angle brackets are values to replace.
 - `lyra server remove <server> [--yes] [--json]`: remove a server from the registry
 - `lyra server attach <server> [--json]`: attach a registered server to the execution map again (after server-not-attached)
 - `lyra server ssh-hosts [--json]`: list the Host aliases in your ~/.ssh/config (Include expanded, wildcards left out)
-- `lyra server import <alias> [--name <name>] [--host-key-policy <policy>] [--password] [--json]`: register an SSH config alias; optionally select a memory password with --password
+- `lyra server import <alias> [--name <name>] [--host-key-policy <policy>] [--password] [--json]`: register an SSH config alias; Lyra picks how it signs in
 - `lyra server connect <server> [--password-stdin] [--retry-password] [--json]`: connect and hold the connection, one line per state change; Ctrl-C closes it
-- `lyra server key <action> <target> [--json]`: your SSH key on a server: `status <server>`, `register <server> [--yes]` (on the current connection), `switch on|off` (register automatically after a password connect)
+- `lyra server key <action> <target> [--json]`: your SSH key on a server: `status <server>`, `register <server> [--yes]` (on the current connection)
 
 **runtime**
 
