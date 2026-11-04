@@ -293,6 +293,10 @@ connections are person-only; an agent asks the person to use Settings → Issue 
 - `lyra serial break <port> [--duration-ms <n>] [--json]`: send a BREAK (50..5000 ms, default 250); it counts as a write
 - `lyra serial status [<port>] [--json]`: show open ports: line settings, capture, who wrote and how long ago, views
 
+**tui**
+
+- `lyra tui [--json]`: open Lyra's text screen in this terminal (Linux); not as root
+
 ## Request receipts
 
 - `lyra request show <request-id> --operation <operation> [--session <session-id>] [--json]`: read a stored request receipt without retrying; a person may select --session, an agent reads its own scope
