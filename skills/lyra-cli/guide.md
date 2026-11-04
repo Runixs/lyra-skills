@@ -95,9 +95,10 @@ lyra session close <session-id> --yes --json
 ## Launch preferences
 
 - `--agent claude`, `codex` or `opencode` picks that agent's canonical Profile
-  on the destination Host; a Profile name the person gave picks that Profile (a
-  company endpoint, another execution location). A Profile holds an endpoint
-  and a location; model and effort are chosen when a Session opens.
+  on the destination Host; a Profile name the person gave picks that Profile
+  (its own launch settings, another execution location). A Profile holds launch
+  settings, a location and an optional model name; `--model` and `--effort` are
+  chosen when a Session opens.
 - Pass `--model` only when the person asked for a model or a kind of model.
   Choose it from `lyra session models <workspace-id> --agent claude --json`;
   never read agent configuration files, caches or binaries to find one.

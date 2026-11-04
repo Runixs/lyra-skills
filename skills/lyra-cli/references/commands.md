@@ -28,7 +28,6 @@ optional input; angle brackets are values to replace.
 - `lyra credential ssh-cleanup-classify <credential> --method <method> --revision <revision> [--json]`: classify unknown SSH metadata without reading its secret
 - `lyra credential ssh-cleanup-retry --revision <revision> [--json]`: retry the displayed unfinished SSH password cleanup
 - `lyra credential add-ssh --name <name> --method <method> [--host <host>] [--key-file <path>] [--json]`: store an SSH credential; the key comes from --key-file, a passphrase or password from standard input
-- `lyra credential add-model-endpoint --name <name> [--host <host>] [--json]`: store the key for a gateway or on-premises model endpoint; the key comes from standard input
 - `lyra credential list [--json]`: list stored credentials (no secret values)
 - `lyra credential show <credential> [--json]`: show one credential (no secret value)
 - `lyra credential remove <credential> [--yes] [--json]`: delete a credential and its secret from the OS credential store
@@ -55,8 +54,8 @@ optional input; angle brackets are values to replace.
 
 - `lyra profile list [--host <host>] [--json]`: list profiles on every host
 - `lyra profile show <profile> [--json]`: show one profile
-- `lyra profile add --from <profile> --name <name> [--provider <provider>] [--address <https-url>] [--location <location>] [--credential <credential>] [--json]`: derive a profile from a canonical one
-- `lyra profile update <profile> [--name <name>] [--enabled <true|false>] [--provider <provider>] [--address <https-url>] [--runtime-default] [--location <location>] [--credential <credential>] [--no-credential] [--json]`: change a profile (a canonical profile changes only its name and enabled flag)
+- `lyra profile add --from <profile> --name <name> [--model <name>] [--location <location>] [--json]`: derive a profile from a canonical one
+- `lyra profile update <profile> [--name <name>] [--model <name>] [--auto-model] [--enabled <true|false>] [--location <location>] [--json]`: change a profile name, model or allowed execution settings
 - `lyra profile remove <profile> [--json]`: remove a derived profile
 
 **update**

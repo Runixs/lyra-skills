@@ -43,3 +43,20 @@ cat launch.json | lyra session configure <profile-id> --stdin --json
   from `session configuration`. A Profile's model default and `home`'s global
   default (`session defaults` / `set-default`) are separate; `set-default`
   without `--model` clears the global default.
+- The template's optional `preLaunchCommand` is POSIX shell text that prepares
+  the environment on the Host once per opening, before any model list that
+  opening reads and the agent launch; `session models` alone never runs it. It
+  gets no input and has 30 seconds; a failure stops the opening. Leaving it out
+  keeps the saved command; null or a blank value clears it. A Windows Host
+  refuses it. Its text is saved and `session configuration` prints it: never
+  write a key or token into it; have the command fetch one.
+- A Profile takes no model endpoint: `profile add` and `profile update` have no
+  endpoint flags, and connection settings go through the agent's own settings
+  file and `preLaunchCommand`. A Profile saved with an endpoint by an older
+  Lyra stays readable.
+- `profile add --model <name>` and `profile update --model <name>` save a model
+  name on a Profile; `profile update --auto-model` clears it, so the model is
+  chosen automatically. The two flags cannot be combined, and leaving both out
+  of an update keeps the saved name. A Session on that Profile runs the saved
+  name with no model list read, so Lyra does not check it and the agent may
+  refuse it. `--model` at the opening still wins, if `session models` lists it.
