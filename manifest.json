@@ -104,8 +104,8 @@
     },
     {
       "path": "skills/lyra-cli/references/sessions-and-models.md",
-      "size": 3481,
-      "sha256": "6f378a6918897ac72617411e16777bb271b2cb00dad6f9d296b0eaf4b82c4a79"
+      "size": 4415,
+      "sha256": "449ac70f8007bd0f3d64012171b30932a0651ab04a33f6be088f280a0e85d2ce"
     },
     {
       "path": "skills/lyra-orchestration/SKILL.md",
@@ -159,13 +159,13 @@
     },
     {
       "path": "skills/lyra-workflow/references/authoring.md",
-      "size": 6888,
-      "sha256": "97e9b1fa0a45464c6eea4ce8b8b054eb6c16c593c0eb738b6d52171b37954a9c"
+      "size": 6931,
+      "sha256": "f0f6462d49511a32efdf18badae0aa1a487763fc39ab3b8a74c81ad728e9f5e4"
     },
     {
       "path": "skills/lyra-workflow/references/definition.md",
-      "size": 7857,
-      "sha256": "9b8361d0e0858495a46a1b017b63742569a49cb72f0374ea9eed4ba2410bd5a0"
+      "size": 7901,
+      "sha256": "dd71cd662f50e85024a3b356f90c8f9ee0ffaccef4988cc73b108db3ceec6688"
     },
     {
       "path": "skills/lyra-workflow/references/example-issue-fix.md",
