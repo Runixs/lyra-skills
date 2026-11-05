@@ -91,7 +91,7 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   Or register an existing checkout (`terminals`), then `worker start`
   with `--host <host>`. Use the remote URL without asking.
   Windows Git Bash: `MSYS_NO_PATHCONV=1` for remote POSIX paths (`terminals`).
-- A new Workspace starts from `--base`, else (Lyra 0.2.4+) on another host
+- A new Workspace starts from `--base`, else on another host
   from your Git branch, else from the target root's HEAD (`baseRef` in the
   result). Another host sees only commits pushed and fetched there; a branch
   it lacks is refused.
@@ -108,8 +108,8 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   Nothing starts by itself.
 
 **Who runs it.** `--agent claude`, `codex`, `opencode`, or a person-given Profile;
-omission inherits your kind. Only pass `--model` when the person asks for a model or
-kind (cheapest, strongest), chosen from
+omission is refused (`usage-missing-value`). Only pass `--model` when the person
+asks for a model or kind (cheapest, strongest), chosen from
 `lyra session models <workspace-id> --agent <name> --json`; `--effort` only
 with it, at a level in its `modelEfforts` (opencode takes none). A refusal
 lists `error.detail.allowed` or `candidates`: pick one or ask. Never run

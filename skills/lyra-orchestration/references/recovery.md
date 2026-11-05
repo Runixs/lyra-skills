@@ -7,7 +7,7 @@ person must act, tell them what, where, and the command you will run after.
 ### Starting
 
 Here `next` is `error.detail.next`, the command a stopped `worker start`
-printed; it comes before `error.next`.
+printed.
 
 | Signal | Do |
 |---|---|
@@ -17,8 +17,8 @@ printed; it comes before `error.next`.
 | `task-execution-refused` or another dispatch refusal | Nothing started and the task is still ready. Run `next` once with a new `--request-id`; the same code again → stop and report it. A spec over 16 KiB is refused this way: shorten it and point to files |
 | `worker-depth-limit` | This Worker cannot start deeper Workers. Split the work with a Workflow, or ask the task owner with `lyra message send --to <owner-session-id> --task <task-id> --file <file>` |
 | `task-not-startable` | Its dependencies have not completed; run `next` when they have |
-| `session-not-active` | The session did not become active in 60 seconds; `next` is the `session show` to read it |
-| `session-effort-unsupported`, `session-model-not-in-catalog`, `agent-selection-refused` | Nothing was created. Pick from `error.detail.allowed` or `candidates`, or ask |
+| `session-not-active` | The session did not become active in 60 seconds; `next` reads it |
+| `session-effort-unsupported`, `session-effort-unknown` (a mistyped `--effort`), `session-model-not-in-catalog`, `agent-selection-refused` | Only a Workspace in `created` may stay; the same command reuses it. Pick from `error.detail.allowed` or `candidates`, or ask |
 | `turn` `not-started`, then no news (below) | The text may sit unsent in its input box, or its agent sends no turn signals. Look for its changes first; none → ask the person to check that terminal (Enter sends waiting text). Never dispatch it again or to a second Worker |
 
 ### Exit 3 (outcome unknown)
@@ -89,10 +89,10 @@ takes it out of the plan and blocks its dependents for good.
 
 ### Your own session ended
 
-When the daemon (it runs agent sessions) stops, every
+When the daemon stops, every
 session it ran ends, yours too, and your commands fail with
-`caller-session-stale`. On the person's word, a new session takes over. A new
-session's `task list` is empty until adoption. Find the ended session with
+`caller-session-stale`. On the person's word, a new session takes over; its
+`task list` is empty until adoption. Find the ended session with
 `lyra session list --json` (`failed`/`closed`, by title), or ask the person:
 
 ```text
@@ -107,9 +107,9 @@ lyra task list --json
   Live Workers report to you; adopt `result.inFlight` after handoff.
 - A `running` task whose Worker died with the daemon: cancel it, retry it once
   it reads `stopped`, and run
-  `worker start --task <task-id> --workspace <workspace-id>` with the
-  previous attempt's `workspaceId` from `task show`, the Workspace that holds
-  the partial changes.
+  `worker start --task <task-id> --workspace <workspace-id> --agent <name>`
+  with the previous attempt's `workspaceId` (`task show`), which holds the
+  partial changes.
 - Messages sent to the old session stay there; read results with
   `task show --brief`.
 - Adopt a Lead's plan the same way, one ended session at a time.

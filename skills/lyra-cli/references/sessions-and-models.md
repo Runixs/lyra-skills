@@ -70,6 +70,11 @@ cat launch.json | lyra session configure <profile-id> --stdin --json
   if given, else the saved name, with no model list read, so Lyra does not
   check it and the agent may refuse it. `--effort` there is checked only as a
   known level for that agent; the agent itself reports a level its model does
-  not support. A `lyra-daemon` too old to apply a saved name refuses the
-  opening with `session.profile-model-unavailable`: tell the person, who
-  updates it on that machine or clears the name.
+  not support. A mistyped level is refused with `session-effort-unknown`, which
+  names `--effort`, the typed value and the known levels
+  (`error.detail.allowed`). No Session or task is made, but a Workspace
+  `worker start` just made stays in `created`; the same command with a known
+  level reuses it. `session-effort-unsupported` stays the model list check of
+  a Profile with no saved model name. A `lyra-daemon` too old to apply a saved
+  name refuses the opening with `session.profile-model-unavailable`: tell the
+  person, who updates it on that machine or clears the name.
