@@ -56,8 +56,9 @@ nodes:                           # the steps, the trigger first
   `profile`, `prompt`, a `text` output and its own records level are
   refused. `profile` names a saved Profile; `effort` asks the agent for a
   reasoning effort, as `--effort` does on `session open`, which refuses one
-  its model does not offer. A build or a test is a terminal step or a
-  step's checks: this Lyra has no `command` kind.
+  its model does not offer unless the Profile has a saved model name. A
+  build or a test is a terminal step or a step's checks: this Lyra has no
+  `command` kind.
 - **Its Workspace**: `where: { workspace: { new: <name> } }` makes a new
   Workspace in the trigger's Project, with its own branch; a taken name
   gets `-2`, `-3`. `where: { workspace: { step: <step> } }` works in the

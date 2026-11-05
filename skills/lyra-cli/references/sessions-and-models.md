@@ -37,19 +37,28 @@ cat launch.json | lyra session configure <profile-id> --stdin --json
 ```
 
 - `session models` reads the real catalog for an agent, with each model's
-  `modelEfforts`. A missing or null list cannot be checked, so Lyra refuses an
-  effort for that model.
+  `modelEfforts`. On a Profile with no saved model name, a missing or null list
+  cannot be checked, so Lyra refuses an effort for that model.
 - `session configure` reads launch-template JSON that carries `expectedRevision`
   from `session configuration`. A Profile's model default and `home`'s global
   default (`session defaults` / `set-default`) are separate; `set-default`
   without `--model` clears the global default.
 - The template's optional `preLaunchCommand` is POSIX shell text that prepares
-  the environment on the Host once per opening, before any model list that
-  opening reads and the agent launch; `session models` alone never runs it. It
-  gets no input and has 30 seconds; a failure stops the opening. Leaving it out
-  keeps the saved command; null or a blank value clears it. A Windows Host
-  refuses it. Its text is saved and `session configuration` prints it: never
-  write a key or token into it; have the command fetch one.
+  the environment on the Host. Each opening runs it once, before that opening's
+  own model list read and the agent launch. It gets no input and has 30
+  seconds; a failure stops the opening. Leaving it out keeps the saved command;
+  null or a blank value clears it. A Windows Host refuses it. Its text is saved
+  and `session configuration` prints it: never write a key or token into it;
+  have the command fetch one.
+- `session models` never runs that command. When the Profile has no saved model
+  name, `session open` and `worker start` check an explicit `--model` or
+  `--effort` against the `session models` list before the opening starts, so
+  the check sees no prepared environment: if the list fails or lacks the model
+  or level, nothing is created and the command does not run. With a saved model
+  name, or with neither flag, there is no such check: the opening prepares,
+  then reads its own list, or none for a saved model name. For a Profile whose
+  models need the command, leave both flags out, or ask the person to save the
+  model name on the Profile.
 - A Profile takes no model endpoint: `profile add` and `profile update` have no
   endpoint flags, and connection settings go through the agent's own settings
   file and `preLaunchCommand`. A Profile saved with an endpoint by an older
@@ -57,6 +66,10 @@ cat launch.json | lyra session configure <profile-id> --stdin --json
 - `profile add --model <name>` and `profile update --model <name>` save a model
   name on a Profile; `profile update --auto-model` clears it, so the model is
   chosen automatically. The two flags cannot be combined, and leaving both out
-  of an update keeps the saved name. A Session on that Profile runs the saved
-  name with no model list read, so Lyra does not check it and the agent may
-  refuse it. `--model` at the opening still wins, if `session models` lists it.
+  of an update keeps the saved name. A Session on that Profile runs `--model`
+  if given, else the saved name, with no model list read, so Lyra does not
+  check it and the agent may refuse it. `--effort` there is checked only as a
+  known level for that agent; the agent itself reports a level its model does
+  not support. A `lyra-daemon` too old to apply a saved name refuses the
+  opening with `session.profile-model-unavailable`: tell the person, who
+  updates it on that machine or clears the name.

@@ -36,10 +36,10 @@ Nothing is saved, turned on or run until the person says so.
    (`launch: terminal`); a step that must see an earlier step's changes
    works in that step's Workspace (`where: { workspace: { step: <step> } }`).
    An effort level is a session step's `effort` (a terminal step takes
-   none; the step's start refuses an effort its model does not offer). A
-   wish it cannot express (a branch on a value, a step only on failure, a
-   schedule): say so, offer the nearest shape, and keep the wish as a
-   comment in the file.
+   none; the step's start refuses an effort its model does not offer,
+   unless the Profile has a saved model name). A wish it cannot express
+   (a branch on a value, a step only on failure, a schedule): say so,
+   offer the nearest shape, and keep the wish as a comment in the file.
 3. **Write the file and draw it.** Show both and ask what is wrong. Repeat
    until the person agrees.
 4. **Before saving**, run `lyra workflow list --json`: saving a name that
