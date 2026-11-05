@@ -64,13 +64,13 @@
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 7089,
-      "sha256": "da41d2f87f31e41f1589459289f18b61c18a8a62b63cab8249919a0fda4f6987"
+      "size": 7167,
+      "sha256": "5851f31cc47b583cbdb577464e85f4b600f6aa8e67d60fc709fbe3b0053321be"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 40494,
-      "sha256": "90b6df748c2f21797bdce474f56648b905f8c2c5be4a242f5147b05c74d9ce3f"
+      "size": 40070,
+      "sha256": "d4440d2a18b2a7d9b851f8686c123d9ae155b9a15478e4fde8fddd72a305ce79"
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
@@ -94,18 +94,18 @@
     },
     {
       "path": "skills/lyra-cli/references/serial.md",
-      "size": 8116,
-      "sha256": "7ee993c9a47a3d37633ef63e798d528bc3e5c34cd6906cb84d95da559e8bc062"
+      "size": 8171,
+      "sha256": "7851328fcca97a10223bd27e53f42279c53959e1f6d2d595c1da44c27d541e29"
     },
     {
       "path": "skills/lyra-cli/references/servers-and-credentials.md",
-      "size": 1271,
-      "sha256": "0311daef631fe92659f65f2be07ba51f4b6e2acef0c11224fd3a3cf31c069003"
+      "size": 6406,
+      "sha256": "f3f2c8b307419e440b55ed8a43e6c5d70f8b4e3c08c43e9043543ce4fd7e36b4"
     },
     {
       "path": "skills/lyra-cli/references/sessions-and-models.md",
-      "size": 2228,
-      "sha256": "0aefc81a713ea7de15026a62fdf8ec6b2bee83a772f6ec0879b1725edfd3bc67"
+      "size": 3481,
+      "sha256": "6f378a6918897ac72617411e16777bb271b2cb00dad6f9d296b0eaf4b82c4a79"
     },
     {
       "path": "skills/lyra-orchestration/SKILL.md",
