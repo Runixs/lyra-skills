@@ -24,6 +24,30 @@ lyra runtime detect --host <host-id> --json
   server); `runtime list` shows what was found. An unreadable remote runtime is
   not an empty result.
 
+## Workspaces on a server
+
+After `server connect`, the server's Host is in `host list` (`host-<server-id>`).
+
+```text
+lyra project add <server-path> --host <host> --json
+lyra project create <server-parent-path> <name> --host <host> --json
+lyra workspace create <project-id> <name> --host <host> --root <source-root> --base <branch> --setup skip --json
+```
+
+- `project add` registers a checkout already on the server; `project create`
+  makes a new, empty one there (a Git repository with no commit yet; `--no-git`
+  for a plain folder).
+- Pass `--base`: without it, a Workspace on another host starts from your own
+  current Git branch, which the server has only after you push it and fetch it
+  there (`workspace-base-ref-not-found`). `lyra project branches <project-id>`
+  lists the branches the checkout has.
+- A checkout with no commit has no branch to start from: make a first commit
+  in it on the server (in a shell there, or in a terminal of the primary
+  Workspace that `project add` opens), then create the Workspace. A plain
+  folder has only that primary Workspace.
+- A Workspace whose creation failed is kept as `failed`; remove it with
+  `lyra workspace remove <workspace-id> --yes` before trying the same name.
+
 ## Company gateway sign-in
 
 A company gateway in front of a server may ask a one-time code (OTP) after the

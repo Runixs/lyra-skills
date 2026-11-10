@@ -72,9 +72,9 @@ summary, questions) and run your part like an Orchestrator (the guide). Also:
    spec allows it, and never more Workers at once than it allows.
 5. **Integrate and check** in your Workspace: bring in each Worker's result,
    run the acceptance, and fix or re-dispatch what fails.
-6. **Settle, then report once.** Keep finished Workers for reuse (`terminals`),
-   report their count and `lyra terminal release` for the person's request.
-   When `task wait` answers `idle`, report your own attempt with a summary,
+6. **Settle, then report once.** Report the Workers kept by `--keep-open` and
+   `lyra terminal release` for the person's request (`terminals`).
+   When `task wait` answers `tasks-ended` or `idle`, report your own attempt with a summary,
    result first (your parent's notice shows its first 320 characters): the
    branch and commit, the checks and their results, one line per Worker task,
    and what is left.

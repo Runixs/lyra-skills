@@ -1,6 +1,9 @@
 ## Finished Workers: reuse or release
 
-A still-open Worker whose task has a result keeps its terminal, process and context. Reuse
+A Worker closes by itself once its report reached its owner and was
+acknowledged, unless it was started with `--keep-open` (`worker start` or
+`task dispatch`); a question waiting for an answer keeps it open. A kept
+Worker whose task has a result keeps its terminal, process and context. Reuse
 it for a follow-up on the same code (review fixes, the next step): it needs no
 new start and remembers what it did. Otherwise leave it open and reusable in
 the explorer, even when nothing follows. Never release a Worker on your own.
@@ -98,6 +101,11 @@ A force-stopped Lead's children keep running and their tasks keep that Lead's
 recorded ownership. Explicitly adopt its plan and tasks using recovery.md, "Your own session ended";
 force-stop does not cascade, move children or invent a new owner.
 
+Closing a Lead (`lyra session close`) is different: it first closes the
+sessions below it, and when one of them does not close, the Lead stays open
+and `session-close-children-open` names it in `error.detail.childSessionId`.
+Close or stop that session, then close the Lead again.
+
 ## Checkouts on another host
 
 A Workspace (Git worktree) is made from a checkout on the same host. If the
@@ -105,6 +113,14 @@ project has none there, use its remote URL without asking the person:
 `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`.
 For an existing checkout, use `lyra project location add <project-id> <native-path> --host <host> --expected-revision <revision>` (get the revision from
 `lyra project show <project-id> --json`). Then run `lyra worker start --project <project-id> --name <workspace-name> --spec-file <spec-file> --host <host> --agent <name>`.
+A new Workspace on another host starts from your own Git branch unless you
+pass `--base <branch>`; a checkout with no commit yet has no branch, so make a
+first commit there first (`lyra-cli`, "Workspaces on a server").
+
+An agent running on a server (not on the person's computer) clones, registers
+and creates Workspaces only on its own server: this bootstrap is refused
+toward another host. There, use an existing Workspace (`--workspace
+<workspace-id>`) that its person or an agent on that host prepared.
 
 In Windows Git Bash, set `MSYS_NO_PATHCONV=1` before passing a POSIX path for a
 remote host. Apply it to that command only:

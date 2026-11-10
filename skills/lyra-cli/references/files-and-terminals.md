@@ -52,15 +52,17 @@ lyra terminal detach <execution-terminal-id> --view-ref <view-ref> --json
   terminal no longer runs, nothing new is started. Only a person at a foreground
   terminal can type into it; piped or `--json` use only watches, and `--json`
   streams events instead of returning one answer. Ctrl-C detaches the view and
-  does not stop the terminal.
+  does not stop the terminal. An agent running on a server (not on the person's
+  computer) cannot attach; it reads its own server's shells with `terminal read`.
 - `terminal split` opens a separate shell on the same Host (`--direction right`
-  or `down`); it never starts a second copy of the agent.
+  or `down`); it never starts a second copy of the agent. An agent running on a
+  server splits only terminals on its own server.
 - `terminal detach` closes one attached view named by its view reference; the
   terminal keeps running.
-- Keep a finished Worker's terminal open for reuse by its session ID with
-  the `lyra-orchestration` skill. Report how many are kept; `lyra terminal release`
-  frees them only on the person's request, or with their agreement when reuse
-  is impossible.
+- A finished Worker closes after its acknowledged report unless it was
+  started with `--keep-open` (the `lyra-orchestration` skill). Report how many
+  are kept; `lyra terminal release` frees them only on the person's request, or
+  with their agreement when reuse is impossible.
 
 ### Plain shells: start, type, read, stop
 
@@ -75,7 +77,8 @@ lyra terminal close <terminal-id> --yes --json
 ```
 
 - `terminal create` starts a shell in the Workspace's folder on the Workspace's
-  Host (this computer, WSL/Linux, Windows or a remote server). On Windows,
+  Host (this computer, WSL/Linux, Windows or a remote server); an agent running
+  on a server starts shells only on its own server. On Windows,
   `--shell cmd|powershell|git-bash` picks the shell (`terminal shells` lists
   them); elsewhere the login shell starts. The shell also appears in the app's
   New terminal list. If the answer is lost (exit 3), run the same command again
@@ -87,7 +90,8 @@ lyra terminal close <terminal-id> --yes --json
   Enter and `--interrupt` presses Ctrl-C (it stops a running command). `--text`
   is typed exactly, so `--text " "` is a space; it shows in the process list, so
   never put a secret in it. Success means every byte reached the shell. It is
-  plain typing, not taking over a Worker, and never starts anything else.
+  plain typing, not taking over a Worker, and never starts anything else. An
+  agent running on a server types only into shells on its own server.
   - `terminal.send-rejected` (exit 1): nothing was typed because someone else
     took the input first; send again when they are done.
   - `terminal.send-unavailable` (exit 1): that Host's Lyra is too old to confirm

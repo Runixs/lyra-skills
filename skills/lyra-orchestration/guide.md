@@ -90,6 +90,7 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   `lyra project clone <remote-url> <parent-path> --host <host> --project <project-id>`
   Or register an existing checkout (`terminals`), then `worker start`
   with `--host <host>`. Use the remote URL without asking.
+  An agent on a server does this only on that server (`terminals`).
   Windows Git Bash: `MSYS_NO_PATHCONV=1` for remote POSIX paths (`terminals`).
 - A new Workspace starts from `--base`, else on another host
   from your Git branch, else from the target root's HEAD (`baseRef` in the
@@ -115,6 +116,9 @@ with it, at a level in its `modelEfforts` (opencode takes none). A refusal
 lists `error.detail.allowed` or `candidates`: pick one or ask. Never run
 `profile add` or `session configure` to start a Worker; they change the
 person's saved settings.
+
+- A Worker closes once you ack its report, never while its question waits;
+  `--keep-open` (also on `task dispatch`) keeps it for reuse.
 
 **Read** `taskId`, `attemptId`, `sessionId`, `workspaceId`, applied `model`/`effort`,
 and `turn`:
@@ -142,10 +146,7 @@ lyra orchestrator start --spec-file brief.md --json
 A person, Orchestrator or Lead may start a new tree; a Worker cannot. An
 agent's new tree keeps its depth, so it cannot reset the limit. Agents may
 omit `--workspace` and `--agent` (stored Workspace, Profile); a person gives
-both. A Claude terminal gets the brief as a typed request before its paste,
-other agents as ordinary input. The daemon is checked before opening
-(unsupported: nothing is created); if it changes after, close the session the
-race refusal names, then retry after an update. An agent's `session open` has
+both. An agent's `session open` has
 the same role checks. Agents may `session prompt` only their tree or sessions
 they started; message other trees. People may open and prompt any session.
 
@@ -155,6 +156,8 @@ Keep one wait running. `--all` returns one claimed message batch, held mail,
 overdue tasks, then Worker conditions in task-list order; a changed positive
 omitted count follows held mail. It records conditions without acking
 mail. Without `--all`, the first event wins. `checkpoint` means timeout.
+`--until-ended` is `--all` returning once all your tasks ended
+(`tasks-ended`), not per report.
 Mail is capped at 50 and one guest line. Ack before reading `morePending`.
 Worker changes and urgent mail end a wait at once; other mail is batched
 (`messages`).
@@ -164,6 +167,7 @@ Worker changes and urgent mail end a wait at once; other mail is batched
 
   ```text
   lyra task wait --all --timeout 15m --json
+  lyra task wait --until-ended --timeout 45m --json
   ```
 
   On completion, read the output, act, ack its messages, then start the next
@@ -218,10 +222,11 @@ is new. It sends nothing; you read only your own tree, a Worker none.
 
 ## Settle and report
 
-- Keep every finished Worker open for reuse in the explorer. Release only on
-  the person's request, or with their agreement when reuse is impossible.
-- Before your final report, `task wait` answers `idle` and each task in scope
-  is `completed`, `failed` or `stopped` in `lyra task list --json`.
+- Release a kept Worker only on the person's request, or with their
+  agreement when reuse is impossible.
+- Before your final report, `task wait` answers `tasks-ended` or `idle` and
+  each task in scope is `completed`, `failed` or `stopped` in
+  `lyra task list --json`.
 - Report per task: its result, the evidence from its summary, what is left,
   and the agent, model and effort that ran it; then the kept Worker count and
   `lyra terminal release` for when the person asks to free them (`terminals`).
@@ -233,7 +238,6 @@ Load only the one your next step needs, with
 
 | When | `<name>` |
 |---|---|
-| Lyra assigned you a task: you are a Worker | `worker` |
 | Give a part to a Lead, or you were started with --role lead; peers; re-linking; resetting a long session | `lead` |
 | A start, a wait, a Worker or a command went wrong, went quiet or is unknown | `recovery` |
 | A Task DAG by hand, decision gates, handoff, several tasks for one session | `tasks` |

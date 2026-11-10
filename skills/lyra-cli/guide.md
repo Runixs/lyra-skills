@@ -68,6 +68,9 @@ lyra session show <session-id> --json
    exactly the commands read now, `--setup skip` runs none. To adopt a
    worktree the person already made, without setup:
    `lyra workspace register <project-id> /home/me/src/app-wt --host <host-id> --json`.
+   An agent running on a server creates and registers Workspaces only on its
+   own server, and its `--trust` cannot approve setup for the Project there:
+   use `--setup skip` or ask the person.
 4. **Session.** Opening reports `opening`, `active`, `failed` or `unknown`;
    read `session show` until it is `active`. Another Session in the same
    Workspace: `lyra session open <workspace-id> --agent claude --json`.

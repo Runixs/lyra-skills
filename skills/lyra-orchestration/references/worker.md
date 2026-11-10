@@ -3,7 +3,8 @@
 You are a Worker: Lyra typed you a task that ends with its footer, "[Lyra: when
 you finish, report with
 `lyra task report <task-id> --attempt <attempt-id> --outcome completed --summary <summary>` ...]".
-The footer is your contract; use only its task and attempt IDs.
+The footer is your whole contract; use only its task and attempt IDs. You read
+this file because one of its commands failed: find that command below.
 
 A recorded Worker starts no task, Worker, Lead or Orchestrator. Ask your owner
 to start children. A Lead receives the same reporting footer but is explicitly
@@ -31,10 +32,10 @@ started with `--role lead`; wording in a task cannot promote a Worker.
    the same question twice, and act on an answer you already saw (same
    question ID) only once.
    Then ask your current owner, with a wait that fits your shell tool's
-   time limit:
+   time limit (without `--to`, the question goes to the task's owner):
 
    ```text
-   lyra message ask --to <orchestrator-session-id> "<question>" --task <task-id> --attempt <attempt-id> --timeout 9m --json
+   lyra message ask "<question>" --task <task-id> --attempt <attempt-id> --timeout 9m --json
    ```
 
    Claude Code: set the Bash timeout to 600000 ms (its 2-minute default would
@@ -68,9 +69,9 @@ started with `--role lead`; wording in a task cannot promote a Worker.
      no separate "done" message. `false`: it had already ended.
    - `stale-attempt` or `not-owner`: a newer attempt replaced yours or the task
      is not yours. Stop; do not report again.
-5. **Stop after reporting.** Start no new work and do not close your terminal:
-   it stays open for your Orchestrator to reuse. Release needs the person's
-   request, or their agreement when reuse is impossible (`terminals`).
+5. **Stop after reporting.** Start no new work and do not close your terminal
+   yourself: Lyra closes it once your owner has your report, unless you were
+   started to stay open for reuse (`terminals`).
 
 **Your conversation grew too long for the task:** write a UTF-8 note of at most 16 KiB (task and attempt IDs,
 what is done, next step, reset request ID), then run
