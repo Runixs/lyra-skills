@@ -139,8 +139,8 @@
     },
     {
       "path": "skills/lyra-orchestration/references/terminals.md",
-      "size": 8099,
-      "sha256": "5ac87338ef8a83c891041a0c1bdfa7d304d0cbccb86631810bca91c1f25853ee"
+      "size": 8112,
+      "sha256": "87f68ab26e291a6462d4f70d8b4203ab02526b1b2df30b1eeb04ff57efee2bd7"
     },
     {
       "path": "skills/lyra-orchestration/references/worker.md",

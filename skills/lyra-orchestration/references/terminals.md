@@ -101,7 +101,7 @@ A force-stopped Lead's children keep running and their tasks keep that Lead's
 recorded ownership. Explicitly adopt its plan and tasks using recovery.md, "Your own session ended";
 force-stop does not cascade, move children or invent a new owner.
 
-Closing a Lead (`lyra session close`) is different: it first closes the
+Closing a Lead (`lyra session close <session-id>`) is different: it first closes the
 sessions below it, and when one of them does not close, the Lead stays open
 and `session-close-children-open` names it in `error.detail.childSessionId`.
 Close or stop that session, then close the Lead again.
