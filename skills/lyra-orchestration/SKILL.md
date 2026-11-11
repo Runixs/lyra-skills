@@ -1,7 +1,7 @@
 ---
 name: lyra-orchestration
 description: 'Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results.'
-skillsVersion: 0.1.31
+skillsVersion: 0.1.32
 minimumLyraVersion: 0.2.14
 ---
 

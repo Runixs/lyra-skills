@@ -29,8 +29,9 @@ lyra terminal release --task <task-id> --request-id <new-request-id> --yes --jso
 - The filtered list shows each settled attempt whose Worker terminal remains
   retained: `sessionId`, `taskId`, `attemptId`, `outcome`, `settledAt`,
   `ownerSessionId` and `next`. `next` is an exact release command only when you
-  own the task or its plan; otherwise it is `null`: `ownerSessionId` names who
-  can release it. A returned command is not the person's permission to run it.
+  own the task or its plan or are above its Worker; otherwise it is `null`:
+  `ownerSessionId` names who can release it. A returned command is not the
+  person's permission to run it.
   It includes older failed attempts after a retry; running
   and released terminals, and releases already `checking` or `closing`, are
   excluded. An agent sees its own tree; a person sees all. The list changes nothing. `--workspace` narrows it further.
@@ -101,10 +102,9 @@ A force-stopped Lead's children keep running and their tasks keep that Lead's
 recorded ownership. Explicitly adopt its plan and tasks using recovery.md, "Your own session ended";
 force-stop does not cascade, move children or invent a new owner.
 
-Closing a Lead (`lyra session close <session-id>`) is different: it first closes the
-sessions below it, and when one of them does not close, the Lead stays open
-and `session-close-children-open` names it in `error.detail.childSessionId`.
-Close or stop that session, then close the Lead again.
+Closing a Lead (`lyra session close <session-id>`) closes only the Lead: its
+sessions stay open. The person can still close them, and you or any session
+above them can release their terminals. Adopt its tasks as for a force-stop.
 
 ## Checkouts on another host
 
