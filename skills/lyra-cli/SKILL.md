@@ -1,7 +1,7 @@
 ---
 name: lyra-cli
-description: Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles, Jira and GitHub connections and issues, workflows, and serial ports - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, add or poll a Jira or GitHub connection, show or comment on an issue, save, run or inspect a workflow, open, read, write or wait on a board's serial port, or install a Lyra skill for an agent.
-skillsVersion: 0.1.32
+description: Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles, Jira and GitHub connections and issues, workflows, and serial ports - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, add or poll a Jira or GitHub connection, show or comment on an issue, save, run or inspect a workflow, open, read, write or wait on a board's serial port, or install a Lyra skill for an agent. To give an agent a task and get its result back, use lyra-orchestration instead.
+skillsVersion: 0.1.33
 minimumLyraVersion: 0.2.14
 ---
 
@@ -16,6 +16,10 @@ A task Lyra typed into your terminal with a report footer, a "You have N Lyra
 messages" line, or several agent sessions to coordinate belong to the
 `lyra-orchestration` skill. A step of a workflow run, watching a run, and
 writing or drawing a workflow file belong to the `lyra-workflow` skill.
+
+To give an agent a task and get its result back, use `lyra-orchestration`:
+`lyra worker start --workspace current --spec-file <task-file> --agent <agent> --json`.
+Do not substitute `session open` followed by `session prompt` for supervised dispatch.
 
 If `lyra` is missing or `skills get` fails, show the exact error to the person
 and stop. Unsure of a flag: add `--help` to that command; never guess one.

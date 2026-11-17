@@ -74,6 +74,10 @@ lyra session show <session-id> --json
 4. **Session.** Opening reports `opening`, `active`, `failed` or `unknown`;
    read `session show` until it is `active`. Another Session in the same
    Workspace: `lyra session open <workspace-id> --agent claude --json`.
+   `providerStart.status: unavailable` means that host's `lyra-daemon` does
+   not support `session.start.query`; it is not a launch failure, and not
+   proof of a ready Session either: read
+   `lyra session show <session-id> --json`.
 
 ## Talk to a Session
 
@@ -86,10 +90,15 @@ lyra session close <session-id> --yes --json
 - `session prompt` types the text into an active Session as if the person had
   typed it (up to 16 KiB; never on the command line or in a log). Accepted is
   not answered. Leave out `--expected-generation`: this build refuses it.
-- An agent running in a terminal stores no conversation cards, so
-  `session turns` has nothing to read for it (cards exist for `Lyra` screen
-  conversations). To get an answer back, ask in the prompt for a file in the
-  Workspace (read it with `file read`) or for a Lyra message.
+- `session prompt` is not for assigning work. For work that needs a tracked
+  result, use `lyra worker start --workspace current --spec-file <task-file> --agent <agent> --json`
+  and the `lyra-orchestration` guide. `session prompt` alone creates no
+  supervised task, report contract or task wait.
+- For an agent terminal, use
+  `lyra session read <session-id> --source terminal --json`; `session turns`
+  reads stored conversation cards (`Lyra` screen conversations) and is not
+  its terminal transcript. If structured output is unavailable because the
+  target is a terminal agent, read its terminal instead.
 - Exit 3 on a prompt: it may have arrived. Do not send it again blindly; check
   for the effect you asked for first.
 - `session interrupt` stops the current turn and keeps the Session;

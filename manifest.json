@@ -1,11 +1,11 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.32",
-  "tag": "v0.1.32",
+  "skillsVersion": "0.1.33",
+  "tag": "v0.1.33",
   "skills": [
     {
       "name": "lyra-cli",
-      "description": "Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles, Jira and GitHub connections and issues, workflows, and serial ports - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, add or poll a Jira or GitHub connection, show or comment on an issue, save, run or inspect a workflow, open, read, write or wait on a board's serial port, or install a Lyra skill for an agent.",
+      "description": "Operates Lyra from the command line - Projects, Workspaces, agent Sessions, terminals, workspace files and Git, the Inbox, Hosts, servers, credentials and Profiles, Jira and GitHub connections and issues, workflows, and serial ports - and installs Lyra's bundled skills. Use when asked to register a project, create or remove a workspace, open, prompt or close an agent session, read a workspace's files or Git state, start, type into, read or stop a shell terminal, attach to or split a terminal, connect a remote server, add or poll a Jira or GitHub connection, show or comment on an issue, save, run or inspect a workflow, open, read, write or wait on a board's serial port, or install a Lyra skill for an agent. To give an agent a task and get its result back, use lyra-orchestration instead.",
       "minimumLyraVersion": "0.2.14",
       "pointer": "skills/lyra-cli/SKILL.md",
       "guide": "skills/lyra-cli/guide.md",
@@ -22,7 +22,7 @@
     },
     {
       "name": "lyra-orchestration",
-      "description": "Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results.",
+      "description": "Coordinates Lyra agent sessions from the command line - starting Workers in one call, delegating a large part of a job to a Lead session that runs its own Workers, Task DAGs, messages, decision gates, waits and recovery. Use when asked to split or delegate work across agent sessions, have another agent do or review something and report back, start an agent on a task, run agents in parallel, dispatch or hand off a task, or wait for Workers and check their results.",
       "minimumLyraVersion": "0.2.14",
       "pointer": "skills/lyra-orchestration/SKILL.md",
       "guide": "skills/lyra-orchestration/guide.md",
@@ -55,17 +55,17 @@
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "0f9308157252811225ec7c4ee712f99b65fc528a55ed01207d6523c664979fb4"
+      "sha256": "ff2f6790884758032578c21511c047d1f2730bca0530b9db47e8a1fbf49a3fda"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
-      "size": 1730,
-      "sha256": "99c98523363075ca4b4adc8cce5d12db1a1273bf872e19f100c4065a9e77309c"
+      "size": 2062,
+      "sha256": "38a81db4a2e9873055afda69f6b1ff28c20e42010f3cd805bb13b986cd63d58f"
     },
     {
       "path": "skills/lyra-cli/guide.md",
-      "size": 7362,
-      "sha256": "f81dab3dc0b8163c172785f3730246d9e46e305216c0fd1f1e4f141a68b6100d"
+      "size": 7927,
+      "sha256": "1c3cf5964a475610008e141bbd94f6adb47ce109efe920c65a86223aef003b8a"
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
@@ -74,8 +74,8 @@
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
-      "size": 6049,
-      "sha256": "ca97e152462c38d2ea39a2c4328ca63167816ee29a341326b1cfc3c69b0d3f04"
+      "size": 6258,
+      "sha256": "c7879b4952432d224efbc8dfa2a3d3a2b7adaa544b99a7e0a65911ae470d622c"
     },
     {
       "path": "skills/lyra-cli/references/diagnostics-and-skills.md",
@@ -109,13 +109,13 @@
     },
     {
       "path": "skills/lyra-orchestration/SKILL.md",
-      "size": 2764,
-      "sha256": "387717a4edbbe623ab46c1752599197c2fd0d43e932450d09af9162230b96d9f"
+      "size": 2849,
+      "sha256": "105ffaba98d39b5d810b34fd48325035a72ae42023984ba0232af89625f3436b"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
-      "size": 15358,
-      "sha256": "364ac12746127e61c2a89a3c97ce53a6f8d2ce3b00563507ec9b4ee6624d647d"
+      "size": 15338,
+      "sha256": "e37165aba16a6486b69443dac93b9611d33089c283e4c05300f2f19ab8906da2"
     },
     {
       "path": "skills/lyra-orchestration/references/lead.md",
@@ -144,13 +144,13 @@
     },
     {
       "path": "skills/lyra-orchestration/references/worker.md",
-      "size": 7358,
-      "sha256": "0476548e83189e270160857daaffabeaed57342982ab81594a8b11fe16b726d5"
+      "size": 7497,
+      "sha256": "2757ac14fe6ce61a27b541e49098918a2b1276941e1f7ae0c4cb23a0ef08ee78"
     },
     {
       "path": "skills/lyra-workflow/SKILL.md",
       "size": 2023,
-      "sha256": "0e7eac63e38b08a1bc90ff6711afbe3f8be7c3a62ab65c62aef7d37adfed94b9"
+      "sha256": "c1438442f80b95134fd8bf7f9548f692da9f15d2d1b18f8ff9a4d2dcce34750c"
     },
     {
       "path": "skills/lyra-workflow/guide.md",

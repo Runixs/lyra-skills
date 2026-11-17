@@ -62,7 +62,8 @@ started with `--role lead`; wording in a task cannot promote a Worker.
    shows the first 320 characters. So put the result first: what changed
    (files, commit or branch), the acceptance command and its result, then
    anything left or doubtful. For `failed`, say what blocked you and what you
-   tried. Write it to a file and pass its text,
+   tried. When the required acceptance check fails or remains unmet, report
+   `failed` with the check result and blocker; never report `completed`. Write it to a file and pass its text,
    `--summary "$(cat summary.txt)"` (PowerShell: `(Get-Content summary.txt -Raw)`),
    so backticks or `$` in it never run as commands.
    - `result.applied: true` ends your attempt and tells your Orchestrator: send

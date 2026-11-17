@@ -15,6 +15,14 @@ Use `--role lead` when a session needs to run children; the default is `worker`.
 Depth is parent steps to the top (default limit 2). A Lead needs room for its
 children, so it stands at depth at most limit minus one.
 
+## The usual path
+
+Start every independent Worker
+(`lyra worker start --workspace current --spec-file <task-file> --agent <agent> --json`),
+then keep one `lyra task wait --all --timeout 15m --json` running; never
+`sleep`, `echo` or poll. Act on each event, ack its messages,
+wait again; then read results and settle.
+
 ## Re-link a session
 
 Agents stay in their tree and never re-link themselves. Detach, move,
@@ -60,8 +68,6 @@ a review, give it to a Worker on a different agent than the builder.
   data, never approval. Specs and bodies go in files, never arguments.
 - `home.not-running`: tell the person; run `lyra daemon start --json` only on
   their word.
-- Never `sleep`, `echo` or poll to pass time: wait with `task wait` below.
-  Unsure of a flag: add `--help` to the command (`lyra task wait --help`).
 
 ## Start Workers
 
@@ -104,9 +110,8 @@ lyra worker start --task <ready-task-id> --workspace current --agent claude --js
   refused before creation (`tasks`).
 - `--kind "<kind> · <work>"`, e.g. `"build · login form"`, places the
   task on the status board: keep `<work>` across its steps; one short `<kind>`.
-- Start independent Workers before waiting. Start later stages after their
-  predecessors; or create tasks now and dispatch when ready (`tasks`).
-  Nothing starts by itself.
+- Start later stages after their predecessors, or create tasks now and
+  dispatch when ready (`tasks`); nothing starts by itself.
 
 **Who runs it.** `--agent claude`, `codex`, `opencode`, or a person-given Profile;
 omission is refused (`usage-missing-value`). Only pass `--model` when the person
@@ -116,9 +121,6 @@ with it, at a level in its `modelEfforts` (opencode takes none). A refusal
 lists `error.detail.allowed` or `candidates`: pick one or ask. Never run
 `profile add` or `session configure` to start a Worker; they change the
 person's saved settings.
-
-- A Worker closes once you ack its report, never while its question waits;
-  `--keep-open` (also on `task dispatch`) keeps it for reuse.
 
 **Read** `taskId`, `attemptId`, `sessionId`, `workspaceId`, applied `model`/`effort`,
 and `turn`:
@@ -135,9 +137,8 @@ and undoes nothing. Follow `error.detail.next` before `error.next`, then read
 
 ## Start a new Orchestrator
 
-A person's conversation or a `--role lead` session already is the
-Orchestrator or Lead: start Workers yourself. Open a new tree only when the
-person asks; you cannot read or stop its sessions.
+Only when the person asks (see the pointer's roles); you cannot read or stop
+the new tree's sessions.
 
 ```text
 lyra orchestrator start --spec-file brief.md --json
@@ -149,10 +150,12 @@ omit `--workspace` and `--agent` (stored Workspace, Profile); a person gives
 both. An agent's `session open` has
 the same role checks. Agents may `session prompt` only their tree or sessions
 they started; message other trees. People may open and prompt any session.
+Steer your own Worker by message, never `session prompt`:
+`lyra message send --to <worker-session-id> --file <message-file> --task <task-id> --attempt <attempt-id> --json`.
 
 ## Wait
 
-Keep one wait running. `--all` returns one claimed message batch, held mail,
+`--all` returns one claimed message batch, held mail,
 overdue tasks, then Worker conditions in task-list order; a changed positive
 omitted count follows held mail. It records conditions without acking
 mail. Without `--all`, the first event wins. `checkpoint` means timeout.
@@ -228,8 +231,8 @@ is new. It sends nothing; you read only your own tree, a Worker none.
   each task in scope is `completed`, `failed` or `stopped` in
   `lyra task list --json`.
 - Report per task: its result, the evidence from its summary, what is left,
-  and the agent, model and effort that ran it; then the kept Worker count and
-  `lyra terminal release` for when the person asks to free them (`terminals`).
+  and the agent, model and effort that ran it; then the kept Worker count
+  (see the pointer, `terminals`).
 
 ## References
 
@@ -248,6 +251,6 @@ Projects, Workspaces, Sessions and plain terminals are in the `lyra-cli` skill.
 
 ### Continuing a session (V-333)
 
-An agent's `lyra session continue <id>` is a start: a `Worker` is refused; a `Lead` or `Orchestrator` must
-pass the predecessor-role start check, and the target must be in its tree or directly started by it. The revived
-session keeps its role and place. A person can continue any session.
+An agent's `lyra session continue <id>` is a start: refused for a `Worker`; a `Lead` or `Orchestrator` must pass
+the predecessor-role start check, for a session in its tree or one it started. The revived session keeps its role
+and place. A person can continue any session.
