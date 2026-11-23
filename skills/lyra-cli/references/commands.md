@@ -166,7 +166,7 @@ Otherwise `/home/...` becomes `C:/Program Files/Git/home/...`.
 - `lyra inbox list [--state <state>] [--kind <kind>] [--cursor <cursor>] [--json]`: list inbox items of one snapshot with its pending count; a list that could not be read is a failure, never zero pending
 - `lyra inbox count [--json]`: count pending inbox items (the same snapshot count the screens show)
 - `lyra inbox show <item-id> [--json]`: show one inbox item with its choices and the version an answer must carry
-- `lyra inbox answer <item-id> [--answer-stdin] --expected-version <version> [--json]`: answer an item with a JSON object on standard input: kind approve/reject, choice/free with value, or grouped with answers; a stale version leaves the item as it was
+- `lyra inbox answer <item-id> [--answer-stdin] --expected-version <version> [--accept-cut] [--json]`: answer an item with a JSON object on standard input: kind approve/reject, choice/free with value, or grouped with answers; --accept-cut approves a command shown cut at 16 KiB; a stale version leaves the item as it was
 - `lyra inbox modify <item-id> --file <path> --expected-version <version> [--json]`: replace a pending approval's proposal with the contents of a file; the new proposal needs a fresh approval
 
 **status**

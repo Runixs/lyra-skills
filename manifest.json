@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
-  "skillsVersion": "0.1.33",
-  "tag": "v0.1.33",
+  "skillsVersion": "0.1.34",
+  "tag": "v0.1.34",
   "skills": [
     {
       "name": "lyra-cli",
@@ -55,12 +55,12 @@
     {
       "path": "VERSION",
       "size": 7,
-      "sha256": "ff2f6790884758032578c21511c047d1f2730bca0530b9db47e8a1fbf49a3fda"
+      "sha256": "691087f859ce8399cb11902c2fb32ed9095a22d055f0bd7d8ff97274f5d6e650"
     },
     {
       "path": "skills/lyra-cli/SKILL.md",
       "size": 2062,
-      "sha256": "38a81db4a2e9873055afda69f6b1ff28c20e42010f3cd805bb13b986cd63d58f"
+      "sha256": "e264f5858ac0d3f67262cdb8cbf08f6becbe8fa5f4223e3aa97e0435dc847d5b"
     },
     {
       "path": "skills/lyra-cli/guide.md",
@@ -69,8 +69,8 @@
     },
     {
       "path": "skills/lyra-cli/references/commands.md",
-      "size": 40950,
-      "sha256": "d54a7c11a8a317caa4cc96cc74e8268808f21fb6af7b4c07eeb63761b11cbbef"
+      "size": 41018,
+      "sha256": "8064e4e2a0738549dd7ef986e575829eaf3f0e7bb3842763325cc77f15aa6213"
     },
     {
       "path": "skills/lyra-cli/references/connections-and-workflows.md",
@@ -110,7 +110,7 @@
     {
       "path": "skills/lyra-orchestration/SKILL.md",
       "size": 2849,
-      "sha256": "105ffaba98d39b5d810b34fd48325035a72ae42023984ba0232af89625f3436b"
+      "sha256": "267a2822c1de3ccb81f2006c3df40aa5f03ac9aadee8125897436b5e5aeda286"
     },
     {
       "path": "skills/lyra-orchestration/guide.md",
@@ -150,7 +150,7 @@
     {
       "path": "skills/lyra-workflow/SKILL.md",
       "size": 2023,
-      "sha256": "c1438442f80b95134fd8bf7f9548f692da9f15d2d1b18f8ff9a4d2dcce34750c"
+      "sha256": "21f66aff7fa53cb9bd70f5566c21eaf99dbf12235e1db894acab8cde28912511"
     },
     {
       "path": "skills/lyra-workflow/guide.md",
